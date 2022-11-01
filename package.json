@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "doc": "redoc-cli build openapi.yaml -o static/document.html",
+    "doc": "redoc-cli build openapi.yaml -o document/index.html",
     "mockserver": "prism mock ./openapi.yaml"
   },
   "dependencies": {
