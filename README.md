@@ -1,5 +1,8 @@
 # Radio-Openapi
 
+document
+https://bucketfan.github.io/Radio-Openapi/
+
 ### 編集
 
 Stoplight Studio をダウンロードして openapi.yaml を編集
