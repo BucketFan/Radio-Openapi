@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "doc": "redoc-cli build openapi.yaml -o document.html",
+    "mockserver": "prism mock ./openapi.yaml"
+  },
+  "dependencies": {
+    "redoc-cli": "^0.13.20"
+  },
+  "devDependencies": {
+    "@stoplight/prism-cli": "^4.10.0"
+  }
+}
