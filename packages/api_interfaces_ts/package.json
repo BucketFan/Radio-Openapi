@@ -1,0 +1,16 @@
+{
+  "name": "@bucketfan/radio-api-interfaces",
+  "version": "0.0.2",
+  "description": "Interfaces for the Radio API",
+  "main": "types.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/@BucketFan/Radio-Openapi.git"
+  },
+  "author": "Bucket, Inc.",
+  "license": "UNLICENSED"
+}

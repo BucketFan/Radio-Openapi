@@ -11,7 +11,7 @@ Stoplight Studio をダウンロードして openapi.yaml を編集
 
 ```sh
 $ npm install
-$ npm run doc
+$ npm run build:doc
 ```
 
 ### モックサーバーの立ち上げ
