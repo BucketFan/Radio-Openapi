@@ -1,0 +1,20 @@
+openapi: 3.0.2
+info:
+  title: radio_openapi
+  version: '1.0'
+paths:
+  /healthcheck:
+    get:
+      summary: healthcheck
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                example:
+                  value: OK
+      operationId: get-healthcheck
