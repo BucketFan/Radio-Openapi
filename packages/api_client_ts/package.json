@@ -1,0 +1,24 @@
+{
+  "name": "@bucketfan/radio-api-client",
+  "version": "0.0.2",
+  "description": "OpenAPI client for the Radio API",
+  "author": "Bucket, Inc.",
+  "license": "UNLICENSED",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/@BucketFan/Radio-Openapi.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.5"
+  }
+}
