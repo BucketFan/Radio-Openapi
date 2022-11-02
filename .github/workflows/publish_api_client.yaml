@@ -13,6 +13,11 @@ concurrency:
   group: "api_client"
   cancel-in-progress: true
 
+# Sets permissions of the GITHUB_TOKEN to allow publishment to Github Packages
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
