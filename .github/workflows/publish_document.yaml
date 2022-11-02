@@ -3,6 +3,9 @@ name: Publish document to Pages
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'openapi.yaml'
+      - '.github/workflows/publish_document.yaml'
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
