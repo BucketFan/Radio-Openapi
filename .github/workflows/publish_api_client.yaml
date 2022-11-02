@@ -37,7 +37,7 @@ jobs:
         registry-url: 'https://npm.pkg.github.com'
         scope: '@bucketfan'
         always-auth: true
-        token: '${{secrets.GITHUB_TOKEN}}'
+        token: ${{secrets.GITHUB_TOKEN}}
 
     - run: cat /home/runner/work/_temp/.npmrc
 
