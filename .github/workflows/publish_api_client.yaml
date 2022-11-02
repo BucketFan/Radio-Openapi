@@ -18,9 +18,9 @@ concurrency:
 #   contents: read
 #   packages: write
 
-defaults:
-  run:
-    working-directory: 'packages/api_client_ts'
+# defaults:
+#   run:
+#     working-directory: 'packages/api_client_ts'
 
 jobs:
   publish:
@@ -45,11 +45,11 @@ jobs:
       run: npm ci
       # env:
       #   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # working-directory: 'packages/api_client_ts'
+      working-directory: 'packages/api_client_ts'
 
     - name: Publish to Github Packages
       run: npm publish
-      # working-directory: 'packages/api_client_ts'
+      working-directory: 'packages/api_client_ts'
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
