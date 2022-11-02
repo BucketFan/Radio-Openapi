@@ -2,6 +2,7 @@
   "scripts": {
     "build:doc": "redoc-cli build openapi.yaml -o document/index.html",
     "build:api_interface": "sh ./scripts/generate_api_interfaces.sh",
+    "build:api_client": "sh ./scripts/generate_api_client.sh",
     "mockserver": "prism mock ./openapi.yaml"
   },
   "dependencies": {
