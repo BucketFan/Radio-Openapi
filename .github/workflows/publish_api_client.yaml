@@ -51,4 +51,4 @@ jobs:
       run: npm publish
       # working-directory: 'packages/api_client_ts'
       env:
-        NODE_AUTH_TOKEN: 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
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
