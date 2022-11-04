@@ -37,8 +37,8 @@ jobs:
       
       - name: Generate a document
         run: | 
-          npm install
-          npm run doc
+          npm ci
+          npm run build:doc
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
