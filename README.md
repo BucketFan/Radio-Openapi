@@ -5,7 +5,8 @@ https://bucketfan.github.io/Radio-Openapi/
 
 ### 編集
 
-Stoplight Studio をダウンロードして openapi.yaml を編集
+1. Stoplight Studio をダウンロードして openapi.yaml を編集
+2. npm run build:packages でコード自動生成
 
 ### ドキュメントの作成
 
