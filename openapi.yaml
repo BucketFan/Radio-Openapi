@@ -1,4 +1,6 @@
 openapi: 3.0.2
+x-stoplight:
+  id: gyoj0d9hbyor4
 info:
   title: radio_openapi
   version: '1.0'
@@ -465,6 +467,40 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Chapter'
+          examples:
+            Example 1:
+              value:
+                chapters:
+                  - id: 1
+                    programId: 1
+                    order: 1
+                    title: 1. RINKAのあいさつ　夏だ飛び出せ！
+                    isAttachedPin: false
+                    mediaUrl: string
+                    playTimeSeconds: 0
+                    createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    deletedAt: null
+                  - id: 2
+                    programId: 1
+                    order: 2
+                    title: 2. 冬だ閉じこもれ！
+                    isAttachedPin: false
+                    mediaUrl: string
+                    playTimeSeconds: 0
+                    createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    deletedAt: null
+                  - id: 2
+                    programId: 1
+                    order: 2
+                    title: 2. 冬だ閉じこもれ！
+                    isAttachedPin: false
+                    mediaUrl: string
+                    playTimeSeconds: 0
+                    createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    deletedAt: null
     ReactionComments:
       description: Example response
       content:
