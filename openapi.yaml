@@ -3,73 +3,29 @@ info:
   title: radio_openapi
   version: '1.0'
 paths:
-  /program:
+  /programs:
     post:
-      summary: create program
-      operationId: post-program
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  program:
-                    $ref: '#/components/schemas/Program'
-        '':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
+      summary: Create Program
+      operationId: create-program
       description: Radioプログラム登録API
       requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                description:
-                  type: string
-                chapters:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      title:
-                        type: string
-                      fileName:
-                        type: string
-                      s3Url:
-                        type: string
-                      contentType:
-                        type: string
-                        description: mineType 例：image/jpeg
-                scope:
-                  type: integer
-                isDraft:
-                  type: boolean
-                attachedPlansIds:
-                  type: array
-                  items:
-                    type: integer
-                broadcastStatus:
-                  type: integer
-                reservedAt:
-                  type: string
-                  description: '2022-06-07T14:59:43+09:00'
-        description: |-
-          プログラム編集APIである PUT /program/{id} と 、リクエストボディが同じ
-
-          scopeは、誰でも見れる=0  プラン入会者しか見れない=1
-          broadcastStatusは、放映中=0, 予約中=1
-          attachedPlansIdsは、紐付けるPlanIdの配列
+        $ref: '#/components/requestBodies/Program'
+      responses:
+        '200':
+          $ref: '#/components/responses/Program'
+      tags:
+        - programs
     parameters: []
-  '/program/{id}':
+    get:
+      summary: List of programs available to members
+      operationId: get-programs
+      description: 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API
+      responses:
+        '200':
+          $ref: '#/components/responses/Programs'
+      tags:
+        - program
+  '/programs/{id}':
     parameters:
       - schema:
           type: string
@@ -77,111 +33,25 @@ paths:
         in: path
         required: true
     get:
-      summary: Program's chapters
-      tags: []
+      summary: Get program's chapters
+      operationId: get-program-chapters
+      description: プログラム内の音声データ一覧を取得するAPI
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  chapters:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Chapter'
-      operationId: get-program-chapters
-      description: プログラム内の音声ファイル一覧を取得する
+          $ref: '#/components/responses/Chapters'
+      tags:
+        - programs
     put:
       summary: Edit program
       operationId: put-program
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  program:
-                    $ref: '#/components/schemas/Program'
-        '':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-      description: Radioプログラム編集API
+      description: Radioプログラム編集API（オーナー向け）
+      parameters: []
       requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                description:
-                  type: string
-                chapters:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      title:
-                        type: string
-                      fileName:
-                        type: string
-                      s3Url:
-                        type: string
-                      contentType:
-                        type: string
-                        description: mineType 例：image/jpeg
-                scope:
-                  type: integer
-                isDraft:
-                  type: boolean
-                attachedPlansIds:
-                  type: array
-                  items:
-                    type: integer
-                broadcastStatus:
-                  type: integer
-                reservedAt:
-                  type: string
-                  description: '2022-06-07T14:59:43+09:00'
-        description: |-
-          プログラム登録APIである POST /programと 、リクエストボディが同じ
-
-          scopeは、誰でも見れる=0  プラン入会者しか見れない=1
-          broadcastStatusは、放映中=0, 予約中=1
-          attachedPlansIdsは、紐付けるPlanIdの配列
-  '/program/{id}/reactionComments':
-    get:
-      summary: Get Reactions Comment
-      tags: []
+        $ref: '#/components/requestBodies/Program'
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  reactionComments:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ReactionComment'
-      operationId: get-program-reactionComments
-      description: ''
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-  '/club/{slug}/playlists':
+          $ref: '#/components/responses/Program'
+  '/programs/of_club/{slug}':
     parameters:
       - schema:
           type: string
@@ -189,26 +59,12 @@ paths:
         in: path
         required: true
     get:
-      summary: GET Club Radio Playlists
-      tags: []
+      summary: GET Club's programs.
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  playlists:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Program'
-                  nextCursor:
-                    type: integer
-                  totalCounts:
-                    type: integer
-      operationId: get-club-radio-playlists
-      description: クラブに登録されているラジオ一覧を取得する
+          $ref: '#/components/responses/Programs'
+      operationId: get-club-programs
+      description: クラブに登録されているプログラム一覧を取得するAPI
       parameters:
         - schema:
             type: string
@@ -220,69 +76,187 @@ paths:
           in: query
           name: switch
           description: 全て、閲覧可能、プラン別のタブスイッチャー プランの場合は、プランID
-  '/club/{slug}':
+      tags:
+        - programs
+  '/programs/of_club/{slug}/for_owner':
+    get:
+      summary: GET Club's Programs For Owner's Admin page.
+      responses:
+        '200':
+          $ref: '#/components/responses/Programs'
+      operationId: get-club-programs-for-owner
+      description: クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: cursor
+          description: 次ページへのカーソル（ProgramID）
+        - schema:
+            type: string
+          in: query
+          name: isDraft
+          description: ONの場合、下書きのみ取得する
+      tags:
+        - programs
     parameters:
       - schema:
           type: string
         name: slug
         in: path
         required: true
-    get:
-      summary: Club Info
-      tags: []
+  /programs/reserved_to_pubslish:
+    parameters: []
+    patch:
+      summary: Switch reserved all program to publish
+      operationId: patch-programs-reserved_to_pubslish
       responses:
         '200':
           description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  club:
-                    $ref: '#/components/schemas/Club'
-      operationId: get-club-info
-      description: クラブ情報を参照する
-  /publishPreSignedUrl:
-    post:
-      summary: publish pre-signed URL
-      operationId: post-publish_pre_signed_url
+      description: |-
+        放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
+        （AWSのLambdaから定期的にリクエストが飛ぶ）
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: AuthrizedToken
+          description: 固定の認証トークン
+      tags:
+        - programs
+  '/reaction_comments/of_program/{programId}':
+    get:
+      summary: Get Reactions Comment
+      tags:
+        - reaction_comments
+      operationId: get-program-reactionComments
+      description: 特定のプログラムのリアクションコメントを取得するAPI
       responses:
         '200':
-          description: PreSignedUrlが、S3アップロード用のURLです。s3Urlが、radioファイル等のファイル登録時のfilesのurlに埋め込むURLです。
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  preSignedUrl:
-                    type: string
-                  s3Url:
-                    type: string
-              examples:
-                my-example:
-                  value:
-                    preSignedUrl: 'https://fanclove-radio.s3.ap-northeast-1.amazonaws.com/media/1/abc.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJTLX7NCWRPA2NHBA%2F20220708%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220708T140416Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&x-id=PutObject&X-Amz-Signature=28d152cf695759fb6a6b86fe858c9ecafd8da298025b24481e2f69b7c153d198'
-                    s3Url: 'https://fanclove-radio.s3.amazonaws.com/media/1/abc.txt'
-      description: 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI
+          $ref: '#/components/responses/ReactionComments'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: order
+          description: asc or desc
+    parameters:
+      - schema:
+          type: string
+        name: programId
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-program-reactionComments
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      description: 特定のプログラムにリアクションコメントをするAPI
+      requestBody:
+        $ref: '#/components/requestBodies/ReactionComment'
+  '/reaction_comments/like_toggle/{commentId}':
+    parameters:
+      - schema:
+          type: string
+        name: commentId
+        in: path
+        required: true
+    patch:
+      summary: Like ON/OFF
+      operationId: patch-reaction_comments-like_toggle-id
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      description: 指定したコメントIDをLikeをON/OFFするAPI
+      tags:
+        - reaction_comments
+  '/reaction_comments/{commentId}':
+    parameters:
+      - schema:
+          type: string
+        name: commentId
+        in: path
+        required: true
+    delete:
+      summary: Delete Reaction Comment
+      operationId: delete-reaction_comments-commentId
+      description: リアクションコメントを削除するAPI。(コメント投稿者向け)
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      tags:
+        - reaction_comments
+    patch:
+      summary: Hidden Reaction Comment
+      operationId: patch-reaction_comments-commentId
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      description: リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
+      tags:
+        - reaction_comments
+  /play_logs:
+    parameters: []
+    post:
+      summary: Start record chapter play log.
+      operationId: chapter-of_play_log-start-chapterId
+      responses:
+        '200':
+          $ref: '#/components/responses/ChapterPlayLog'
+      description: |-
+        チャプター再生の開始時に叩くAPI。目的は、聴取ログを取得する。
+
+        返却値として、session（cookieのsessionとは関係ない。１つの聴取の始まりを文字化したもの）を返す。
+
+        それをend時に、PUTして終了を検知する。
+      tags:
+        - chapter
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                clubId:
+                chapterId:
                   type: integer
-                contentType:
-                  type: string
-                  description: MineType　例：image/jpeg
-                fileName:
-                  type: string
-        description: |-
-          contentTypeは無くても良いといえば良いのですが、s3に登録する際のmetadataとして登録します。
-
-
-          例：
-          https://fanclove-radio.s3.ap-northeast-1.amazonaws.com/media/1(clubId)/abc.mp3(fileName)?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJTLX7NCWRPA2NHBA%2F20220708%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220708T140416Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&x-id=PutObject&X-Amz-Signature=28d152cf695759fb6a6b86fe858c9ecafd8da298025b24481e2f69b7c153d198
+    put:
+      summary: End record chapter play log.
+      operationId: chapter-of_play_log-end-chapterId
+      responses:
+        '200':
+          $ref: '#/components/responses/ChapterPlayLog'
+      description: |
+        チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
+        Request Bodyに追加して送る必要がある。
+      requestBody:
+        $ref: '#/components/requestBodies/PutChapterPlayLog'
+  '/chapters/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Delete Chapter's media file.
+      operationId: delete-chapter-id
+      description: Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
+      responses:
+        '200':
+          $ref: '#/components/responses/Chapter'
+      tags:
+        - chapter
+  /pre_signed_url:
+    post:
+      summary: Publish pre-signed URL
+      operationId: post-publish_pre_signed_url
+      description: 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI
+      requestBody:
+        $ref: '#/components/requestBodies/PreSignedUrl'
+      responses:
+        '200':
+          $ref: '#/components/responses/PreSignedUrl'
     parameters: []
   /healthcheck:
     get:
@@ -316,8 +290,6 @@ components:
           type: string
         description:
           type: string
-        orderNumber:
-          type: integer
         broadcastStatus:
           type: integer
         scope:
@@ -330,8 +302,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Plan'
-        isDraft:
+        isAttachedPin:
           type: boolean
+        reactionCommentsCount:
+          type: integer
         reservedAt:
           type: string
           nullable: true
@@ -350,21 +324,24 @@ components:
           type: integer
         programId:
           type: integer
+        order:
+          type: integer
         title:
           type: string
-        orderNumber:
-          type: integer
-        IsAttachedPin:
+        isAttachedPin:
           type: boolean
           description: 固定表示ON/OFF
         mediaUrl:
           type: string
         playTimeSeconds:
-          type: string
+          type: integer
         createdAt:
           type: string
         updatedAt:
           type: string
+        deletedAt:
+          type: string
+          nullable: true
     Plan:
       title: Plan
       x-stoplight:
@@ -373,8 +350,8 @@ components:
       properties:
         id:
           type: integer
-        club:
-          $ref: '#/components/schemas/Club'
+        clubId:
+          type: integer
         name:
           type: string
         info:
@@ -444,6 +421,9 @@ components:
           type: string
         updatedAt:
           type: string
+        deletedAt:
+          type: string
+          nullable: true
     Profile:
       title: Profile
       x-stoplight:
@@ -462,3 +442,175 @@ components:
         type:
           type: string
           description: owner or member or passerby
+  responses:
+    Programs:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              programs:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Program'
+    Chapters:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              chapters:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+    ReactionComments:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              reactionComments:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReactionComment'
+              nextCursor:
+                type: string
+              totalCounts:
+                type: integer
+    Program:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              program:
+                $ref: '#/components/schemas/Program'
+    ReactionComment:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              reactionComment:
+                $ref: '#/components/schemas/ReactionComment'
+    PreSignedUrl:
+      description: PreSignedUrlが、S3アップロード用のURLです。s3Urlが、radioファイル等のファイル登録時のfilesのurlに埋め込むURLです。
+      content:
+        application/json:
+          schema:
+            properties:
+              preSignedUrl:
+                type: string
+              s3Url:
+                type: string
+          examples:
+            my-example:
+              value:
+                preSignedUrl: 'https://fanclove-radio.s3.ap-northeast-1.amazonaws.com/media/1/abc.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJTLX7NCWRPA2NHBA%2F20220708%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220708T140416Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&x-id=PutObject&X-Amz-Signature=28d152cf695759fb6a6b86fe858c9ecafd8da298025b24481e2f69b7c153d198'
+                s3Url: 'https://fanclove-radio.s3.amazonaws.com/media/1/abc.txt'
+    Chapter:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              chapter:
+                $ref: '#/components/schemas/Chapter'
+    ChapterPlayLog:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              session:
+                type: string
+  requestBodies:
+    Program:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              description:
+                type: string
+              chapters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    fileName:
+                      type: string
+                    s3Url:
+                      type: string
+                    contentType:
+                      type: string
+                      description: mineType 例：image/jpeg
+                    playTime:
+                      type: integer
+              scope:
+                type: integer
+              isDraft:
+                type: boolean
+              attachedPlansIds:
+                type: array
+                items:
+                  type: integer
+              broadcastStatus:
+                type: integer
+              reservedAt:
+                type: string
+                description: '2022-06-07T14:59:43+09:00'
+      description: |-
+        scopeは、誰でも見れる=0  プラン入会者しか見れない=1
+        broadcastStatusは、放映中=0, 予約中=1
+        attachedPlansIdsは、紐付けるPlanIdの配列
+    ReactionComment:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              programId:
+                type: integer
+              contents:
+                type: string
+    PreSignedUrl:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              clubId:
+                type: integer
+              contentType:
+                type: string
+                description: MineType　例：image/jpeg
+              fileName:
+                type: string
+      description: |-
+        contentTypeは無くても良いといえば良いのですが、s3に登録する際のmetadataとして登録します。
+
+
+        例：
+        https://fanclove-radio.s3.ap-northeast-1.amazonaws.com/media/1(clubId)/abc.mp3(fileName)?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJTLX7NCWRPA2NHBA%2F20220708%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220708T140416Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&x-id=PutObject&X-Amz-Signature=28d152cf695759fb6a6b86fe858c9ecafd8da298025b24481e2f69b7c153d198
+    PutChapterPlayLog:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              chapterId:
+                type: integer
+              session:
+                type: string
