@@ -196,13 +196,8 @@ paths:
       description: リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
       tags:
         - reaction_comments
-  '/chapter/of_play_log/{chapterId}':
-    parameters:
-      - schema:
-          type: string
-        name: chapterId
-        in: path
-        required: true
+  /play_logs:
+    parameters: []
     post:
       summary: Start record chapter play log.
       operationId: chapter-of_play_log-start-chapterId
@@ -217,6 +212,14 @@ paths:
         それをend時に、PUTして終了を検知する。
       tags:
         - chapter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chapterId:
+                  type: integer
     put:
       summary: End record chapter play log.
       operationId: chapter-of_play_log-end-chapterId
@@ -227,8 +230,8 @@ paths:
         チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
         Request Bodyに追加して送る必要がある。
       requestBody:
-        $ref: '#/components/requestBodies/ChapterPlayLog'
-  '/chapter/{id}':
+        $ref: '#/components/requestBodies/PutChapterPlayLog'
+  '/chapters/{id}':
     parameters:
       - schema:
           type: string
@@ -601,11 +604,13 @@ components:
 
         例：
         https://fanclove-radio.s3.ap-northeast-1.amazonaws.com/media/1(clubId)/abc.mp3(fileName)?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJTLX7NCWRPA2NHBA%2F20220708%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220708T140416Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&x-id=PutObject&X-Amz-Signature=28d152cf695759fb6a6b86fe858c9ecafd8da298025b24481e2f69b7c153d198
-    ChapterPlayLog:
+    PutChapterPlayLog:
       content:
         application/json:
           schema:
             type: object
             properties:
+              chapterId:
+                type: integer
               session:
                 type: string
