@@ -179,7 +179,7 @@ export interface components {
     };
     /** ReactionComment */
     ReactionComment: {
-      id?: string;
+      id?: number;
       content?: string;
       LikedProfiles?: components["schemas"]["Profile"][];
       isLiked?: boolean;

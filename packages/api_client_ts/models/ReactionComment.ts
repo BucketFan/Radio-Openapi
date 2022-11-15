@@ -28,10 +28,10 @@ import {
 export interface ReactionComment {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof ReactionComment
      */
-    id?: string;
+    id?: number;
     /**
      * 
      * @type {string}

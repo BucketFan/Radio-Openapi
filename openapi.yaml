@@ -408,7 +408,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         content:
           type: string
         LikedProfiles:
