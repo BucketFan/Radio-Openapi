@@ -456,6 +456,193 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Program'
+          examples:
+            my-example:
+              value:
+                programs:
+                  - id: 1
+                    club:
+                      id: 1
+                      name: 応援隊！『釣り猿』
+                      slug: tsurizaru
+                      overview: 釣り好き役者のガチ釣りバラエティ『釣り猿』の応援隊の会員制サイトです。「ただただ、やりたい」っていうだけで、無防備にも始めてしまったこの番組を少しでも長く続けられるよう支えていただけるサポーターの場を設けさせていただきました。株式会社でいうと、ある意味、この会員様が株主さまのようなものです。YouTube版でも動画を定期的に撮り続けられるよう、また会員のみなさまだけにお届けするものを用意させていただこうと思います。一緒に出世していく出世魚のような番組をどうぞ見届けてやってください
+                      icon: 'https://picsum.photos/seed/picsum/200/300'
+                      clubColor: red
+                      url: string
+                      programAttachedPlans:
+                        - id: 0
+                          clubId: 0
+                          name: string
+                          info: string
+                          image: string
+                      twitter_url: string
+                      facebook_url: string
+                      line_url: string
+                      instagram_url: string
+                      youtube_url: string
+                      tiktok_url: string
+                    title: 自由診療向けSaaS メディカルフォースの6億円資金調達に言いたい放題！
+                    description: 自由診療向けSaaS メディカルフォースが6億円資金調達を行いました。このニュースに関して話していきます。自由診療向けSaaS メディカルフォースが6億円資金調達を行いました。このニュースに関して話していきます。
+                    broadcastStatus: 0
+                    scope: 0
+                    chapters:
+                      - id: 1
+                        programId: 1
+                        order: 1
+                        title: 1. RINKAのあいさつ　夏だ飛び出せ！
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                      - id: 2
+                        programId: 1
+                        order: 2
+                        title: 2. 冬だ閉じこもれ！
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                      - id: 3
+                        programId: 1
+                        order: 3
+                        title: 2. 冬だ閉じこもれ！
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                    isAttachedPin: false
+                    reactionCommentsCount: 4
+                    reservedAt: string
+                    createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                  - id: 2
+                    club:
+                      id: 1
+                      name: 応援隊！『釣り猿』
+                      slug: tsurizaru
+                      overview: 釣り好き役者のガチ釣りバラエティ『釣り猿』の応援隊の会員制サイトです。「ただただ、やりたい」っていうだけで、無防備にも始めてしまったこの番組を少しでも長く続けられるよう支えていただけるサポーターの場を設けさせていただきました。株式会社でいうと、ある意味、この会員様が株主さまのようなものです。YouTube版でも動画を定期的に撮り続けられるよう、また会員のみなさまだけにお届けするものを用意させていただこうと思います。一緒に出世していく出世魚のような番組をどうぞ見届けてやってください
+                      icon: 'https://picsum.photos/seed/picsum/200/300'
+                      clubColor: red
+                      url: string
+                      programAttachedPlans:
+                        - id: 0
+                          clubId: 0
+                          name: string
+                          info: string
+                          image: string
+                      twitter_url: string
+                      facebook_url: string
+                      line_url: string
+                      instagram_url: string
+                      youtube_url: string
+                      tiktok_url: string
+                    title: キュアアップが70億調達！医療の世界に激震起こすか！言いたい放題！
+                    description: キュアアップが70億調達を行いました。このニュースに関して話していきます。キュアアップが70億調達を行いました。このニュースに関して話していきます。キュアアップが70億調達を行いました。このニュースに関して話していきます。
+                    broadcastStatus: 0
+                    scope: 0
+                    chapters:
+                      - id: 4
+                        programId: 1
+                        order: 1
+                        title: デジタル療法のキュア・アップ、カーライルから70億円をシリーズG調達——累積調達額は134億円に
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                      - id: 5
+                        programId: 1
+                        order: 2
+                        title: ニュース詳細
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                      - id: 6
+                        programId: 1
+                        order: 3
+                        title: おわりに
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                    isAttachedPin: true
+                    reactionCommentsCount: 3
+                    reservedAt: string
+                    createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                  - id: 3
+                    club:
+                      id: 1
+                      name: 応援隊！『釣り猿』
+                      slug: tsurizaru
+                      overview: 釣り好き役者のガチ釣りバラエティ『釣り猿』の応援隊の会員制サイトです。「ただただ、やりたい」っていうだけで、無防備にも始めてしまったこの番組を少しでも長く続けられるよう支えていただけるサポーターの場を設けさせていただきました。株式会社でいうと、ある意味、この会員様が株主さまのようなものです。YouTube版でも動画を定期的に撮り続けられるよう、また会員のみなさまだけにお届けするものを用意させていただこうと思います。一緒に出世していく出世魚のような番組をどうぞ見届けてやってください
+                      icon: 'https://picsum.photos/seed/picsum/200/300'
+                      clubColor: red
+                      url: string
+                      programAttachedPlans:
+                        - id: 0
+                          clubId: 0
+                          name: string
+                          info: string
+                          image: string
+                      twitter_url: string
+                      facebook_url: string
+                      line_url: string
+                      instagram_url: string
+                      youtube_url: string
+                      tiktok_url: string
+                    title: ミツモア、23億円をシリーズB調達！に言いたい放題！
+                    description: ミツモアが23億円をシリーズB調達！このニュースに関して話していきます。ミツモアが23億円をシリーズB調達！このニュースに関して話していきます。ミツモアが23億円をシリーズB調達！このニュースに関して話していきます。
+                    broadcastStatus: 0
+                    scope: 0
+                    chapters:
+                      - id: 7
+                        programId: 1
+                        order: 1
+                        title: 1. 地域密着・生活関連サービス見積比較のミツモア、23億円をシリーズB調達——累積調達額は33億円に
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                      - id: 8
+                        programId: 1
+                        order: 2
+                        title: ニュース詳細
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                      - id: 9
+                        programId: 1
+                        order: 3
+                        title: おわりに
+                        isAttachedPin: false
+                        mediaUrl: string
+                        playTimeSeconds: 0
+                        createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                        deletedAt: null
+                    isAttachedPin: false
+                    reactionCommentsCount: 3
+                    reservedAt: string
+                    createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
+                    updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
     Chapters:
       description: Example response
       content:
@@ -468,7 +655,7 @@ components:
                 items:
                   $ref: '#/components/schemas/Chapter'
           examples:
-            Example 1:
+            my-example:
               value:
                 chapters:
                   - id: 1
@@ -491,7 +678,7 @@ components:
                     createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     deletedAt: null
-                  - id: 2
+                  - id: 3
                     programId: 1
                     order: 2
                     title: 2. 冬だ閉じこもれ！
