@@ -21,7 +21,7 @@ $ npm run build:doc
 $ npm run mockserver
 ```
 
-### openapi のクライアント package インストール方法
+### openapi の package インストール方法
 
 1. プロジェクトのルートに`.npmrc`を作成し、以下の内容を追加
 
