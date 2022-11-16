@@ -53,6 +53,6 @@ $ npm run mockserver
 
    ```
    $ yarn add @bucketfan/radio-api-client
-
-   $ yarn install
+   or
+   $ yarn add @bucketfan/radio-api-interfaces
    ```
