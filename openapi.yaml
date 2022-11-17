@@ -516,6 +516,17 @@ components:
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         deletedAt: null
+                    attachedPlans:
+                      - id: 1
+                        clubId: 1
+                        name: test
+                        info: string
+                        image: string
+                      - id: 2
+                        clubId: 1
+                        name: test2
+                        info: string
+                        image: string
                     isAttachedPin: false
                     reactionCommentsCount: 4
                     reservedAt: string
@@ -577,6 +588,12 @@ components:
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         deletedAt: null
+                    attachedPlans:
+                      - id: 1
+                        clubId: 1
+                        name: string
+                        info: string
+                        image: string
                     isAttachedPin: true
                     reactionCommentsCount: 3
                     reservedAt: string
@@ -638,6 +655,12 @@ components:
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         deletedAt: null
+                    attachedPlans:
+                      - id: 1
+                        clubId: 1
+                        name: string
+                        info: string
+                        image: string
                     isAttachedPin: true
                     reactionCommentsCount: 3
                     reservedAt: string
