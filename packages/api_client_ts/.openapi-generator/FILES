@@ -1,3 +1,4 @@
+.openapi-generator-ignore
 apis/ChapterApi.ts
 apis/DefaultApi.ts
 apis/ProgramApi.ts
