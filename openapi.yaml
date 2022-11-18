@@ -826,6 +826,8 @@ components:
           schema:
             type: object
             properties:
+              clubId:
+                type: integer
               title:
                 type: string
               description:
@@ -845,6 +847,8 @@ components:
                       type: string
                       description: mineType 例：image/jpeg
                     playTime:
+                      type: integer
+                    order:
                       type: integer
               scope:
                 type: integer
