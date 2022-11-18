@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@bucketfan/radio-api-client": "^0.0.1"
+    "@bucketfan/radio-api-client": "^0.0.5"
   },
   "engines": {
     "node": ">=18.0.0"
