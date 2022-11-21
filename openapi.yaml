@@ -832,6 +832,9 @@ components:
             properties:
               chapter:
                 $ref: '#/components/schemas/Chapter'
+              elapsedSeconds:
+                type: number
+                nullable: true
     ChapterPlayLog:
       description: Example response
       content:
