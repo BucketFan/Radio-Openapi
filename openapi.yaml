@@ -444,6 +444,28 @@ components:
         type:
           type: string
           description: owner or member or passerby
+    PlayLog:
+      title: PlayLog
+      x-stoplight:
+        id: nmzdt5ngivp34
+      type: object
+      properties:
+        id:
+          type: number
+        programId:
+          type: number
+        chapterId:
+          type: number
+        profileId:
+          type: string
+        session:
+          type: string
+        playTime:
+          type: number
+        elapsedSeconds:
+          type: number
+        createdAt:
+          type: string
   responses:
     Programs:
       description: Example response
