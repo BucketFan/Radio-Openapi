@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: 4wddw3yz8hd6o
+  id: poytvzegapdyg
 info:
   title: radio_openapi
   version: '1.0'
@@ -816,20 +816,7 @@ components:
             properties:
               chapter:
                 $ref: '#/components/schemas/Chapter'
-          examples:
-            example-1:
-              value:
-                chapter:
-                  id: 0
-                  programId: 0
-                  order: 0
-                  title: string
-                  isAttachedPin: true
-                  mediaUrl: string
-                  playTimeSeconds: 0
-                  createdAt: string
-                  updatedAt: string
-                  deletedAt: string
+          examples: {}
     ChapterPlayLog:
       description: Example response
       content:
