@@ -816,7 +816,6 @@ components:
             properties:
               chapter:
                 $ref: '#/components/schemas/Chapter'
-          examples: {}
     ChapterPlayLog:
       description: Example response
       content:
