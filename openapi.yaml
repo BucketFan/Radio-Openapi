@@ -238,7 +238,7 @@ paths:
       operationId: get-play_logs
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/PlayLogs'
       description: 特定のユーザーの再生履歴を返すAPI
       parameters:
         - schema:
