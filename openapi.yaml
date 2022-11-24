@@ -142,6 +142,10 @@ paths:
           in: query
           name: order
           description: asc or desc
+        - schema:
+            type: string
+          in: query
+          name: cursor
     parameters:
       - schema:
           type: integer
@@ -425,10 +429,12 @@ components:
           type: integer
         content:
           type: string
-        LikedProfiles:
+        likedProfiles:
           type: array
           items:
             $ref: '#/components/schemas/Profile'
+        profile:
+          $ref: '#/components/schemas/Profile'
         isLiked:
           type: boolean
         createdAt:
