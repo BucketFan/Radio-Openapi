@@ -40,7 +40,7 @@ paths:
       description: プログラム内の音声データ一覧を取得するAPI
       responses:
         '200':
-          $ref: '#/components/responses/Chapters'
+          $ref: '#/components/responses/Program'
       tags:
         - programs
     put:
