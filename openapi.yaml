@@ -22,7 +22,7 @@ paths:
   /programs:
     post:
       summary: Create Program
-      operationId: create-program
+      operationId: createProgram
       description: Radioプログラム登録API
       requestBody:
         $ref: '#/components/requestBodies/Program'
@@ -34,7 +34,7 @@ paths:
     parameters: []
     get:
       summary: List of programs available to members
-      operationId: get-programs
+      operationId: getPrograms
       description: 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API
       responses:
         '200':
@@ -50,7 +50,7 @@ paths:
         required: true
     get:
       summary: Get program's chapters
-      operationId: get-program-chapters
+      operationId: getProgramChapters
       description: プログラム内の音声データ一覧を取得するAPI
       responses:
         '200':
@@ -59,7 +59,7 @@ paths:
         - programs
     put:
       summary: Edit program
-      operationId: put-program
+      operationId: putProgram
       description: Radioプログラム編集API（オーナー向け）
       parameters: []
       requestBody:
@@ -81,7 +81,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Programs'
-      operationId: get-club-programs
+      operationId: getClubPrograms
       description: クラブに登録されているプログラム一覧を取得するAPI
       parameters:
         - schema:
@@ -102,7 +102,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Programs'
-      operationId: get-club-programs-for-owner
+      operationId: getClubProgramsForOwner
       description: クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
       parameters:
         - schema:
@@ -127,7 +127,7 @@ paths:
     parameters: []
     patch:
       summary: Switch reserved all program to publish
-      operationId: patch-programs-reserved_to_pubslish
+      operationId: patchProgramsReservedToPublish
       responses:
         '200':
           description: OK
@@ -147,7 +147,7 @@ paths:
       summary: Get Reactions Comment
       tags:
         - reaction_comments
-      operationId: get-program-reactionComments
+      operationId: getProgramReactionComments
       description: 特定のプログラムのリアクションコメントを取得するAPI
       responses:
         '200':
@@ -170,7 +170,7 @@ paths:
         required: true
     post:
       summary: ''
-      operationId: post-program-reactionComments
+      operationId: postProgramReactionComments
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
@@ -188,7 +188,7 @@ paths:
         required: true
     patch:
       summary: Like ON/OFF
-      operationId: patch-reaction_comments-like_toggle-id
+      operationId: patchReactionCommentsLikeToggleId
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
@@ -204,7 +204,7 @@ paths:
         required: true
     delete:
       summary: Delete Reaction Comment
-      operationId: delete-reaction_comments-commentId
+      operationId: deleteReactionCommentsCommentId
       description: リアクションコメントを削除するAPI。(コメント投稿者向け)
       responses:
         '200':
@@ -213,7 +213,7 @@ paths:
         - reaction_comments
     patch:
       summary: Hidden Reaction Comment
-      operationId: patch-reaction_comments-commentId
+      operationId: patchReactionCommentsCommentId
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
@@ -224,7 +224,7 @@ paths:
     parameters: []
     post:
       summary: Start record chapter play log.
-      operationId: chapter-of_play_log-start-chapterId
+      operationId: chapterOfPlayLogStartChapterId
       responses:
         '200':
           $ref: '#/components/responses/ChapterPlayLog'
@@ -246,7 +246,7 @@ paths:
                   type: integer
     put:
       summary: End record chapter play log.
-      operationId: chapter-of_play_log-end-chapterId
+      operationId: chapterOfPlayLogEndChapterId
       responses:
         '200':
           $ref: '#/components/responses/ChapterPlayLog'
@@ -259,7 +259,7 @@ paths:
         - play_logs
     get:
       summary: ''
-      operationId: get-play_logs
+      operationId: getPlayLogs
       responses:
         '200':
           $ref: '#/components/responses/PlayLogs'
@@ -280,7 +280,7 @@ paths:
         required: true
     delete:
       summary: Delete Chapter's media file.
-      operationId: delete-chapter-id
+      operationId: deleteChapterId
       description: Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
       responses:
         '200':
@@ -290,7 +290,7 @@ paths:
   /pre_signed_url:
     post:
       summary: Publish pre-signed URL
-      operationId: post-publish_pre_signed_url
+      operationId: postPublishPreSignedUrl
       description: 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI
       requestBody:
         $ref: '#/components/requestBodies/PreSignedUrl'
@@ -316,7 +316,7 @@ paths:
               examples:
                 example:
                   value: OK
-      operationId: get-healthcheck
+      operationId: getHealthcheck
 
 components:
   schemas:
