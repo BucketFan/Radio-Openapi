@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: gyoj0d9hbyor4
+  id: ir7ckios6gkgn
 info:
   title: radio_openapi
   version: '1.0'
@@ -30,7 +30,7 @@ paths:
   '/programs/{id}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: id
         in: path
         required: true
@@ -144,7 +144,7 @@ paths:
           description: asc or desc
     parameters:
       - schema:
-          type: string
+          type: integer
         name: programId
         in: path
         required: true
@@ -160,7 +160,7 @@ paths:
   '/reaction_comments/like_toggle/{commentId}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: commentId
         in: path
         required: true
@@ -176,7 +176,7 @@ paths:
   '/reaction_comments/{commentId}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: commentId
         in: path
         required: true
@@ -248,7 +248,7 @@ paths:
   '/chapters/{id}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: id
         in: path
         required: true
