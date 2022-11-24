@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: gyoj0d9hbyor4
+  id: poytvzegapdyg
 info:
   title: radio_openapi
   version: '1.0'
@@ -142,6 +142,10 @@ paths:
           in: query
           name: order
           description: asc or desc
+        - schema:
+            type: string
+          in: query
+          name: cursor
     parameters:
       - schema:
           type: string
@@ -413,10 +417,12 @@ components:
           type: integer
         content:
           type: string
-        LikedProfiles:
+        likedProfiles:
           type: array
           items:
             $ref: '#/components/schemas/Profile'
+        profile:
+          $ref: '#/components/schemas/Profile'
         isLiked:
           type: boolean
         createdAt:
