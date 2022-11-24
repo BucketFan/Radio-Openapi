@@ -237,6 +237,18 @@ paths:
         Request Bodyに追加して送る必要がある。
       requestBody:
         $ref: '#/components/requestBodies/PutChapterPlayLog'
+    get:
+      summary: ''
+      operationId: get-play_logs
+      responses:
+        '200':
+          $ref: '#/components/responses/PlayLogs'
+      description: 特定のユーザーの再生履歴を返すAPI
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: profileId
   '/chapters/{id}':
     parameters:
       - schema:
@@ -472,6 +484,10 @@ components:
           type: number
         createdAt:
           type: string
+        chapter:
+          $ref: '#/components/schemas/Chapter'
+        program:
+          $ref: '#/components/schemas/Program'
   responses:
     Programs:
       description: Example response
@@ -850,6 +866,17 @@ components:
             properties:
               session:
                 type: string
+    PlayLogs:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              playLogs:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayLog'
   requestBodies:
     Program:
       content:
