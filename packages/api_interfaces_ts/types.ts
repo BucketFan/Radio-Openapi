@@ -181,7 +181,8 @@ export interface components {
     ReactionComment: {
       id?: number;
       content?: string;
-      LikedProfiles?: components["schemas"]["Profile"][];
+      likedProfiles?: components["schemas"]["Profile"][];
+      profile?: components["schemas"]["Profile"];
       isLiked?: boolean;
       createdAt?: string;
       updatedAt?: string;
@@ -278,6 +279,7 @@ export interface components {
     Program: {
       content: {
         "application/json": {
+          clubId?: number;
           title?: string;
           description?: string;
           chapters?: {
@@ -287,6 +289,7 @@ export interface components {
             /** @description mineType 例：image/jpeg */
             contentType?: string;
             playTime?: number;
+            order?: number;
           }[];
           scope?: number;
           isDraft?: boolean;
@@ -431,6 +434,7 @@ export interface operations {
       query: {
         /** asc or desc */
         order?: string;
+        cursor?: string;
       };
     };
     responses: {

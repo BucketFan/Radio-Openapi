@@ -49,6 +49,12 @@ export interface CreateProgramRequestChaptersInner {
      * @memberof CreateProgramRequestChaptersInner
      */
     playTime?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateProgramRequestChaptersInner
+     */
+    order?: number;
 }
 
 /**
@@ -75,6 +81,7 @@ export function CreateProgramRequestChaptersInnerFromJSONTyped(json: any, ignore
         's3Url': !exists(json, 's3Url') ? undefined : json['s3Url'],
         'contentType': !exists(json, 'contentType') ? undefined : json['contentType'],
         'playTime': !exists(json, 'playTime') ? undefined : json['playTime'],
+        'order': !exists(json, 'order') ? undefined : json['order'],
     };
 }
 
@@ -92,6 +99,7 @@ export function CreateProgramRequestChaptersInnerToJSON(value?: CreateProgramReq
         's3Url': value.s3Url,
         'contentType': value.contentType,
         'playTime': value.playTime,
+        'order': value.order,
     };
 }
 
