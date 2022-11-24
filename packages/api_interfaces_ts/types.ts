@@ -18,7 +18,7 @@ export interface paths {
     put: operations["put-program"];
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
   };
@@ -55,7 +55,7 @@ export interface paths {
     post: operations["post-program-reactionComments"];
     parameters: {
       path: {
-        programId: string;
+        programId: number;
       };
     };
   };
@@ -64,7 +64,7 @@ export interface paths {
     patch: operations["patch-reaction_comments-like_toggle-id"];
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
   };
@@ -75,11 +75,13 @@ export interface paths {
     patch: operations["patch-reaction_comments-commentId"];
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
   };
   "/play_logs": {
+    /** 特定のユーザーの再生履歴を返すAPI */
+    get: operations["get-play_logs"];
     /**
      * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
      * Request Bodyに追加して送る必要がある。
@@ -100,7 +102,7 @@ export interface paths {
     delete: operations["delete-chapter-id"];
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
   };
@@ -181,7 +183,8 @@ export interface components {
     ReactionComment: {
       id?: number;
       content?: string;
-      LikedProfiles?: components["schemas"]["Profile"][];
+      likedProfiles?: components["schemas"]["Profile"][];
+      profile?: components["schemas"]["Profile"];
       isLiked?: boolean;
       createdAt?: string;
       updatedAt?: string;
@@ -198,6 +201,19 @@ export interface components {
       isPublicProfile?: boolean;
       /** @description owner or member or passerby */
       type?: string;
+    };
+    /** PlayLog */
+    PlayLog: {
+      id?: number;
+      programId?: number;
+      chapterId?: number;
+      profileId?: string;
+      session?: string;
+      playTime?: number;
+      elapsedSeconds?: number;
+      createdAt?: string;
+      chapter?: components["schemas"]["Chapter"];
+      program?: components["schemas"]["Program"];
     };
   };
   responses: {
@@ -257,6 +273,7 @@ export interface components {
       content: {
         "application/json": {
           chapter?: components["schemas"]["Chapter"];
+          elapsedSeconds?: number | null;
         };
       };
     };
@@ -265,6 +282,14 @@ export interface components {
       content: {
         "application/json": {
           session?: string;
+        };
+      };
+    };
+    /** Example response */
+    PlayLogs: {
+      content: {
+        "application/json": {
+          playLogs?: components["schemas"]["PlayLog"][];
         };
       };
     };
@@ -278,6 +303,7 @@ export interface components {
     Program: {
       content: {
         "application/json": {
+          clubId?: number;
           title?: string;
           description?: string;
           chapters?: {
@@ -287,6 +313,7 @@ export interface components {
             /** @description mineType 例：image/jpeg */
             contentType?: string;
             playTime?: number;
+            order?: number;
           }[];
           scope?: number;
           isDraft?: boolean;
@@ -353,7 +380,7 @@ export interface operations {
   "get-program-chapters": {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {
@@ -364,7 +391,7 @@ export interface operations {
   "put-program": {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {
@@ -426,11 +453,12 @@ export interface operations {
   "get-program-reactionComments": {
     parameters: {
       path: {
-        programId: string;
+        programId: number;
       };
       query: {
         /** asc or desc */
         order?: string;
+        cursor?: string;
       };
     };
     responses: {
@@ -441,7 +469,7 @@ export interface operations {
   "post-program-reactionComments": {
     parameters: {
       path: {
-        programId: string;
+        programId: number;
       };
     };
     responses: {
@@ -453,7 +481,7 @@ export interface operations {
   "patch-reaction_comments-like_toggle-id": {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
@@ -464,7 +492,7 @@ export interface operations {
   "delete-reaction_comments-commentId": {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
@@ -475,11 +503,22 @@ export interface operations {
   "patch-reaction_comments-commentId": {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
       200: components["responses"]["ReactionComment"];
+    };
+  };
+  /** 特定のユーザーの再生履歴を返すAPI */
+  "get-play_logs": {
+    parameters: {
+      query: {
+        profileId?: string;
+      };
+    };
+    responses: {
+      200: components["responses"]["PlayLogs"];
     };
   };
   /**
@@ -517,7 +556,7 @@ export interface operations {
   "delete-chapter-id": {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {

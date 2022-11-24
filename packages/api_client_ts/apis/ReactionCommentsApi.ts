@@ -26,20 +26,21 @@ import {
 } from '../models';
 
 export interface DeleteReactionCommentsCommentIdRequest {
-    commentId: string;
+    commentId: number;
 }
 
 export interface GetProgramReactionCommentsRequest {
-    programId: string;
+    programId: number;
     order?: string;
+    cursor?: string;
 }
 
 export interface PatchReactionCommentsCommentIdRequest {
-    commentId: string;
+    commentId: number;
 }
 
 export interface PatchReactionCommentsLikeToggleIdRequest {
-    commentId: string;
+    commentId: number;
 }
 
 /**
@@ -52,7 +53,7 @@ export interface ReactionCommentsApiInterface {
     /**
      * リアクションコメントを削除するAPI。(コメント投稿者向け)
      * @summary Delete Reaction Comment
-     * @param {string} commentId 
+     * @param {number} commentId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
@@ -63,13 +64,14 @@ export interface ReactionCommentsApiInterface {
      * リアクションコメントを削除するAPI。(コメント投稿者向け)
      * Delete Reaction Comment
      */
-    deleteReactionCommentsCommentId(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
+    deleteReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
 
     /**
      * 特定のプログラムのリアクションコメントを取得するAPI
      * @summary Get Reactions Comment
-     * @param {string} programId 
+     * @param {number} programId 
      * @param {string} [order] asc or desc
+     * @param {string} [cursor] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
@@ -80,12 +82,12 @@ export interface ReactionCommentsApiInterface {
      * 特定のプログラムのリアクションコメントを取得するAPI
      * Get Reactions Comment
      */
-    getProgramReactionComments(programId: string, order?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response>;
+    getProgramReactionComments(programId: number, order?: string, cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response>;
 
     /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
      * @summary Hidden Reaction Comment
-     * @param {string} commentId 
+     * @param {number} commentId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
@@ -96,12 +98,12 @@ export interface ReactionCommentsApiInterface {
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
      * Hidden Reaction Comment
      */
-    patchReactionCommentsCommentId(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
+    patchReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
 
     /**
      * 指定したコメントIDをLikeをON/OFFするAPI
      * @summary Like ON/OFF
-     * @param {string} commentId 
+     * @param {number} commentId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
@@ -112,7 +114,7 @@ export interface ReactionCommentsApiInterface {
      * 指定したコメントIDをLikeをON/OFFするAPI
      * Like ON/OFF
      */
-    patchReactionCommentsLikeToggleId(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
+    patchReactionCommentsLikeToggleId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
 
 }
 
@@ -148,7 +150,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * リアクションコメントを削除するAPI。(コメント投稿者向け)
      * Delete Reaction Comment
      */
-    async deleteReactionCommentsCommentId(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
+    async deleteReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
         const response = await this.deleteReactionCommentsCommentIdRaw({ commentId: commentId }, initOverrides);
         return await response.value();
     }
@@ -168,6 +170,10 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
             queryParameters['order'] = requestParameters.order;
         }
 
+        if (requestParameters.cursor !== undefined) {
+            queryParameters['cursor'] = requestParameters.cursor;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
@@ -184,8 +190,8 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * 特定のプログラムのリアクションコメントを取得するAPI
      * Get Reactions Comment
      */
-    async getProgramReactionComments(programId: string, order?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response> {
-        const response = await this.getProgramReactionCommentsRaw({ programId: programId, order: order }, initOverrides);
+    async getProgramReactionComments(programId: number, order?: string, cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response> {
+        const response = await this.getProgramReactionCommentsRaw({ programId: programId, order: order, cursor: cursor }, initOverrides);
         return await response.value();
     }
 
@@ -216,7 +222,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
      * Hidden Reaction Comment
      */
-    async patchReactionCommentsCommentId(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
+    async patchReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
         const response = await this.patchReactionCommentsCommentIdRaw({ commentId: commentId }, initOverrides);
         return await response.value();
     }
@@ -248,7 +254,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * 指定したコメントIDをLikeをON/OFFするAPI
      * Like ON/OFF
      */
-    async patchReactionCommentsLikeToggleId(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
+    async patchReactionCommentsLikeToggleId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
         const response = await this.patchReactionCommentsLikeToggleIdRaw({ commentId: commentId }, initOverrides);
         return await response.value();
     }

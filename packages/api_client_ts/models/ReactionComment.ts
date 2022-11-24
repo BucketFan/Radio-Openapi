@@ -46,6 +46,12 @@ export interface ReactionComment {
     likedProfiles?: Array<Profile>;
     /**
      * 
+     * @type {Profile}
+     * @memberof ReactionComment
+     */
+    profile?: Profile;
+    /**
+     * 
      * @type {boolean}
      * @memberof ReactionComment
      */
@@ -91,7 +97,8 @@ export function ReactionCommentFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'content': !exists(json, 'content') ? undefined : json['content'],
-        'likedProfiles': !exists(json, 'LikedProfiles') ? undefined : ((json['LikedProfiles'] as Array<any>).map(ProfileFromJSON)),
+        'likedProfiles': !exists(json, 'likedProfiles') ? undefined : ((json['likedProfiles'] as Array<any>).map(ProfileFromJSON)),
+        'profile': !exists(json, 'profile') ? undefined : ProfileFromJSON(json['profile']),
         'isLiked': !exists(json, 'isLiked') ? undefined : json['isLiked'],
         'createdAt': !exists(json, 'createdAt') ? undefined : json['createdAt'],
         'updatedAt': !exists(json, 'updatedAt') ? undefined : json['updatedAt'],
@@ -110,7 +117,8 @@ export function ReactionCommentToJSON(value?: ReactionComment | null): any {
         
         'id': value.id,
         'content': value.content,
-        'LikedProfiles': value.likedProfiles === undefined ? undefined : ((value.likedProfiles as Array<any>).map(ProfileToJSON)),
+        'likedProfiles': value.likedProfiles === undefined ? undefined : ((value.likedProfiles as Array<any>).map(ProfileToJSON)),
+        'profile': ProfileToJSON(value.profile),
         'isLiked': value.isLiked,
         'createdAt': value.createdAt,
         'updatedAt': value.updatedAt,
