@@ -4,6 +4,20 @@ x-stoplight:
 info:
   title: radio_openapi
   version: '1.0'
+  description: radio_openapi
+  contact:
+    name: Anycloud
+    email: info@anycloud.co.jp
+    url: https://anycloud.co.jp/
+servers:
+  - url: ''
+    description: Production server
+  - url: ''
+    description: Staging server
+  - url: ''
+    description: Development server
+  - url: 'http://127.0.0.1:4010'
+    description: Development Mockserver
 paths:
   /programs:
     post:
@@ -26,7 +40,7 @@ paths:
         '200':
           $ref: '#/components/responses/Programs'
       tags:
-        - program
+        - programs
   '/programs/{id}':
     parameters:
       - schema:
@@ -53,6 +67,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Program'
+      tags:
+        - programs
   '/programs/of_club/{slug}':
     parameters:
       - schema:
@@ -161,6 +177,8 @@ paths:
       description: 特定のプログラムにリアクションコメントをするAPI
       requestBody:
         $ref: '#/components/requestBodies/ReactionComment'
+      tags:
+        - reaction_comments
   '/reaction_comments/like_toggle/{commentId}':
     parameters:
       - schema:
@@ -237,6 +255,8 @@ paths:
         Request Bodyに追加して送る必要がある。
       requestBody:
         $ref: '#/components/requestBodies/PutChapterPlayLog'
+      tags:
+        - play_logs
     get:
       summary: ''
       operationId: get-play_logs
@@ -249,6 +269,8 @@ paths:
             type: string
           in: query
           name: profileId
+      tags:
+        - play_logs
   '/chapters/{id}':
     parameters:
       - schema:
@@ -275,11 +297,15 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/PreSignedUrl'
+      tags:
+        - pre_signed_url
     parameters: []
   /healthcheck:
     get:
       summary: healthcheck
-      tags: []
+      description: 'healthcheck'
+      tags:
+        - healthcheck
       responses:
         '200':
           description: OK
@@ -291,6 +317,7 @@ paths:
                 example:
                   value: OK
       operationId: get-healthcheck
+
 components:
   schemas:
     Program:
@@ -964,3 +991,18 @@ components:
                 type: integer
               session:
                 type: string
+tags:
+  - name: program
+    description: ''
+  - name: programs
+    description: ''
+  - name: reaction_comments
+    description: ''
+  - name: chapter
+    description: ''
+  - name: play_logs
+    description: ''
+  - name: pre_signed_url
+    description: ''
+  - name: healthcheck
+    description: ''
