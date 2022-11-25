@@ -899,15 +899,18 @@ components:
                       type: string
                     fileName:
                       type: string
-                    s3Url:
+                    mediaUrl:
                       type: string
                     contentType:
                       type: string
                       description: mineType 例：image/jpeg
-                    playTime:
+                    playTimeSeconds:
                       type: integer
                     order:
                       type: integer
+                    id:
+                      type: number
+                      nullable: true
               scope:
                 type: integer
               isDraft:
