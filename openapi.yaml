@@ -53,11 +53,11 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Program'
-  '/programs/of_club/{slug}':
+  '/programs/of_club/{id}':
     parameters:
       - schema:
-          type: string
-        name: slug
+          type: number
+        name: id
         in: path
         required: true
     get:
@@ -80,7 +80,7 @@ paths:
           description: 全て、閲覧可能、プラン別のタブスイッチャー プランの場合は、プランID
       tags:
         - programs
-  '/programs/of_club/{slug}/for_owner':
+  '/programs/of_club/{id}/for_owner':
     get:
       summary: GET Club's Programs For Owner's Admin page.
       responses:
@@ -103,8 +103,8 @@ paths:
         - programs
     parameters:
       - schema:
-          type: string
-        name: slug
+          type: number
+        name: id
         in: path
         required: true
   /programs/reserved_to_pubslish:
