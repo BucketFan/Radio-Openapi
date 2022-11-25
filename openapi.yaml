@@ -331,6 +331,19 @@ components:
           type: string
         updatedAt:
           type: string
+      required:
+        - id
+        - club
+        - title
+        - description
+        - broadcastStatus
+        - scope
+        - chapters
+        - attachedPlans
+        - isAttachedPin
+        - reactionCommentsCount
+        - createdAt
+        - updatedAt
     Chapter:
       title: Chapter
       x-stoplight:
@@ -360,6 +373,16 @@ components:
         deletedAt:
           type: string
           nullable: true
+      required:
+        - id
+        - programId
+        - order
+        - title
+        - isAttachedPin
+        - mediaUrl
+        - playTimeSeconds
+        - createdAt
+        - updatedAt
     Plan:
       title: Plan
       x-stoplight:
@@ -376,12 +399,16 @@ components:
           type: string
         image:
           type: string
+      required:
+        - id
+        - clubId
+        - name
+        - info
     Club:
       title: Club
       x-stoplight:
         id: wzgyoggtvo0dd
       type: object
-      description: ''
       properties:
         id:
           type: integer
@@ -419,6 +446,14 @@ components:
         tiktok_url:
           type: string
           nullable: true
+      required:
+        - id
+        - name
+        - slug
+        - overview
+        - clubColor
+        - url
+        - programAttachedPlans
     ReactionComment:
       title: ReactionComment
       x-stoplight:
@@ -444,6 +479,14 @@ components:
         deletedAt:
           type: string
           nullable: true
+      required:
+        - id
+        - content
+        - likedProfiles
+        - profile
+        - isLiked
+        - createdAt
+        - updatedAt
     Profile:
       title: Profile
       x-stoplight:
@@ -462,6 +505,11 @@ components:
         type:
           type: string
           description: owner or member or passerby
+      required:
+        - id
+        - name
+        - isPublicProfile
+        - type
     PlayLog:
       title: PlayLog
       x-stoplight:
@@ -488,6 +536,17 @@ components:
           $ref: '#/components/schemas/Chapter'
         program:
           $ref: '#/components/schemas/Program'
+      required:
+        - id
+        - programId
+        - chapterId
+        - profileId
+        - session
+        - playTime
+        - elapsedSeconds
+        - createdAt
+        - chapter
+        - program
   responses:
     Programs:
       description: Example response
