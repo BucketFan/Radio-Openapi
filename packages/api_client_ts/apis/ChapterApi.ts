@@ -33,7 +33,7 @@ export interface ChapterOfPlayLogStartChapterIdOperationRequest {
 }
 
 export interface DeleteChapterIdRequest {
-    id: string;
+    id: number;
 }
 
 /**
@@ -62,7 +62,7 @@ export interface ChapterApiInterface {
     /**
      * Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
      * @summary Delete Chapter\'s media file.
-     * @param {string} id 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChapterApiInterface
@@ -73,7 +73,7 @@ export interface ChapterApiInterface {
      * Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
      * Delete Chapter\'s media file.
      */
-    deleteChapterId(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response>;
+    deleteChapterId(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response>;
 
 }
 
@@ -140,7 +140,7 @@ export class ChapterApi extends runtime.BaseAPI implements ChapterApiInterface {
      * Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
      * Delete Chapter\'s media file.
      */
-    async deleteChapterId(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response> {
+    async deleteChapterId(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response> {
         const response = await this.deleteChapterIdRaw({ id: id }, initOverrides);
         return await response.value();
     }

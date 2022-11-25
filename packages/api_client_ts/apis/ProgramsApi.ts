@@ -48,7 +48,7 @@ export interface GetClubProgramsForOwnerRequest {
 }
 
 export interface GetProgramChaptersRequest {
-    id: string;
+    id: number;
 }
 
 export interface PatchProgramsReservedToPubslishRequest {
@@ -117,7 +117,7 @@ export interface ProgramsApiInterface {
     /**
      * プログラム内の音声データ一覧を取得するAPI
      * @summary Get program\'s chapters
-     * @param {string} id 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface
@@ -128,7 +128,7 @@ export interface ProgramsApiInterface {
      * プログラム内の音声データ一覧を取得するAPI
      * Get program\'s chapters
      */
-    getProgramChapters(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramChapters200Response>;
+    getProgramChapters(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramChapters200Response>;
 
     /**
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。 （AWSのLambdaから定期的にリクエストが飛ぶ）
@@ -291,7 +291,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * プログラム内の音声データ一覧を取得するAPI
      * Get program\'s chapters
      */
-    async getProgramChapters(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramChapters200Response> {
+    async getProgramChapters(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramChapters200Response> {
         const response = await this.getProgramChaptersRaw({ id: id }, initOverrides);
         return await response.value();
     }
