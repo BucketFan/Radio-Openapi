@@ -36,7 +36,7 @@ export interface CreateProgramRequestChaptersInner {
      * @type {string}
      * @memberof CreateProgramRequestChaptersInner
      */
-    s3Url?: string;
+    mediaUrl?: string;
     /**
      * mineType 例：image/jpeg
      * @type {string}
@@ -48,13 +48,19 @@ export interface CreateProgramRequestChaptersInner {
      * @type {number}
      * @memberof CreateProgramRequestChaptersInner
      */
-    playTime?: number;
+    playTimeSeconds?: number;
     /**
      * 
      * @type {number}
      * @memberof CreateProgramRequestChaptersInner
      */
     order?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateProgramRequestChaptersInner
+     */
+    id?: number | null;
 }
 
 /**
@@ -78,10 +84,11 @@ export function CreateProgramRequestChaptersInnerFromJSONTyped(json: any, ignore
         
         'title': !exists(json, 'title') ? undefined : json['title'],
         'fileName': !exists(json, 'fileName') ? undefined : json['fileName'],
-        's3Url': !exists(json, 's3Url') ? undefined : json['s3Url'],
+        'mediaUrl': !exists(json, 'mediaUrl') ? undefined : json['mediaUrl'],
         'contentType': !exists(json, 'contentType') ? undefined : json['contentType'],
-        'playTime': !exists(json, 'playTime') ? undefined : json['playTime'],
+        'playTimeSeconds': !exists(json, 'playTimeSeconds') ? undefined : json['playTimeSeconds'],
         'order': !exists(json, 'order') ? undefined : json['order'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
     };
 }
 
@@ -96,10 +103,11 @@ export function CreateProgramRequestChaptersInnerToJSON(value?: CreateProgramReq
         
         'title': value.title,
         'fileName': value.fileName,
-        's3Url': value.s3Url,
+        'mediaUrl': value.mediaUrl,
         'contentType': value.contentType,
-        'playTime': value.playTime,
+        'playTimeSeconds': value.playTimeSeconds,
         'order': value.order,
+        'id': value.id,
     };
 }
 
