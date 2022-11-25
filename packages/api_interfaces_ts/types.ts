@@ -22,21 +22,21 @@ export interface paths {
       };
     };
   };
-  "/programs/of_club/{slug}": {
+  "/programs/of_club/{id}": {
     /** クラブに登録されているプログラム一覧を取得するAPI */
     get: operations["get-club-programs"];
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
     };
   };
-  "/programs/of_club/{slug}/for_owner": {
+  "/programs/of_club/{id}/for_owner": {
     /** クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある） */
     get: operations["get-club-programs-for-owner"];
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
     };
   };
@@ -309,11 +309,12 @@ export interface components {
           chapters?: {
             title?: string;
             fileName?: string;
-            s3Url?: string;
+            mediaUrl?: string;
             /** @description mineType 例：image/jpeg */
             contentType?: string;
-            playTime?: number;
+            playTimeSeconds?: number;
             order?: number;
+            id?: number | null;
           }[];
           scope?: number;
           isDraft?: boolean;
@@ -384,7 +385,7 @@ export interface operations {
       };
     };
     responses: {
-      200: components["responses"]["Chapters"];
+      200: components["responses"]["Program"];
     };
   };
   /** Radioプログラム編集API（オーナー向け） */
@@ -403,7 +404,7 @@ export interface operations {
   "get-club-programs": {
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
       query: {
         /** 次ページへのカーソル（ProgramID） */
@@ -420,7 +421,7 @@ export interface operations {
   "get-club-programs-for-owner": {
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
       query: {
         /** 次ページへのカーソル（ProgramID） */

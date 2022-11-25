@@ -15,7 +15,6 @@ models/CreateProgramRequest.ts
 models/CreateProgramRequestChaptersInner.ts
 models/DeleteChapterId200Response.ts
 models/GetPlayLogs200Response.ts
-models/GetProgramChapters200Response.ts
 models/GetProgramReactionComments200Response.ts
 models/GetPrograms200Response.ts
 models/Plan.ts
