@@ -37,61 +37,61 @@ export interface PlayLog {
      * @type {number}
      * @memberof PlayLog
      */
-    id?: number;
+    id: number;
     /**
      * 
      * @type {number}
      * @memberof PlayLog
      */
-    programId?: number;
+    programId: number;
     /**
      * 
      * @type {number}
      * @memberof PlayLog
      */
-    chapterId?: number;
+    chapterId: number;
     /**
      * 
      * @type {string}
      * @memberof PlayLog
      */
-    profileId?: string;
+    profileId: string;
     /**
      * 
      * @type {string}
      * @memberof PlayLog
      */
-    session?: string;
+    session: string;
     /**
      * 
      * @type {number}
      * @memberof PlayLog
      */
-    playTime?: number;
+    playTime: number;
     /**
      * 
      * @type {number}
      * @memberof PlayLog
      */
-    elapsedSeconds?: number;
+    elapsedSeconds: number;
     /**
      * 
      * @type {string}
      * @memberof PlayLog
      */
-    createdAt?: string;
+    createdAt: string;
     /**
      * 
      * @type {Chapter}
      * @memberof PlayLog
      */
-    chapter?: Chapter;
+    chapter: Chapter;
     /**
      * 
      * @type {Program}
      * @memberof PlayLog
      */
-    program?: Program;
+    program: Program;
 }
 
 /**
@@ -99,6 +99,16 @@ export interface PlayLog {
  */
 export function instanceOfPlayLog(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "programId" in value;
+    isInstance = isInstance && "chapterId" in value;
+    isInstance = isInstance && "profileId" in value;
+    isInstance = isInstance && "session" in value;
+    isInstance = isInstance && "playTime" in value;
+    isInstance = isInstance && "elapsedSeconds" in value;
+    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "chapter" in value;
+    isInstance = isInstance && "program" in value;
 
     return isInstance;
 }
@@ -113,16 +123,16 @@ export function PlayLogFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'programId': !exists(json, 'programId') ? undefined : json['programId'],
-        'chapterId': !exists(json, 'chapterId') ? undefined : json['chapterId'],
-        'profileId': !exists(json, 'profileId') ? undefined : json['profileId'],
-        'session': !exists(json, 'session') ? undefined : json['session'],
-        'playTime': !exists(json, 'playTime') ? undefined : json['playTime'],
-        'elapsedSeconds': !exists(json, 'elapsedSeconds') ? undefined : json['elapsedSeconds'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : json['createdAt'],
-        'chapter': !exists(json, 'chapter') ? undefined : ChapterFromJSON(json['chapter']),
-        'program': !exists(json, 'program') ? undefined : ProgramFromJSON(json['program']),
+        'id': json['id'],
+        'programId': json['programId'],
+        'chapterId': json['chapterId'],
+        'profileId': json['profileId'],
+        'session': json['session'],
+        'playTime': json['playTime'],
+        'elapsedSeconds': json['elapsedSeconds'],
+        'createdAt': json['createdAt'],
+        'chapter': ChapterFromJSON(json['chapter']),
+        'program': ProgramFromJSON(json['program']),
     };
 }
 

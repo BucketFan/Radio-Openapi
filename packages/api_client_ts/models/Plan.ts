@@ -24,25 +24,25 @@ export interface Plan {
      * @type {number}
      * @memberof Plan
      */
-    id?: number;
+    id: number;
     /**
      * 
      * @type {number}
      * @memberof Plan
      */
-    clubId?: number;
+    clubId: number;
     /**
      * 
      * @type {string}
      * @memberof Plan
      */
-    name?: string;
+    name: string;
     /**
      * 
      * @type {string}
      * @memberof Plan
      */
-    info?: string;
+    info: string;
     /**
      * 
      * @type {string}
@@ -56,6 +56,10 @@ export interface Plan {
  */
 export function instanceOfPlan(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "clubId" in value;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "info" in value;
 
     return isInstance;
 }
@@ -70,10 +74,10 @@ export function PlanFromJSONTyped(json: any, ignoreDiscriminator: boolean): Plan
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'clubId': !exists(json, 'clubId') ? undefined : json['clubId'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'info': !exists(json, 'info') ? undefined : json['info'],
+        'id': json['id'],
+        'clubId': json['clubId'],
+        'name': json['name'],
+        'info': json['info'],
         'image': !exists(json, 'image') ? undefined : json['image'],
     };
 }

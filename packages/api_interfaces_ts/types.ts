@@ -123,55 +123,55 @@ export interface components {
      * @description Chapterの集合体
      */
     Program: {
-      id?: number;
-      club?: components["schemas"]["Club"];
-      title?: string;
-      description?: string;
-      broadcastStatus?: number;
-      scope?: number;
-      chapters?: components["schemas"]["Chapter"][];
-      attachedPlans?: components["schemas"]["Plan"][];
-      isAttachedPin?: boolean;
-      reactionCommentsCount?: number;
+      id: number;
+      club: components["schemas"]["Club"];
+      title: string;
+      description: string;
+      broadcastStatus: number;
+      scope: number;
+      chapters: components["schemas"]["Chapter"][];
+      attachedPlans: components["schemas"]["Plan"][];
+      isAttachedPin: boolean;
+      reactionCommentsCount: number;
       reservedAt?: string | null;
-      createdAt?: string;
-      updatedAt?: string;
+      createdAt: string;
+      updatedAt: string;
     };
     /**
      * Chapter
      * @description 音声ファイルとその説明
      */
     Chapter: {
-      id?: number;
-      programId?: number;
-      order?: number;
-      title?: string;
+      id: number;
+      programId: number;
+      order: number;
+      title: string;
       /** @description 固定表示ON/OFF */
-      isAttachedPin?: boolean;
-      mediaUrl?: string;
-      playTimeSeconds?: number;
-      createdAt?: string;
-      updatedAt?: string;
+      isAttachedPin: boolean;
+      mediaUrl: string;
+      playTimeSeconds: number;
+      createdAt: string;
+      updatedAt: string;
       deletedAt?: string | null;
     };
     /** Plan */
     Plan: {
-      id?: number;
-      clubId?: number;
-      name?: string;
-      info?: string;
+      id: number;
+      clubId: number;
+      name: string;
+      info: string;
       image?: string;
     };
     /** Club */
     Club: {
-      id?: number;
-      name?: string;
-      slug?: string;
-      overview?: string;
+      id: number;
+      name: string;
+      slug: string;
+      overview: string;
       icon?: string;
-      clubColor?: string;
-      url?: string;
-      programAttachedPlans?: components["schemas"]["Plan"][];
+      clubColor: string;
+      url: string;
+      programAttachedPlans: components["schemas"]["Plan"][];
       twitter_url?: string | null;
       facebook_url?: string | null;
       line_url?: string | null;
@@ -181,13 +181,13 @@ export interface components {
     };
     /** ReactionComment */
     ReactionComment: {
-      id?: number;
-      content?: string;
-      likedProfiles?: components["schemas"]["Profile"][];
-      profile?: components["schemas"]["Profile"];
-      isLiked?: boolean;
-      createdAt?: string;
-      updatedAt?: string;
+      id: number;
+      content: string;
+      likedProfiles: components["schemas"]["Profile"][];
+      profile: components["schemas"]["Profile"];
+      isLiked: boolean;
+      createdAt: string;
+      updatedAt: string;
       deletedAt?: string | null;
     };
     /**
@@ -195,25 +195,25 @@ export interface components {
      * @description ユーザプロファイル（会員、オーナー、通りすがりの人がありえる）
      */
     Profile: {
-      id?: string;
-      name?: string;
+      id: string;
+      name: string;
       thumbnail?: string;
-      isPublicProfile?: boolean;
+      isPublicProfile: boolean;
       /** @description owner or member or passerby */
-      type?: string;
+      type: string;
     };
     /** PlayLog */
     PlayLog: {
-      id?: number;
-      programId?: number;
-      chapterId?: number;
-      profileId?: string;
-      session?: string;
-      playTime?: number;
-      elapsedSeconds?: number;
-      createdAt?: string;
-      chapter?: components["schemas"]["Chapter"];
-      program?: components["schemas"]["Program"];
+      id: number;
+      programId: number;
+      chapterId: number;
+      profileId: string;
+      session: string;
+      playTime: number;
+      elapsedSeconds: number;
+      createdAt: string;
+      chapter: components["schemas"]["Chapter"];
+      program: components["schemas"]["Program"];
     };
   };
   responses: {

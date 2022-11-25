@@ -24,55 +24,55 @@ export interface Chapter {
      * @type {number}
      * @memberof Chapter
      */
-    id?: number;
+    id: number;
     /**
      * 
      * @type {number}
      * @memberof Chapter
      */
-    programId?: number;
+    programId: number;
     /**
      * 
      * @type {number}
      * @memberof Chapter
      */
-    order?: number;
+    order: number;
     /**
      * 
      * @type {string}
      * @memberof Chapter
      */
-    title?: string;
+    title: string;
     /**
      * 固定表示ON/OFF
      * @type {boolean}
      * @memberof Chapter
      */
-    isAttachedPin?: boolean;
+    isAttachedPin: boolean;
     /**
      * 
      * @type {string}
      * @memberof Chapter
      */
-    mediaUrl?: string;
+    mediaUrl: string;
     /**
      * 
      * @type {number}
      * @memberof Chapter
      */
-    playTimeSeconds?: number;
+    playTimeSeconds: number;
     /**
      * 
      * @type {string}
      * @memberof Chapter
      */
-    createdAt?: string;
+    createdAt: string;
     /**
      * 
      * @type {string}
      * @memberof Chapter
      */
-    updatedAt?: string;
+    updatedAt: string;
     /**
      * 
      * @type {string}
@@ -86,6 +86,15 @@ export interface Chapter {
  */
 export function instanceOfChapter(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "programId" in value;
+    isInstance = isInstance && "order" in value;
+    isInstance = isInstance && "title" in value;
+    isInstance = isInstance && "isAttachedPin" in value;
+    isInstance = isInstance && "mediaUrl" in value;
+    isInstance = isInstance && "playTimeSeconds" in value;
+    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "updatedAt" in value;
 
     return isInstance;
 }
@@ -100,15 +109,15 @@ export function ChapterFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'programId': !exists(json, 'programId') ? undefined : json['programId'],
-        'order': !exists(json, 'order') ? undefined : json['order'],
-        'title': !exists(json, 'title') ? undefined : json['title'],
-        'isAttachedPin': !exists(json, 'isAttachedPin') ? undefined : json['isAttachedPin'],
-        'mediaUrl': !exists(json, 'mediaUrl') ? undefined : json['mediaUrl'],
-        'playTimeSeconds': !exists(json, 'playTimeSeconds') ? undefined : json['playTimeSeconds'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : json['createdAt'],
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : json['updatedAt'],
+        'id': json['id'],
+        'programId': json['programId'],
+        'order': json['order'],
+        'title': json['title'],
+        'isAttachedPin': json['isAttachedPin'],
+        'mediaUrl': json['mediaUrl'],
+        'playTimeSeconds': json['playTimeSeconds'],
+        'createdAt': json['createdAt'],
+        'updatedAt': json['updatedAt'],
         'deletedAt': !exists(json, 'deletedAt') ? undefined : json['deletedAt'],
     };
 }
