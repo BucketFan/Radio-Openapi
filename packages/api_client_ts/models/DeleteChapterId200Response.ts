@@ -32,6 +32,12 @@ export interface DeleteChapterId200Response {
      * @memberof DeleteChapterId200Response
      */
     chapter?: Chapter;
+    /**
+     * 
+     * @type {number}
+     * @memberof DeleteChapterId200Response
+     */
+    elapsedSeconds?: number | null;
 }
 
 /**
@@ -54,6 +60,7 @@ export function DeleteChapterId200ResponseFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'chapter': !exists(json, 'chapter') ? undefined : ChapterFromJSON(json['chapter']),
+        'elapsedSeconds': !exists(json, 'elapsedSeconds') ? undefined : json['elapsedSeconds'],
     };
 }
 
@@ -67,6 +74,7 @@ export function DeleteChapterId200ResponseToJSON(value?: DeleteChapterId200Respo
     return {
         
         'chapter': ChapterToJSON(value.chapter),
+        'elapsedSeconds': value.elapsedSeconds,
     };
 }
 

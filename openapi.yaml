@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: poytvzegapdyg
+  id: ir7ckios6gkgn
 info:
   title: radio_openapi
   version: '1.0'
@@ -30,7 +30,7 @@ paths:
   '/programs/{id}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: id
         in: path
         required: true
@@ -40,7 +40,7 @@ paths:
       description: プログラム内の音声データ一覧を取得するAPI
       responses:
         '200':
-          $ref: '#/components/responses/Chapters'
+          $ref: '#/components/responses/Program'
       tags:
         - programs
     put:
@@ -53,11 +53,11 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Program'
-  '/programs/of_club/{slug}':
+  '/programs/of_club/{id}':
     parameters:
       - schema:
-          type: string
-        name: slug
+          type: number
+        name: id
         in: path
         required: true
     get:
@@ -80,7 +80,7 @@ paths:
           description: 全て、閲覧可能、プラン別のタブスイッチャー プランの場合は、プランID
       tags:
         - programs
-  '/programs/of_club/{slug}/for_owner':
+  '/programs/of_club/{id}/for_owner':
     get:
       summary: GET Club's Programs For Owner's Admin page.
       responses:
@@ -103,8 +103,8 @@ paths:
         - programs
     parameters:
       - schema:
-          type: string
-        name: slug
+          type: number
+        name: id
         in: path
         required: true
   /programs/reserved_to_pubslish:
@@ -148,7 +148,7 @@ paths:
           name: cursor
     parameters:
       - schema:
-          type: string
+          type: integer
         name: programId
         in: path
         required: true
@@ -164,7 +164,7 @@ paths:
   '/reaction_comments/like_toggle/{commentId}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: commentId
         in: path
         required: true
@@ -180,7 +180,7 @@ paths:
   '/reaction_comments/{commentId}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: commentId
         in: path
         required: true
@@ -237,10 +237,22 @@ paths:
         Request Bodyに追加して送る必要がある。
       requestBody:
         $ref: '#/components/requestBodies/PutChapterPlayLog'
+    get:
+      summary: ''
+      operationId: get-play_logs
+      responses:
+        '200':
+          $ref: '#/components/responses/PlayLogs'
+      description: 特定のユーザーの再生履歴を返すAPI
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: profileId
   '/chapters/{id}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: id
         in: path
         required: true
@@ -450,6 +462,32 @@ components:
         type:
           type: string
           description: owner or member or passerby
+    PlayLog:
+      title: PlayLog
+      x-stoplight:
+        id: nmzdt5ngivp34
+      type: object
+      properties:
+        id:
+          type: number
+        programId:
+          type: number
+        chapterId:
+          type: number
+        profileId:
+          type: string
+        session:
+          type: string
+        playTime:
+          type: number
+        elapsedSeconds:
+          type: number
+        createdAt:
+          type: string
+        chapter:
+          $ref: '#/components/schemas/Chapter'
+        program:
+          $ref: '#/components/schemas/Program'
   responses:
     Programs:
       description: Example response
@@ -816,6 +854,9 @@ components:
             properties:
               chapter:
                 $ref: '#/components/schemas/Chapter'
+              elapsedSeconds:
+                type: number
+                nullable: true
     ChapterPlayLog:
       description: Example response
       content:
@@ -825,6 +866,17 @@ components:
             properties:
               session:
                 type: string
+    PlayLogs:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              playLogs:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayLog'
   requestBodies:
     Program:
       content:
@@ -847,15 +899,18 @@ components:
                       type: string
                     fileName:
                       type: string
-                    s3Url:
+                    mediaUrl:
                       type: string
                     contentType:
                       type: string
                       description: mineType 例：image/jpeg
-                    playTime:
+                    playTimeSeconds:
                       type: integer
                     order:
                       type: integer
+                    id:
+                      type: number
+                      nullable: true
               scope:
                 type: integer
               isDraft:

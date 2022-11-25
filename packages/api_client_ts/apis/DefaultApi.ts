@@ -19,6 +19,7 @@ import type {
   ChapterOfPlayLogEndChapterIdRequest,
   CreateProgram200Response,
   CreateProgramRequest,
+  GetPlayLogs200Response,
   PostProgramReactionComments200Response,
   PostProgramReactionCommentsRequest,
   PostPublishPreSignedUrl200Response,
@@ -33,6 +34,8 @@ import {
     CreateProgram200ResponseToJSON,
     CreateProgramRequestFromJSON,
     CreateProgramRequestToJSON,
+    GetPlayLogs200ResponseFromJSON,
+    GetPlayLogs200ResponseToJSON,
     PostProgramReactionComments200ResponseFromJSON,
     PostProgramReactionComments200ResponseToJSON,
     PostProgramReactionCommentsRequestFromJSON,
@@ -47,8 +50,12 @@ export interface ChapterOfPlayLogEndChapterIdOperationRequest {
     chapterOfPlayLogEndChapterIdRequest?: ChapterOfPlayLogEndChapterIdRequest;
 }
 
+export interface GetPlayLogsRequest {
+    profileId?: string;
+}
+
 export interface PostProgramReactionCommentsOperationRequest {
-    programId: string;
+    programId: number;
     postProgramReactionCommentsRequest?: PostProgramReactionCommentsRequest;
 }
 
@@ -57,7 +64,7 @@ export interface PostPublishPreSignedUrlOperationRequest {
 }
 
 export interface PutProgramRequest {
-    id: string;
+    id: number;
     createProgramRequest?: CreateProgramRequest;
 }
 
@@ -99,9 +106,25 @@ export interface DefaultApiInterface {
     getHealthcheck(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string>;
 
     /**
+     * 特定のユーザーの再生履歴を返すAPI
+     * @summary 
+     * @param {string} [profileId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getPlayLogsRaw(requestParameters: GetPlayLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPlayLogs200Response>>;
+
+    /**
+     * 特定のユーザーの再生履歴を返すAPI
+     * 
+     */
+    getPlayLogs(profileId?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response>;
+
+    /**
      * 特定のプログラムにリアクションコメントをするAPI
      * @summary 
-     * @param {string} programId 
+     * @param {number} programId 
      * @param {PostProgramReactionCommentsRequest} [postProgramReactionCommentsRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -113,7 +136,7 @@ export interface DefaultApiInterface {
      * 特定のプログラムにリアクションコメントをするAPI
      * 
      */
-    postProgramReactionComments(programId: string, postProgramReactionCommentsRequest?: PostProgramReactionCommentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
+    postProgramReactionComments(programId: number, postProgramReactionCommentsRequest?: PostProgramReactionCommentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response>;
 
     /**
      * 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI
@@ -134,7 +157,7 @@ export interface DefaultApiInterface {
     /**
      * Radioプログラム編集API（オーナー向け）
      * @summary Edit program
-     * @param {string} id 
+     * @param {number} id 
      * @param {CreateProgramRequest} [createProgramRequest] scopeは、誰でも見れる&#x3D;0  プラン入会者しか見れない&#x3D;1 broadcastStatusは、放映中&#x3D;0, 予約中&#x3D;1 attachedPlansIdsは、紐付けるPlanIdの配列
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -146,7 +169,7 @@ export interface DefaultApiInterface {
      * Radioプログラム編集API（オーナー向け）
      * Edit program
      */
-    putProgram(id: string, createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
+    putProgram(id: number, createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
 
 }
 
@@ -213,6 +236,38 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * 特定のユーザーの再生履歴を返すAPI
+     * 
+     */
+    async getPlayLogsRaw(requestParameters: GetPlayLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPlayLogs200Response>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.profileId !== undefined) {
+            queryParameters['profileId'] = requestParameters.profileId;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/play_logs`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetPlayLogs200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * 特定のユーザーの再生履歴を返すAPI
+     * 
+     */
+    async getPlayLogs(profileId?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response> {
+        const response = await this.getPlayLogsRaw({ profileId: profileId }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * 特定のプログラムにリアクションコメントをするAPI
      * 
      */
@@ -242,7 +297,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
      * 特定のプログラムにリアクションコメントをするAPI
      * 
      */
-    async postProgramReactionComments(programId: string, postProgramReactionCommentsRequest?: PostProgramReactionCommentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
+    async postProgramReactionComments(programId: number, postProgramReactionCommentsRequest?: PostProgramReactionCommentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostProgramReactionComments200Response> {
         const response = await this.postProgramReactionCommentsRaw({ programId: programId, postProgramReactionCommentsRequest: postProgramReactionCommentsRequest }, initOverrides);
         return await response.value();
     }
@@ -308,7 +363,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
      * Radioプログラム編集API（オーナー向け）
      * Edit program
      */
-    async putProgram(id: string, createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
+    async putProgram(id: number, createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
         const response = await this.putProgramRaw({ id: id, createProgramRequest: createProgramRequest }, initOverrides);
         return await response.value();
     }
