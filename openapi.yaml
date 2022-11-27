@@ -326,11 +326,14 @@ components:
           type: integer
         reservedAt:
           type: string
+          format: date-time
           nullable: true
         createdAt:
           type: string
+          format: date-time
         updatedAt:
           type: string
+          format: date-time
       required:
         - id
         - club
@@ -368,10 +371,13 @@ components:
           type: integer
         createdAt:
           type: string
+          format: date-time
         updatedAt:
           type: string
+          format: date-time
         deletedAt:
           type: string
+          format: date-time
           nullable: true
       required:
         - id
@@ -474,10 +480,13 @@ components:
           type: boolean
         createdAt:
           type: string
+          format: date-time
         updatedAt:
           type: string
+          format: date-time
         deletedAt:
           type: string
+          format: date-time
           nullable: true
       required:
         - id
@@ -532,6 +541,7 @@ components:
           type: number
         createdAt:
           type: string
+          format: date-time
         chapter:
           $ref: '#/components/schemas/Chapter'
         program:
