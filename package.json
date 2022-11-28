@@ -2,7 +2,8 @@
   "scripts": {
     "build:doc": "redoc-cli build openapi.yaml -o document/index.html",
     "build:packages": "sh ./scripts/generate_packages.sh",
-    "mockserver": "prism mock ./openapi.yaml"
+    "mockserver": "prism mock ./openapi.yaml",
+    "lint": "npx @stoplight/spectral-cli lint openapi.yaml"
   },
   "dependencies": {
     "openapi-typescript": "^5.4.1",

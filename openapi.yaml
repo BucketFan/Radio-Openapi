@@ -4,11 +4,25 @@ x-stoplight:
 info:
   title: radio_openapi
   version: '1.0'
+  description: radio_openapi
+  contact:
+    name: Anycloud
+    email: info@anycloud.co.jp
+    url: https://anycloud.co.jp/
+servers:
+  - url: ''
+    description: Production server
+  - url: ''
+    description: Staging server
+  - url: ''
+    description: Development server
+  - url: 'http://127.0.0.1:4010'
+    description: Development Mockserver
 paths:
   /programs:
     post:
       summary: Create Program
-      operationId: create-program
+      operationId: createProgram
       description: Radioプログラム登録API
       requestBody:
         $ref: '#/components/requestBodies/Program'
@@ -20,13 +34,13 @@ paths:
     parameters: []
     get:
       summary: List of programs available to members
-      operationId: get-programs
+      operationId: getPrograms
       description: 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API
       responses:
         '200':
           $ref: '#/components/responses/Programs'
       tags:
-        - program
+        - programs
   '/programs/{id}':
     parameters:
       - schema:
@@ -36,7 +50,7 @@ paths:
         required: true
     get:
       summary: Get program's chapters
-      operationId: get-program-chapters
+      operationId: getProgramChapters
       description: プログラム内の音声データ一覧を取得するAPI
       responses:
         '200':
@@ -45,7 +59,7 @@ paths:
         - programs
     put:
       summary: Edit program
-      operationId: put-program
+      operationId: putProgram
       description: Radioプログラム編集API（オーナー向け）
       parameters: []
       requestBody:
@@ -53,6 +67,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Program'
+      tags:
+        - programs
   '/programs/of_club/{id}':
     parameters:
       - schema:
@@ -65,7 +81,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Programs'
-      operationId: get-club-programs
+      operationId: getClubPrograms
       description: クラブに登録されているプログラム一覧を取得するAPI
       parameters:
         - schema:
@@ -86,7 +102,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Programs'
-      operationId: get-club-programs-for-owner
+      operationId: getClubProgramsForOwner
       description: クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
       parameters:
         - schema:
@@ -111,7 +127,7 @@ paths:
     parameters: []
     patch:
       summary: Switch reserved all program to publish
-      operationId: patch-programs-reserved_to_pubslish
+      operationId: patchProgramsReservedToPublish
       responses:
         '200':
           description: OK
@@ -131,7 +147,7 @@ paths:
       summary: Get Reactions Comment
       tags:
         - reaction_comments
-      operationId: get-program-reactionComments
+      operationId: getProgramReactionComments
       description: 特定のプログラムのリアクションコメントを取得するAPI
       responses:
         '200':
@@ -154,13 +170,15 @@ paths:
         required: true
     post:
       summary: ''
-      operationId: post-program-reactionComments
+      operationId: postProgramReactionComments
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
       description: 特定のプログラムにリアクションコメントをするAPI
       requestBody:
         $ref: '#/components/requestBodies/ReactionComment'
+      tags:
+        - reaction_comments
   '/reaction_comments/like_toggle/{commentId}':
     parameters:
       - schema:
@@ -170,7 +188,7 @@ paths:
         required: true
     patch:
       summary: Like ON/OFF
-      operationId: patch-reaction_comments-like_toggle-id
+      operationId: patchReactionCommentsLikeToggleId
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
@@ -186,7 +204,7 @@ paths:
         required: true
     delete:
       summary: Delete Reaction Comment
-      operationId: delete-reaction_comments-commentId
+      operationId: deleteReactionCommentsCommentId
       description: リアクションコメントを削除するAPI。(コメント投稿者向け)
       responses:
         '200':
@@ -195,7 +213,7 @@ paths:
         - reaction_comments
     patch:
       summary: Hidden Reaction Comment
-      operationId: patch-reaction_comments-commentId
+      operationId: patchReactionCommentsCommentId
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
@@ -206,7 +224,7 @@ paths:
     parameters: []
     post:
       summary: Start record chapter play log.
-      operationId: chapter-of_play_log-start-chapterId
+      operationId: chapterOfPlayLogStartChapterId
       responses:
         '200':
           $ref: '#/components/responses/ChapterPlayLog'
@@ -228,7 +246,7 @@ paths:
                   type: integer
     put:
       summary: End record chapter play log.
-      operationId: chapter-of_play_log-end-chapterId
+      operationId: chapterOfPlayLogEndChapterId
       responses:
         '200':
           $ref: '#/components/responses/ChapterPlayLog'
@@ -237,9 +255,11 @@ paths:
         Request Bodyに追加して送る必要がある。
       requestBody:
         $ref: '#/components/requestBodies/PutChapterPlayLog'
+      tags:
+        - play_logs
     get:
       summary: ''
-      operationId: get-play_logs
+      operationId: getPlayLogs
       responses:
         '200':
           $ref: '#/components/responses/PlayLogs'
@@ -249,6 +269,8 @@ paths:
             type: string
           in: query
           name: profileId
+      tags:
+        - play_logs
   '/chapters/{id}':
     parameters:
       - schema:
@@ -258,7 +280,7 @@ paths:
         required: true
     delete:
       summary: Delete Chapter's media file.
-      operationId: delete-chapter-id
+      operationId: deleteChapterId
       description: Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
       responses:
         '200':
@@ -268,18 +290,22 @@ paths:
   /pre_signed_url:
     post:
       summary: Publish pre-signed URL
-      operationId: post-publish_pre_signed_url
+      operationId: postPublishPreSignedUrl
       description: 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI
       requestBody:
         $ref: '#/components/requestBodies/PreSignedUrl'
       responses:
         '200':
           $ref: '#/components/responses/PreSignedUrl'
+      tags:
+        - pre_signed_url
     parameters: []
   /healthcheck:
     get:
       summary: healthcheck
-      tags: []
+      description: 'healthcheck'
+      tags:
+        - healthcheck
       responses:
         '200':
           description: OK
@@ -290,7 +316,8 @@ paths:
               examples:
                 example:
                   value: OK
-      operationId: get-healthcheck
+      operationId: getHealthcheck
+
 components:
   schemas:
     Program:
@@ -1036,3 +1063,18 @@ components:
                 type: integer
               session:
                 type: string
+tags:
+  - name: program
+    description: ''
+  - name: programs
+    description: ''
+  - name: reaction_comments
+    description: ''
+  - name: chapter
+    description: ''
+  - name: play_logs
+    description: ''
+  - name: pre_signed_url
+    description: ''
+  - name: healthcheck
+    description: ''
