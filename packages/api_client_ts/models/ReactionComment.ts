@@ -31,37 +31,43 @@ export interface ReactionComment {
      * @type {number}
      * @memberof ReactionComment
      */
-    id?: number;
+    id: number;
     /**
      * 
      * @type {string}
      * @memberof ReactionComment
      */
-    content?: string;
+    content: string;
     /**
      * 
      * @type {Array<Profile>}
      * @memberof ReactionComment
      */
-    likedProfiles?: Array<Profile>;
+    likedProfiles: Array<Profile>;
+    /**
+     * 
+     * @type {Profile}
+     * @memberof ReactionComment
+     */
+    profile: Profile;
     /**
      * 
      * @type {boolean}
      * @memberof ReactionComment
      */
-    isLiked?: boolean;
+    isLiked: boolean;
     /**
      * 
      * @type {string}
      * @memberof ReactionComment
      */
-    createdAt?: string;
+    createdAt: string;
     /**
      * 
      * @type {string}
      * @memberof ReactionComment
      */
-    updatedAt?: string;
+    updatedAt: string;
     /**
      * 
      * @type {string}
@@ -75,6 +81,13 @@ export interface ReactionComment {
  */
 export function instanceOfReactionComment(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "content" in value;
+    isInstance = isInstance && "likedProfiles" in value;
+    isInstance = isInstance && "profile" in value;
+    isInstance = isInstance && "isLiked" in value;
+    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "updatedAt" in value;
 
     return isInstance;
 }
@@ -89,12 +102,13 @@ export function ReactionCommentFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'content': !exists(json, 'content') ? undefined : json['content'],
-        'likedProfiles': !exists(json, 'LikedProfiles') ? undefined : ((json['LikedProfiles'] as Array<any>).map(ProfileFromJSON)),
-        'isLiked': !exists(json, 'isLiked') ? undefined : json['isLiked'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : json['createdAt'],
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : json['updatedAt'],
+        'id': json['id'],
+        'content': json['content'],
+        'likedProfiles': ((json['likedProfiles'] as Array<any>).map(ProfileFromJSON)),
+        'profile': ProfileFromJSON(json['profile']),
+        'isLiked': json['isLiked'],
+        'createdAt': json['createdAt'],
+        'updatedAt': json['updatedAt'],
         'deletedAt': !exists(json, 'deletedAt') ? undefined : json['deletedAt'],
     };
 }
@@ -110,7 +124,8 @@ export function ReactionCommentToJSON(value?: ReactionComment | null): any {
         
         'id': value.id,
         'content': value.content,
-        'LikedProfiles': value.likedProfiles === undefined ? undefined : ((value.likedProfiles as Array<any>).map(ProfileToJSON)),
+        'likedProfiles': ((value.likedProfiles as Array<any>).map(ProfileToJSON)),
+        'profile': ProfileToJSON(value.profile),
         'isLiked': value.isLiked,
         'createdAt': value.createdAt,
         'updatedAt': value.updatedAt,

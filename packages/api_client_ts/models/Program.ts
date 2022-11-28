@@ -43,61 +43,61 @@ export interface Program {
      * @type {number}
      * @memberof Program
      */
-    id?: number;
+    id: number;
     /**
      * 
      * @type {Club}
      * @memberof Program
      */
-    club?: Club;
+    club: Club;
     /**
      * 
      * @type {string}
      * @memberof Program
      */
-    title?: string;
+    title: string;
     /**
      * 
      * @type {string}
      * @memberof Program
      */
-    description?: string;
+    description: string;
     /**
      * 
      * @type {number}
      * @memberof Program
      */
-    broadcastStatus?: number;
+    broadcastStatus: number;
     /**
      * 
      * @type {number}
      * @memberof Program
      */
-    scope?: number;
+    scope: number;
     /**
      * 
      * @type {Array<Chapter>}
      * @memberof Program
      */
-    chapters?: Array<Chapter>;
+    chapters: Array<Chapter>;
     /**
      * 
      * @type {Array<Plan>}
      * @memberof Program
      */
-    attachedPlans?: Array<Plan>;
+    attachedPlans: Array<Plan>;
     /**
      * 
      * @type {boolean}
      * @memberof Program
      */
-    isAttachedPin?: boolean;
+    isAttachedPin: boolean;
     /**
      * 
      * @type {number}
      * @memberof Program
      */
-    reactionCommentsCount?: number;
+    reactionCommentsCount: number;
     /**
      * 
      * @type {string}
@@ -109,13 +109,13 @@ export interface Program {
      * @type {string}
      * @memberof Program
      */
-    createdAt?: string;
+    createdAt: string;
     /**
      * 
      * @type {string}
      * @memberof Program
      */
-    updatedAt?: string;
+    updatedAt: string;
 }
 
 /**
@@ -123,6 +123,18 @@ export interface Program {
  */
 export function instanceOfProgram(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "club" in value;
+    isInstance = isInstance && "title" in value;
+    isInstance = isInstance && "description" in value;
+    isInstance = isInstance && "broadcastStatus" in value;
+    isInstance = isInstance && "scope" in value;
+    isInstance = isInstance && "chapters" in value;
+    isInstance = isInstance && "attachedPlans" in value;
+    isInstance = isInstance && "isAttachedPin" in value;
+    isInstance = isInstance && "reactionCommentsCount" in value;
+    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "updatedAt" in value;
 
     return isInstance;
 }
@@ -137,19 +149,19 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'club': !exists(json, 'club') ? undefined : ClubFromJSON(json['club']),
-        'title': !exists(json, 'title') ? undefined : json['title'],
-        'description': !exists(json, 'description') ? undefined : json['description'],
-        'broadcastStatus': !exists(json, 'broadcastStatus') ? undefined : json['broadcastStatus'],
-        'scope': !exists(json, 'scope') ? undefined : json['scope'],
-        'chapters': !exists(json, 'chapters') ? undefined : ((json['chapters'] as Array<any>).map(ChapterFromJSON)),
-        'attachedPlans': !exists(json, 'attachedPlans') ? undefined : ((json['attachedPlans'] as Array<any>).map(PlanFromJSON)),
-        'isAttachedPin': !exists(json, 'isAttachedPin') ? undefined : json['isAttachedPin'],
-        'reactionCommentsCount': !exists(json, 'reactionCommentsCount') ? undefined : json['reactionCommentsCount'],
+        'id': json['id'],
+        'club': ClubFromJSON(json['club']),
+        'title': json['title'],
+        'description': json['description'],
+        'broadcastStatus': json['broadcastStatus'],
+        'scope': json['scope'],
+        'chapters': ((json['chapters'] as Array<any>).map(ChapterFromJSON)),
+        'attachedPlans': ((json['attachedPlans'] as Array<any>).map(PlanFromJSON)),
+        'isAttachedPin': json['isAttachedPin'],
+        'reactionCommentsCount': json['reactionCommentsCount'],
         'reservedAt': !exists(json, 'reservedAt') ? undefined : json['reservedAt'],
-        'createdAt': !exists(json, 'createdAt') ? undefined : json['createdAt'],
-        'updatedAt': !exists(json, 'updatedAt') ? undefined : json['updatedAt'],
+        'createdAt': json['createdAt'],
+        'updatedAt': json['updatedAt'],
     };
 }
 
@@ -168,8 +180,8 @@ export function ProgramToJSON(value?: Program | null): any {
         'description': value.description,
         'broadcastStatus': value.broadcastStatus,
         'scope': value.scope,
-        'chapters': value.chapters === undefined ? undefined : ((value.chapters as Array<any>).map(ChapterToJSON)),
-        'attachedPlans': value.attachedPlans === undefined ? undefined : ((value.attachedPlans as Array<any>).map(PlanToJSON)),
+        'chapters': ((value.chapters as Array<any>).map(ChapterToJSON)),
+        'attachedPlans': ((value.attachedPlans as Array<any>).map(PlanToJSON)),
         'isAttachedPin': value.isAttachedPin,
         'reactionCommentsCount': value.reactionCommentsCount,
         'reservedAt': value.reservedAt,

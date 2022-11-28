@@ -17,7 +17,6 @@ import * as runtime from '../runtime';
 import type {
   CreateProgram200Response,
   CreateProgramRequest,
-  GetProgramChapters200Response,
   GetPrograms200Response,
 } from '../models';
 import {
@@ -25,8 +24,6 @@ import {
     CreateProgram200ResponseToJSON,
     CreateProgramRequestFromJSON,
     CreateProgramRequestToJSON,
-    GetProgramChapters200ResponseFromJSON,
-    GetProgramChapters200ResponseToJSON,
     GetPrograms200ResponseFromJSON,
     GetPrograms200ResponseToJSON,
 } from '../models';
@@ -36,19 +33,19 @@ export interface CreateProgramOperationRequest {
 }
 
 export interface GetClubProgramsRequest {
-    slug: string;
+    id: number;
     cursor?: string;
     _switch?: string;
 }
 
 export interface GetClubProgramsForOwnerRequest {
-    slug: string;
+    id: number;
     cursor?: string;
     isDraft?: string;
 }
 
 export interface GetProgramChaptersRequest {
-    id: string;
+    id: number;
 }
 
 export interface PatchProgramsReservedToPubslishRequest {
@@ -81,7 +78,7 @@ export interface ProgramsApiInterface {
     /**
      * クラブに登録されているプログラム一覧を取得するAPI
      * @summary GET Club\'s programs.
-     * @param {string} slug 
+     * @param {number} id 
      * @param {string} [cursor] 次ページへのカーソル（ProgramID）
      * @param {string} [_switch] 全て、閲覧可能、プラン別のタブスイッチャー プランの場合は、プランID
      * @param {*} [options] Override http request option.
@@ -94,12 +91,12 @@ export interface ProgramsApiInterface {
      * クラブに登録されているプログラム一覧を取得するAPI
      * GET Club\'s programs.
      */
-    getClubPrograms(slug: string, cursor?: string, _switch?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
+    getClubPrograms(id: number, cursor?: string, _switch?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
      * クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
      * @summary GET Club\'s Programs For Owner\'s Admin page.
-     * @param {string} slug 
+     * @param {number} id 
      * @param {string} [cursor] 次ページへのカーソル（ProgramID）
      * @param {string} [isDraft] ONの場合、下書きのみ取得する
      * @param {*} [options] Override http request option.
@@ -112,23 +109,23 @@ export interface ProgramsApiInterface {
      * クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
      * GET Club\'s Programs For Owner\'s Admin page.
      */
-    getClubProgramsForOwner(slug: string, cursor?: string, isDraft?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
+    getClubProgramsForOwner(id: number, cursor?: string, isDraft?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
      * プログラム内の音声データ一覧を取得するAPI
      * @summary Get program\'s chapters
-     * @param {string} id 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface
      */
-    getProgramChaptersRaw(requestParameters: GetProgramChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetProgramChapters200Response>>;
+    getProgramChaptersRaw(requestParameters: GetProgramChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>>;
 
     /**
      * プログラム内の音声データ一覧を取得するAPI
      * Get program\'s chapters
      */
-    getProgramChapters(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramChapters200Response>;
+    getProgramChapters(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
 
     /**
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。 （AWSのLambdaから定期的にリクエストが飛ぶ）
@@ -189,8 +186,8 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * GET Club\'s programs.
      */
     async getClubProgramsRaw(requestParameters: GetClubProgramsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPrograms200Response>> {
-        if (requestParameters.slug === null || requestParameters.slug === undefined) {
-            throw new runtime.RequiredError('slug','Required parameter requestParameters.slug was null or undefined when calling getClubPrograms.');
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getClubPrograms.');
         }
 
         const queryParameters: any = {};
@@ -206,7 +203,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/programs/of_club/{slug}`.replace(`{${"slug"}}`, encodeURIComponent(String(requestParameters.slug))),
+            path: `/programs/of_club/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -219,8 +216,8 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * クラブに登録されているプログラム一覧を取得するAPI
      * GET Club\'s programs.
      */
-    async getClubPrograms(slug: string, cursor?: string, _switch?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
-        const response = await this.getClubProgramsRaw({ slug: slug, cursor: cursor, _switch: _switch }, initOverrides);
+    async getClubPrograms(id: number, cursor?: string, _switch?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
+        const response = await this.getClubProgramsRaw({ id: id, cursor: cursor, _switch: _switch }, initOverrides);
         return await response.value();
     }
 
@@ -229,8 +226,8 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * GET Club\'s Programs For Owner\'s Admin page.
      */
     async getClubProgramsForOwnerRaw(requestParameters: GetClubProgramsForOwnerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPrograms200Response>> {
-        if (requestParameters.slug === null || requestParameters.slug === undefined) {
-            throw new runtime.RequiredError('slug','Required parameter requestParameters.slug was null or undefined when calling getClubProgramsForOwner.');
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getClubProgramsForOwner.');
         }
 
         const queryParameters: any = {};
@@ -246,7 +243,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/programs/of_club/{slug}/for_owner`.replace(`{${"slug"}}`, encodeURIComponent(String(requestParameters.slug))),
+            path: `/programs/of_club/{id}/for_owner`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -259,8 +256,8 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
      * GET Club\'s Programs For Owner\'s Admin page.
      */
-    async getClubProgramsForOwner(slug: string, cursor?: string, isDraft?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
-        const response = await this.getClubProgramsForOwnerRaw({ slug: slug, cursor: cursor, isDraft: isDraft }, initOverrides);
+    async getClubProgramsForOwner(id: number, cursor?: string, isDraft?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
+        const response = await this.getClubProgramsForOwnerRaw({ id: id, cursor: cursor, isDraft: isDraft }, initOverrides);
         return await response.value();
     }
 
@@ -268,7 +265,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * プログラム内の音声データ一覧を取得するAPI
      * Get program\'s chapters
      */
-    async getProgramChaptersRaw(requestParameters: GetProgramChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetProgramChapters200Response>> {
+    async getProgramChaptersRaw(requestParameters: GetProgramChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProgramChapters.');
         }
@@ -284,14 +281,14 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => GetProgramChapters200ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgram200ResponseFromJSON(jsonValue));
     }
 
     /**
      * プログラム内の音声データ一覧を取得するAPI
      * Get program\'s chapters
      */
-    async getProgramChapters(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramChapters200Response> {
+    async getProgramChapters(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
         const response = await this.getProgramChaptersRaw({ id: id }, initOverrides);
         return await response.value();
     }

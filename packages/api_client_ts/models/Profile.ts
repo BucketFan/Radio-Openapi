@@ -24,13 +24,13 @@ export interface Profile {
      * @type {string}
      * @memberof Profile
      */
-    id?: string;
+    id: string;
     /**
      * 
      * @type {string}
      * @memberof Profile
      */
-    name?: string;
+    name: string;
     /**
      * 
      * @type {string}
@@ -42,13 +42,13 @@ export interface Profile {
      * @type {boolean}
      * @memberof Profile
      */
-    isPublicProfile?: boolean;
+    isPublicProfile: boolean;
     /**
      * owner or member or passerby
      * @type {string}
      * @memberof Profile
      */
-    type?: string;
+    type: string;
 }
 
 /**
@@ -56,6 +56,10 @@ export interface Profile {
  */
 export function instanceOfProfile(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "isPublicProfile" in value;
+    isInstance = isInstance && "type" in value;
 
     return isInstance;
 }
@@ -70,11 +74,11 @@ export function ProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'id': json['id'],
+        'name': json['name'],
         'thumbnail': !exists(json, 'thumbnail') ? undefined : json['thumbnail'],
-        'isPublicProfile': !exists(json, 'isPublicProfile') ? undefined : json['isPublicProfile'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
+        'isPublicProfile': json['isPublicProfile'],
+        'type': json['type'],
     };
 }
 

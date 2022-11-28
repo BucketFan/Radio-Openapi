@@ -28,6 +28,12 @@ import {
 export interface CreateProgramRequest {
     /**
      * 
+     * @type {number}
+     * @memberof CreateProgramRequest
+     */
+    clubId?: number;
+    /**
+     * 
      * @type {string}
      * @memberof CreateProgramRequest
      */
@@ -95,6 +101,7 @@ export function CreateProgramRequestFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
+        'clubId': !exists(json, 'clubId') ? undefined : json['clubId'],
         'title': !exists(json, 'title') ? undefined : json['title'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'chapters': !exists(json, 'chapters') ? undefined : ((json['chapters'] as Array<any>).map(CreateProgramRequestChaptersInnerFromJSON)),
@@ -115,6 +122,7 @@ export function CreateProgramRequestToJSON(value?: CreateProgramRequest | null):
     }
     return {
         
+        'clubId': value.clubId,
         'title': value.title,
         'description': value.description,
         'chapters': value.chapters === undefined ? undefined : ((value.chapters as Array<any>).map(CreateProgramRequestChaptersInnerToJSON)),

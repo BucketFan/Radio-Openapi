@@ -18,25 +18,25 @@ export interface paths {
     put: operations["put-program"];
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
   };
-  "/programs/of_club/{slug}": {
+  "/programs/of_club/{id}": {
     /** クラブに登録されているプログラム一覧を取得するAPI */
     get: operations["get-club-programs"];
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
     };
   };
-  "/programs/of_club/{slug}/for_owner": {
+  "/programs/of_club/{id}/for_owner": {
     /** クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある） */
     get: operations["get-club-programs-for-owner"];
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
     };
   };
@@ -55,7 +55,7 @@ export interface paths {
     post: operations["post-program-reactionComments"];
     parameters: {
       path: {
-        programId: string;
+        programId: number;
       };
     };
   };
@@ -64,7 +64,7 @@ export interface paths {
     patch: operations["patch-reaction_comments-like_toggle-id"];
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
   };
@@ -75,11 +75,13 @@ export interface paths {
     patch: operations["patch-reaction_comments-commentId"];
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
   };
   "/play_logs": {
+    /** 特定のユーザーの再生履歴を返すAPI */
+    get: operations["get-play_logs"];
     /**
      * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
      * Request Bodyに追加して送る必要がある。
@@ -100,7 +102,7 @@ export interface paths {
     delete: operations["delete-chapter-id"];
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
   };
@@ -121,55 +123,55 @@ export interface components {
      * @description Chapterの集合体
      */
     Program: {
-      id?: number;
-      club?: components["schemas"]["Club"];
-      title?: string;
-      description?: string;
-      broadcastStatus?: number;
-      scope?: number;
-      chapters?: components["schemas"]["Chapter"][];
-      attachedPlans?: components["schemas"]["Plan"][];
-      isAttachedPin?: boolean;
-      reactionCommentsCount?: number;
+      id: number;
+      club: components["schemas"]["Club"];
+      title: string;
+      description: string;
+      broadcastStatus: number;
+      scope: number;
+      chapters: components["schemas"]["Chapter"][];
+      attachedPlans: components["schemas"]["Plan"][];
+      isAttachedPin: boolean;
+      reactionCommentsCount: number;
       reservedAt?: string | null;
-      createdAt?: string;
-      updatedAt?: string;
+      createdAt: string;
+      updatedAt: string;
     };
     /**
      * Chapter
      * @description 音声ファイルとその説明
      */
     Chapter: {
-      id?: number;
-      programId?: number;
-      order?: number;
-      title?: string;
+      id: number;
+      programId: number;
+      order: number;
+      title: string;
       /** @description 固定表示ON/OFF */
-      isAttachedPin?: boolean;
-      mediaUrl?: string;
-      playTimeSeconds?: number;
-      createdAt?: string;
-      updatedAt?: string;
+      isAttachedPin: boolean;
+      mediaUrl: string;
+      playTimeSeconds: number;
+      createdAt: string;
+      updatedAt: string;
       deletedAt?: string | null;
     };
     /** Plan */
     Plan: {
-      id?: number;
-      clubId?: number;
-      name?: string;
-      info?: string;
+      id: number;
+      clubId: number;
+      name: string;
+      info: string;
       image?: string;
     };
     /** Club */
     Club: {
-      id?: number;
-      name?: string;
-      slug?: string;
-      overview?: string;
+      id: number;
+      name: string;
+      slug: string;
+      overview: string;
       icon?: string;
-      clubColor?: string;
-      url?: string;
-      programAttachedPlans?: components["schemas"]["Plan"][];
+      clubColor: string;
+      url: string;
+      programAttachedPlans: components["schemas"]["Plan"][];
       twitter_url?: string | null;
       facebook_url?: string | null;
       line_url?: string | null;
@@ -179,12 +181,13 @@ export interface components {
     };
     /** ReactionComment */
     ReactionComment: {
-      id?: number;
-      content?: string;
-      LikedProfiles?: components["schemas"]["Profile"][];
-      isLiked?: boolean;
-      createdAt?: string;
-      updatedAt?: string;
+      id: number;
+      content: string;
+      likedProfiles: components["schemas"]["Profile"][];
+      profile: components["schemas"]["Profile"];
+      isLiked: boolean;
+      createdAt: string;
+      updatedAt: string;
       deletedAt?: string | null;
     };
     /**
@@ -192,12 +195,25 @@ export interface components {
      * @description ユーザプロファイル（会員、オーナー、通りすがりの人がありえる）
      */
     Profile: {
-      id?: string;
-      name?: string;
+      id: string;
+      name: string;
       thumbnail?: string;
-      isPublicProfile?: boolean;
+      isPublicProfile: boolean;
       /** @description owner or member or passerby */
-      type?: string;
+      type: string;
+    };
+    /** PlayLog */
+    PlayLog: {
+      id: number;
+      programId: number;
+      chapterId: number;
+      profileId: string;
+      session: string;
+      playTime: number;
+      elapsedSeconds: number;
+      createdAt: string;
+      chapter: components["schemas"]["Chapter"];
+      program: components["schemas"]["Program"];
     };
   };
   responses: {
@@ -257,6 +273,7 @@ export interface components {
       content: {
         "application/json": {
           chapter?: components["schemas"]["Chapter"];
+          elapsedSeconds?: number | null;
         };
       };
     };
@@ -265,6 +282,14 @@ export interface components {
       content: {
         "application/json": {
           session?: string;
+        };
+      };
+    };
+    /** Example response */
+    PlayLogs: {
+      content: {
+        "application/json": {
+          playLogs?: components["schemas"]["PlayLog"][];
         };
       };
     };
@@ -278,15 +303,18 @@ export interface components {
     Program: {
       content: {
         "application/json": {
+          clubId?: number;
           title?: string;
           description?: string;
           chapters?: {
             title?: string;
             fileName?: string;
-            s3Url?: string;
+            mediaUrl?: string;
             /** @description mineType 例：image/jpeg */
             contentType?: string;
-            playTime?: number;
+            playTimeSeconds?: number;
+            order?: number;
+            id?: number | null;
           }[];
           scope?: number;
           isDraft?: boolean;
@@ -353,18 +381,18 @@ export interface operations {
   "get-program-chapters": {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {
-      200: components["responses"]["Chapters"];
+      200: components["responses"]["Program"];
     };
   };
   /** Radioプログラム編集API（オーナー向け） */
   "put-program": {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {
@@ -376,7 +404,7 @@ export interface operations {
   "get-club-programs": {
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
       query: {
         /** 次ページへのカーソル（ProgramID） */
@@ -393,7 +421,7 @@ export interface operations {
   "get-club-programs-for-owner": {
     parameters: {
       path: {
-        slug: string;
+        id: number;
       };
       query: {
         /** 次ページへのカーソル（ProgramID） */
@@ -426,11 +454,12 @@ export interface operations {
   "get-program-reactionComments": {
     parameters: {
       path: {
-        programId: string;
+        programId: number;
       };
       query: {
         /** asc or desc */
         order?: string;
+        cursor?: string;
       };
     };
     responses: {
@@ -441,7 +470,7 @@ export interface operations {
   "post-program-reactionComments": {
     parameters: {
       path: {
-        programId: string;
+        programId: number;
       };
     };
     responses: {
@@ -453,7 +482,7 @@ export interface operations {
   "patch-reaction_comments-like_toggle-id": {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
@@ -464,7 +493,7 @@ export interface operations {
   "delete-reaction_comments-commentId": {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
@@ -475,11 +504,22 @@ export interface operations {
   "patch-reaction_comments-commentId": {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
       200: components["responses"]["ReactionComment"];
+    };
+  };
+  /** 特定のユーザーの再生履歴を返すAPI */
+  "get-play_logs": {
+    parameters: {
+      query: {
+        profileId?: string;
+      };
+    };
+    responses: {
+      200: components["responses"]["PlayLogs"];
     };
   };
   /**
@@ -517,7 +557,7 @@ export interface operations {
   "delete-chapter-id": {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {

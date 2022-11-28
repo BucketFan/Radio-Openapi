@@ -31,25 +31,25 @@ export interface Club {
      * @type {number}
      * @memberof Club
      */
-    id?: number;
+    id: number;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    name?: string;
+    name: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    slug?: string;
+    slug: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    overview?: string;
+    overview: string;
     /**
      * 
      * @type {string}
@@ -61,19 +61,19 @@ export interface Club {
      * @type {string}
      * @memberof Club
      */
-    clubColor?: string;
+    clubColor: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    url?: string;
+    url: string;
     /**
      * 
      * @type {Array<Plan>}
      * @memberof Club
      */
-    programAttachedPlans?: Array<Plan>;
+    programAttachedPlans: Array<Plan>;
     /**
      * 
      * @type {string}
@@ -117,6 +117,13 @@ export interface Club {
  */
 export function instanceOfClub(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "slug" in value;
+    isInstance = isInstance && "overview" in value;
+    isInstance = isInstance && "clubColor" in value;
+    isInstance = isInstance && "url" in value;
+    isInstance = isInstance && "programAttachedPlans" in value;
 
     return isInstance;
 }
@@ -131,14 +138,14 @@ export function ClubFromJSONTyped(json: any, ignoreDiscriminator: boolean): Club
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'slug': !exists(json, 'slug') ? undefined : json['slug'],
-        'overview': !exists(json, 'overview') ? undefined : json['overview'],
+        'id': json['id'],
+        'name': json['name'],
+        'slug': json['slug'],
+        'overview': json['overview'],
         'icon': !exists(json, 'icon') ? undefined : json['icon'],
-        'clubColor': !exists(json, 'clubColor') ? undefined : json['clubColor'],
-        'url': !exists(json, 'url') ? undefined : json['url'],
-        'programAttachedPlans': !exists(json, 'programAttachedPlans') ? undefined : ((json['programAttachedPlans'] as Array<any>).map(PlanFromJSON)),
+        'clubColor': json['clubColor'],
+        'url': json['url'],
+        'programAttachedPlans': ((json['programAttachedPlans'] as Array<any>).map(PlanFromJSON)),
         'twitterUrl': !exists(json, 'twitter_url') ? undefined : json['twitter_url'],
         'facebookUrl': !exists(json, 'facebook_url') ? undefined : json['facebook_url'],
         'lineUrl': !exists(json, 'line_url') ? undefined : json['line_url'],
@@ -164,7 +171,7 @@ export function ClubToJSON(value?: Club | null): any {
         'icon': value.icon,
         'clubColor': value.clubColor,
         'url': value.url,
-        'programAttachedPlans': value.programAttachedPlans === undefined ? undefined : ((value.programAttachedPlans as Array<any>).map(PlanToJSON)),
+        'programAttachedPlans': ((value.programAttachedPlans as Array<any>).map(PlanToJSON)),
         'twitter_url': value.twitterUrl,
         'facebook_url': value.facebookUrl,
         'line_url': value.lineUrl,

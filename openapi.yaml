@@ -54,7 +54,7 @@ paths:
       description: プログラム内の音声データ一覧を取得するAPI
       responses:
         '200':
-          $ref: '#/components/responses/Chapters'
+          $ref: '#/components/responses/Program'
       tags:
         - programs
     put:
@@ -69,11 +69,11 @@ paths:
           $ref: '#/components/responses/Program'
       tags:
         - programs
-  '/programs/of_club/{slug}':
+  '/programs/of_club/{id}':
     parameters:
       - schema:
-          type: string
-        name: slug
+          type: number
+        name: id
         in: path
         required: true
     get:
@@ -96,7 +96,7 @@ paths:
           description: 全て、閲覧可能、プラン別のタブスイッチャー プランの場合は、プランID
       tags:
         - programs
-  '/programs/of_club/{slug}/for_owner':
+  '/programs/of_club/{id}/for_owner':
     get:
       summary: GET Club's Programs For Owner's Admin page.
       responses:
@@ -119,8 +119,8 @@ paths:
         - programs
     parameters:
       - schema:
-          type: string
-        name: slug
+          type: number
+        name: id
         in: path
         required: true
   /programs/reserved_to_pubslish:
@@ -353,11 +353,27 @@ components:
           type: integer
         reservedAt:
           type: string
+          format: date-time
           nullable: true
         createdAt:
           type: string
+          format: date-time
         updatedAt:
           type: string
+          format: date-time
+      required:
+        - id
+        - club
+        - title
+        - description
+        - broadcastStatus
+        - scope
+        - chapters
+        - attachedPlans
+        - isAttachedPin
+        - reactionCommentsCount
+        - createdAt
+        - updatedAt
     Chapter:
       title: Chapter
       x-stoplight:
@@ -382,11 +398,24 @@ components:
           type: integer
         createdAt:
           type: string
+          format: date-time
         updatedAt:
           type: string
+          format: date-time
         deletedAt:
           type: string
+          format: date-time
           nullable: true
+      required:
+        - id
+        - programId
+        - order
+        - title
+        - isAttachedPin
+        - mediaUrl
+        - playTimeSeconds
+        - createdAt
+        - updatedAt
     Plan:
       title: Plan
       x-stoplight:
@@ -403,12 +432,16 @@ components:
           type: string
         image:
           type: string
+      required:
+        - id
+        - clubId
+        - name
+        - info
     Club:
       title: Club
       x-stoplight:
         id: wzgyoggtvo0dd
       type: object
-      description: ''
       properties:
         id:
           type: integer
@@ -446,6 +479,14 @@ components:
         tiktok_url:
           type: string
           nullable: true
+      required:
+        - id
+        - name
+        - slug
+        - overview
+        - clubColor
+        - url
+        - programAttachedPlans
     ReactionComment:
       title: ReactionComment
       x-stoplight:
@@ -466,11 +507,22 @@ components:
           type: boolean
         createdAt:
           type: string
+          format: date-time
         updatedAt:
           type: string
+          format: date-time
         deletedAt:
           type: string
+          format: date-time
           nullable: true
+      required:
+        - id
+        - content
+        - likedProfiles
+        - profile
+        - isLiked
+        - createdAt
+        - updatedAt
     Profile:
       title: Profile
       x-stoplight:
@@ -489,6 +541,11 @@ components:
         type:
           type: string
           description: owner or member or passerby
+      required:
+        - id
+        - name
+        - isPublicProfile
+        - type
     PlayLog:
       title: PlayLog
       x-stoplight:
@@ -511,10 +568,22 @@ components:
           type: number
         createdAt:
           type: string
+          format: date-time
         chapter:
           $ref: '#/components/schemas/Chapter'
         program:
           $ref: '#/components/schemas/Program'
+      required:
+        - id
+        - programId
+        - chapterId
+        - profileId
+        - session
+        - playTime
+        - elapsedSeconds
+        - createdAt
+        - chapter
+        - program
   responses:
     Programs:
       description: Example response
@@ -926,15 +995,18 @@ components:
                       type: string
                     fileName:
                       type: string
-                    s3Url:
+                    mediaUrl:
                       type: string
                     contentType:
                       type: string
                       description: mineType 例：image/jpeg
-                    playTime:
+                    playTimeSeconds:
                       type: integer
                     order:
                       type: integer
+                    id:
+                      type: number
+                      nullable: true
               scope:
                 type: integer
               isDraft:
