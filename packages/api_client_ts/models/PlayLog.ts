@@ -76,10 +76,10 @@ export interface PlayLog {
     elapsedSeconds: number;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof PlayLog
      */
-    createdAt: string;
+    createdAt: Date;
     /**
      * 
      * @type {Chapter}
@@ -130,7 +130,7 @@ export function PlayLogFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'session': json['session'],
         'playTime': json['playTime'],
         'elapsedSeconds': json['elapsedSeconds'],
-        'createdAt': json['createdAt'],
+        'createdAt': (new Date(json['createdAt'])),
         'chapter': ChapterFromJSON(json['chapter']),
         'program': ProgramFromJSON(json['program']),
     };
@@ -152,7 +152,7 @@ export function PlayLogToJSON(value?: PlayLog | null): any {
         'session': value.session,
         'playTime': value.playTime,
         'elapsedSeconds': value.elapsedSeconds,
-        'createdAt': value.createdAt,
+        'createdAt': (value.createdAt.toISOString()),
         'chapter': ChapterToJSON(value.chapter),
         'program': ProgramToJSON(value.program),
     };
