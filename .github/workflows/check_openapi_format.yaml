@@ -12,4 +12,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Lint OpenAPI
-        run: npx @stoplight/spectral-cli lint openapi.yaml
+        run: npm run lint
