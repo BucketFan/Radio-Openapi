@@ -58,22 +58,22 @@ export interface ReactionComment {
     isLiked: boolean;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof ReactionComment
      */
-    createdAt: string;
+    createdAt: Date;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof ReactionComment
      */
-    updatedAt: string;
+    updatedAt: Date;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof ReactionComment
      */
-    deletedAt?: string | null;
+    deletedAt?: Date | null;
 }
 
 /**
@@ -107,9 +107,9 @@ export function ReactionCommentFromJSONTyped(json: any, ignoreDiscriminator: boo
         'likedProfiles': ((json['likedProfiles'] as Array<any>).map(ProfileFromJSON)),
         'profile': ProfileFromJSON(json['profile']),
         'isLiked': json['isLiked'],
-        'createdAt': json['createdAt'],
-        'updatedAt': json['updatedAt'],
-        'deletedAt': !exists(json, 'deletedAt') ? undefined : json['deletedAt'],
+        'createdAt': (new Date(json['createdAt'])),
+        'updatedAt': (new Date(json['updatedAt'])),
+        'deletedAt': !exists(json, 'deletedAt') ? undefined : (json['deletedAt'] === null ? null : new Date(json['deletedAt'])),
     };
 }
 
@@ -127,9 +127,9 @@ export function ReactionCommentToJSON(value?: ReactionComment | null): any {
         'likedProfiles': ((value.likedProfiles as Array<any>).map(ProfileToJSON)),
         'profile': ProfileToJSON(value.profile),
         'isLiked': value.isLiked,
-        'createdAt': value.createdAt,
-        'updatedAt': value.updatedAt,
-        'deletedAt': value.deletedAt,
+        'createdAt': (value.createdAt.toISOString()),
+        'updatedAt': (value.updatedAt.toISOString()),
+        'deletedAt': value.deletedAt === undefined ? undefined : (value.deletedAt === null ? null : value.deletedAt.toISOString()),
     };
 }
 

@@ -100,22 +100,22 @@ export interface Program {
     reactionCommentsCount: number;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Program
      */
-    reservedAt?: string | null;
+    reservedAt?: Date | null;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Program
      */
-    createdAt: string;
+    createdAt: Date;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Program
      */
-    updatedAt: string;
+    updatedAt: Date;
 }
 
 /**
@@ -159,9 +159,9 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'attachedPlans': ((json['attachedPlans'] as Array<any>).map(PlanFromJSON)),
         'isAttachedPin': json['isAttachedPin'],
         'reactionCommentsCount': json['reactionCommentsCount'],
-        'reservedAt': !exists(json, 'reservedAt') ? undefined : json['reservedAt'],
-        'createdAt': json['createdAt'],
-        'updatedAt': json['updatedAt'],
+        'reservedAt': !exists(json, 'reservedAt') ? undefined : (json['reservedAt'] === null ? null : new Date(json['reservedAt'])),
+        'createdAt': (new Date(json['createdAt'])),
+        'updatedAt': (new Date(json['updatedAt'])),
     };
 }
 
@@ -184,9 +184,9 @@ export function ProgramToJSON(value?: Program | null): any {
         'attachedPlans': ((value.attachedPlans as Array<any>).map(PlanToJSON)),
         'isAttachedPin': value.isAttachedPin,
         'reactionCommentsCount': value.reactionCommentsCount,
-        'reservedAt': value.reservedAt,
-        'createdAt': value.createdAt,
-        'updatedAt': value.updatedAt,
+        'reservedAt': value.reservedAt === undefined ? undefined : (value.reservedAt === null ? null : value.reservedAt.toISOString()),
+        'createdAt': (value.createdAt.toISOString()),
+        'updatedAt': (value.updatedAt.toISOString()),
     };
 }
 

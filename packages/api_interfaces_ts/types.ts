@@ -133,8 +133,11 @@ export interface components {
       attachedPlans: components["schemas"]["Plan"][];
       isAttachedPin: boolean;
       reactionCommentsCount: number;
+      /** Format: date-time */
       reservedAt?: string | null;
+      /** Format: date-time */
       createdAt: string;
+      /** Format: date-time */
       updatedAt: string;
     };
     /**
@@ -150,8 +153,11 @@ export interface components {
       isAttachedPin: boolean;
       mediaUrl: string;
       playTimeSeconds: number;
+      /** Format: date-time */
       createdAt: string;
+      /** Format: date-time */
       updatedAt: string;
+      /** Format: date-time */
       deletedAt?: string | null;
     };
     /** Plan */
@@ -186,8 +192,11 @@ export interface components {
       likedProfiles: components["schemas"]["Profile"][];
       profile: components["schemas"]["Profile"];
       isLiked: boolean;
+      /** Format: date-time */
       createdAt: string;
+      /** Format: date-time */
       updatedAt: string;
+      /** Format: date-time */
       deletedAt?: string | null;
     };
     /**
@@ -211,6 +220,7 @@ export interface components {
       session: string;
       playTime: number;
       elapsedSeconds: number;
+      /** Format: date-time */
       createdAt: string;
       chapter: components["schemas"]["Chapter"];
       program: components["schemas"]["Program"];

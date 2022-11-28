@@ -63,22 +63,22 @@ export interface Chapter {
     playTimeSeconds: number;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Chapter
      */
-    createdAt: string;
+    createdAt: Date;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Chapter
      */
-    updatedAt: string;
+    updatedAt: Date;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Chapter
      */
-    deletedAt?: string | null;
+    deletedAt?: Date | null;
 }
 
 /**
@@ -116,9 +116,9 @@ export function ChapterFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
         'isAttachedPin': json['isAttachedPin'],
         'mediaUrl': json['mediaUrl'],
         'playTimeSeconds': json['playTimeSeconds'],
-        'createdAt': json['createdAt'],
-        'updatedAt': json['updatedAt'],
-        'deletedAt': !exists(json, 'deletedAt') ? undefined : json['deletedAt'],
+        'createdAt': (new Date(json['createdAt'])),
+        'updatedAt': (new Date(json['updatedAt'])),
+        'deletedAt': !exists(json, 'deletedAt') ? undefined : (json['deletedAt'] === null ? null : new Date(json['deletedAt'])),
     };
 }
 
@@ -138,9 +138,9 @@ export function ChapterToJSON(value?: Chapter | null): any {
         'isAttachedPin': value.isAttachedPin,
         'mediaUrl': value.mediaUrl,
         'playTimeSeconds': value.playTimeSeconds,
-        'createdAt': value.createdAt,
-        'updatedAt': value.updatedAt,
-        'deletedAt': value.deletedAt,
+        'createdAt': (value.createdAt.toISOString()),
+        'updatedAt': (value.updatedAt.toISOString()),
+        'deletedAt': value.deletedAt === undefined ? undefined : (value.deletedAt === null ? null : value.deletedAt.toISOString()),
     };
 }
 
