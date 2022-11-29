@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: ir7ckios6gkgn
+  id: tksavftaes3nr
 info:
   title: radio_openapi
   version: '1.0'
@@ -1020,6 +1020,7 @@ components:
               reservedAt:
                 type: string
                 description: '2022-06-07T14:59:43+09:00'
+                format: date-time
       description: |-
         scopeは、誰でも見れる=0  プラン入会者しか見れない=1
         broadcastStatusは、放映中=0, 予約中=1
