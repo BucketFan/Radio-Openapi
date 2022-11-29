@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: tksavftaes3nr
+  id: e1ir6x6vaximw
 info:
   title: radio_openapi
   version: '1.0'
@@ -870,42 +870,60 @@ components:
             my-example:
               value:
                 reactionComments:
-                  - id: 8fd9ebe5-0b7f-434c-87c5-7a85d942a68f
+                  - id: 1
                     content: 釣り好き役者のガチ釣りバラエティ『釣り猿』の応援隊の会員制サイトです。「ただただ、やりたい」っていうだけで、無防備にも始めてしまったこの番組を少しでも長く続けられるよう支えていただけるサポーターの場を設けさせていただきました。株式会社でいうと、ある意味、この会員様が株主さまのようなものです。YouTube版でも動画を定期的に撮り続けられるよう、また会員のみなさまだけにお届けするものを用意させていただこうと思います。一緒に出世していく出世魚のような番組をどう
-                    LikedProfiles:
-                      - id: 90527c82-d745-487e-9e65-e356558e44c1
+                    likedProfiles:
+                      - id: 94b4b830-f410-4fd1-af31-7d7fbdf08ce8
                         name: よっしー
-                        thumbnail: ''
+                        thumbnail: 'https://picsum.photos/200/300?grayscale'
+                        isPublicProfile: true
+                        type: member
+                    profile:
+                      - id: 94b4b830-f410-4fd1-af31-7d7fbdf08ce8
+                        name: てすたー
+                        thumbnail: 'https://picsum.photos/200/300?grayscale'
                         isPublicProfile: true
                         type: member
                     isLiked: true
-                    createdAt: 'Wed Nov 22 2023 05:44:33 GMT+0900 (Japan Standard Time)'
-                    updatedAt: 'Wed Nov 22 2023 05:44:33 GMT+0900 (Japan Standard Time)'
-                    deletedAt: string
-                  - id: 2a3d21f4-972a-4cd5-8187-d7f4e626d8a0
-                    content: 釣り好き役者のガチ釣りバラエティ『釣り猿』の応援隊の会員制サイトです。
-                    LikedProfiles:
-                      - id: 21c67673-781f-4205-9d44-23b6022fa027
-                        name: blanche_123_123
-                        thumbnail: 'https://picsum.photos/id/237/200/300'
-                        isPublicProfile: true
-                        type: member
-                    isLiked: true
-                    createdAt: 'Wed Nov 23 2023 05:44:33 GMT+0900 (Japan Standard Time)'
-                    updatedAt: 'Wed Nov 23 2023 05:44:33 GMT+0900 (Japan Standard Time)'
-                    deletedAt: string
-                  - id: 7c852841-45f5-4bb1-bb42-9d635ba7498b
+                    createdAt: '2019-08-24T14:15:22Z'
+                    updatedAt: '2019-08-24T14:15:22Z'
+                    deletedAt: '2019-08-24T14:15:22Z'
+                  - id: 2
                     content: 釣り好き役者のガチ釣りバラエティ『釣り猿』の応援隊の会員制サイトです。「ただただ、やりたい」っていうだけで、無防備にも始めてしまったこの番組を少しでも長く続けられるよう支えていただけるサポーターの場を設けさせていただきました。株式会社でいうと、ある意味、この会員様が株主さまのようなものです。YouTube版でも動画を定期的に撮り続けられるよう、また会員のみなさまだけにお届けするものを用意させていただこうと思います。一緒に出世していく出世魚のような番組をどう
-                    LikedProfiles:
+                    likedProfiles:
+                      - id: 94b4b830-f410-4fd1-af31-7d7fbdf08ce8
+                        name: てすたー
+                        thumbnail: 'https://picsum.photos/200/300?grayscale'
+                        isPublicProfile: true
+                        type: member
+                    profile:
                       - id: 94b4b830-f410-4fd1-af31-7d7fbdf08ce8
                         name: てすたー
                         thumbnail: 'https://picsum.photos/200/300?grayscale'
                         isPublicProfile: true
                         type: member
                     isLiked: false
-                    createdAt: 'Wed Nov 24 2023 05:44:33 GMT+0900 (Japan Standard Time)'
-                    updatedAt: 'Wed Nov 24 2023 05:44:33 GMT+0900 (Japan Standard Time)'
-                    deletedAt: string
+                    createdAt: '2019-08-24T14:15:22Z'
+                    updatedAt: '2019-08-24T14:15:22Z'
+                    deletedAt: '2019-08-24T14:15:22Z'
+                  - id: 3
+                    content: 釣り好き役者のガチ釣りバラエティ『釣り猿』の応援隊の会員制サイトです。「ただただ、やりたい」っていうだけで、無防備にも始めてしまったこの番組を少しでも長く続けられるよう支えていただけるサポーターの場を設けさせていただきました。株式会社でいうと、ある意味、この会員様が株主さまのようなものです。YouTube版でも動画を定期的に撮り続けられるよう、また会員のみなさまだけにお届けするものを用意させていただこうと思います。一緒に出世していく出世魚のような番組をどう
+                    likedProfiles:
+                      - id: 94b4b830-f410-4fd1-af31-7d7fbdf08ce8
+                        name: てすたー
+                        thumbnail: 'https://picsum.photos/200/300?grayscale'
+                        isPublicProfile: true
+                        type: member
+                    profile:
+                      - id: 94b4b830-f410-4fd1-af31-7d7fbdf08ce8
+                        name: てすたー
+                        thumbnail: 'https://picsum.photos/200/300?grayscale'
+                        isPublicProfile: true
+                        type: member
+                    isLiked: false
+                    createdAt: '2019-08-24T14:15:22Z'
+                    updatedAt: '2019-08-24T14:15:22Z'
+                    deletedAt: '2019-08-24T14:15:22Z'
                 nextCursor: string
                 totalCounts: 3
     Program:
