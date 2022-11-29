@@ -6,16 +6,16 @@
 export interface paths {
   "/programs": {
     /** 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API */
-    get: operations["get-programs"];
+    get: operations["getPrograms"];
     /** Radioプログラム登録API */
-    post: operations["create-program"];
+    post: operations["createProgram"];
     parameters: {};
   };
   "/programs/{id}": {
     /** プログラム内の音声データ一覧を取得するAPI */
-    get: operations["get-program-chapters"];
+    get: operations["getProgramChapters"];
     /** Radioプログラム編集API（オーナー向け） */
-    put: operations["put-program"];
+    put: operations["putProgram"];
     parameters: {
       path: {
         id: number;
@@ -24,7 +24,7 @@ export interface paths {
   };
   "/programs/of_club/{id}": {
     /** クラブに登録されているプログラム一覧を取得するAPI */
-    get: operations["get-club-programs"];
+    get: operations["getClubPrograms"];
     parameters: {
       path: {
         id: number;
@@ -33,7 +33,7 @@ export interface paths {
   };
   "/programs/of_club/{id}/for_owner": {
     /** クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある） */
-    get: operations["get-club-programs-for-owner"];
+    get: operations["getClubProgramsForOwner"];
     parameters: {
       path: {
         id: number;
@@ -45,14 +45,14 @@ export interface paths {
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
      * （AWSのLambdaから定期的にリクエストが飛ぶ）
      */
-    patch: operations["patch-programs-reserved_to_pubslish"];
+    patch: operations["patchProgramsReservedToPublish"];
     parameters: {};
   };
   "/reaction_comments/of_program/{programId}": {
     /** 特定のプログラムのリアクションコメントを取得するAPI */
-    get: operations["get-program-reactionComments"];
+    get: operations["getProgramReactionComments"];
     /** 特定のプログラムにリアクションコメントをするAPI */
-    post: operations["post-program-reactionComments"];
+    post: operations["postProgramReactionComments"];
     parameters: {
       path: {
         programId: number;
@@ -61,7 +61,7 @@ export interface paths {
   };
   "/reaction_comments/like_toggle/{commentId}": {
     /** 指定したコメントIDをLikeをON/OFFするAPI */
-    patch: operations["patch-reaction_comments-like_toggle-id"];
+    patch: operations["patchReactionCommentsLikeToggleId"];
     parameters: {
       path: {
         commentId: number;
@@ -70,9 +70,9 @@ export interface paths {
   };
   "/reaction_comments/{commentId}": {
     /** リアクションコメントを削除するAPI。(コメント投稿者向け) */
-    delete: operations["delete-reaction_comments-commentId"];
+    delete: operations["deleteReactionCommentsCommentId"];
     /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
-    patch: operations["patch-reaction_comments-commentId"];
+    patch: operations["patchReactionCommentsCommentId"];
     parameters: {
       path: {
         commentId: number;
@@ -81,12 +81,12 @@ export interface paths {
   };
   "/play_logs": {
     /** 特定のユーザーの再生履歴を返すAPI */
-    get: operations["get-play_logs"];
+    get: operations["getPlayLogs"];
     /**
      * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
      * Request Bodyに追加して送る必要がある。
      */
-    put: operations["chapter-of_play_log-end-chapterId"];
+    put: operations["chapterOfPlayLogEndChapterId"];
     /**
      * チャプター再生の開始時に叩くAPI。目的は、聴取ログを取得する。
      *
@@ -94,12 +94,12 @@ export interface paths {
      *
      * それをend時に、PUTして終了を検知する。
      */
-    post: operations["chapter-of_play_log-start-chapterId"];
+    post: operations["chapterOfPlayLogStartChapterId"];
     parameters: {};
   };
   "/chapters/{id}": {
     /** Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI） */
-    delete: operations["delete-chapter-id"];
+    delete: operations["deleteChapterId"];
     parameters: {
       path: {
         id: number;
@@ -108,11 +108,12 @@ export interface paths {
   };
   "/pre_signed_url": {
     /** 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI */
-    post: operations["post-publish_pre_signed_url"];
+    post: operations["postPublishPreSignedUrl"];
     parameters: {};
   };
   "/healthcheck": {
-    get: operations["get-healthcheck"];
+    /** healthcheck */
+    get: operations["getHealthcheck"];
   };
 }
 
@@ -330,7 +331,10 @@ export interface components {
           isDraft?: boolean;
           attachedPlansIds?: number[];
           broadcastStatus?: number;
-          /** @description 2022-06-07T14:59:43+09:00 */
+          /**
+           * Format: date-time
+           * @description 2022-06-07T14:59:43+09:00
+           */
           reservedAt?: string;
         };
       };
@@ -373,14 +377,14 @@ export interface components {
 
 export interface operations {
   /** 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API */
-  "get-programs": {
+  getPrograms: {
     parameters: {};
     responses: {
       200: components["responses"]["Programs"];
     };
   };
   /** Radioプログラム登録API */
-  "create-program": {
+  createProgram: {
     parameters: {};
     responses: {
       200: components["responses"]["Program"];
@@ -388,7 +392,7 @@ export interface operations {
     requestBody: components["requestBodies"]["Program"];
   };
   /** プログラム内の音声データ一覧を取得するAPI */
-  "get-program-chapters": {
+  getProgramChapters: {
     parameters: {
       path: {
         id: number;
@@ -399,7 +403,7 @@ export interface operations {
     };
   };
   /** Radioプログラム編集API（オーナー向け） */
-  "put-program": {
+  putProgram: {
     parameters: {
       path: {
         id: number;
@@ -411,7 +415,7 @@ export interface operations {
     requestBody: components["requestBodies"]["Program"];
   };
   /** クラブに登録されているプログラム一覧を取得するAPI */
-  "get-club-programs": {
+  getClubPrograms: {
     parameters: {
       path: {
         id: number;
@@ -428,7 +432,7 @@ export interface operations {
     };
   };
   /** クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある） */
-  "get-club-programs-for-owner": {
+  getClubProgramsForOwner: {
     parameters: {
       path: {
         id: number;
@@ -437,7 +441,7 @@ export interface operations {
         /** 次ページへのカーソル（ProgramID） */
         cursor?: string;
         /** ONの場合、下書きのみ取得する */
-        isDraft?: string;
+        isOnlyDraft?: boolean;
       };
     };
     responses: {
@@ -448,7 +452,7 @@ export interface operations {
    * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
    * （AWSのLambdaから定期的にリクエストが飛ぶ）
    */
-  "patch-programs-reserved_to_pubslish": {
+  patchProgramsReservedToPublish: {
     parameters: {
       header: {
         /** 固定の認証トークン */
@@ -461,7 +465,7 @@ export interface operations {
     };
   };
   /** 特定のプログラムのリアクションコメントを取得するAPI */
-  "get-program-reactionComments": {
+  getProgramReactionComments: {
     parameters: {
       path: {
         programId: number;
@@ -477,7 +481,7 @@ export interface operations {
     };
   };
   /** 特定のプログラムにリアクションコメントをするAPI */
-  "post-program-reactionComments": {
+  postProgramReactionComments: {
     parameters: {
       path: {
         programId: number;
@@ -489,7 +493,7 @@ export interface operations {
     requestBody: components["requestBodies"]["ReactionComment"];
   };
   /** 指定したコメントIDをLikeをON/OFFするAPI */
-  "patch-reaction_comments-like_toggle-id": {
+  patchReactionCommentsLikeToggleId: {
     parameters: {
       path: {
         commentId: number;
@@ -500,7 +504,7 @@ export interface operations {
     };
   };
   /** リアクションコメントを削除するAPI。(コメント投稿者向け) */
-  "delete-reaction_comments-commentId": {
+  deleteReactionCommentsCommentId: {
     parameters: {
       path: {
         commentId: number;
@@ -511,7 +515,7 @@ export interface operations {
     };
   };
   /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
-  "patch-reaction_comments-commentId": {
+  patchReactionCommentsCommentId: {
     parameters: {
       path: {
         commentId: number;
@@ -522,7 +526,7 @@ export interface operations {
     };
   };
   /** 特定のユーザーの再生履歴を返すAPI */
-  "get-play_logs": {
+  getPlayLogs: {
     parameters: {
       query: {
         profileId?: string;
@@ -536,7 +540,7 @@ export interface operations {
    * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
    * Request Bodyに追加して送る必要がある。
    */
-  "chapter-of_play_log-end-chapterId": {
+  chapterOfPlayLogEndChapterId: {
     parameters: {};
     responses: {
       200: components["responses"]["ChapterPlayLog"];
@@ -550,7 +554,7 @@ export interface operations {
    *
    * それをend時に、PUTして終了を検知する。
    */
-  "chapter-of_play_log-start-chapterId": {
+  chapterOfPlayLogStartChapterId: {
     parameters: {};
     responses: {
       200: components["responses"]["ChapterPlayLog"];
@@ -564,7 +568,7 @@ export interface operations {
     };
   };
   /** Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI） */
-  "delete-chapter-id": {
+  deleteChapterId: {
     parameters: {
       path: {
         id: number;
@@ -575,14 +579,15 @@ export interface operations {
     };
   };
   /** 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI */
-  "post-publish_pre_signed_url": {
+  postPublishPreSignedUrl: {
     parameters: {};
     responses: {
       200: components["responses"]["PreSignedUrl"];
     };
     requestBody: components["requestBodies"]["PreSignedUrl"];
   };
-  "get-healthcheck": {
+  /** healthcheck */
+  getHealthcheck: {
     responses: {
       /** OK */
       200: {

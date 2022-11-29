@@ -1,6 +1,7 @@
 apis/ChapterApi.ts
-apis/DefaultApi.ts
-apis/ProgramApi.ts
+apis/HealthcheckApi.ts
+apis/PlayLogsApi.ts
+apis/PreSignedUrlApi.ts
 apis/ProgramsApi.ts
 apis/ReactionCommentsApi.ts
 apis/index.ts

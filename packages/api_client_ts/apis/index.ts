@@ -1,7 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './ChapterApi';
-export * from './DefaultApi';
-export * from './ProgramApi';
+export * from './HealthcheckApi';
+export * from './PlayLogsApi';
+export * from './PreSignedUrlApi';
 export * from './ProgramsApi';
 export * from './ReactionCommentsApi';
