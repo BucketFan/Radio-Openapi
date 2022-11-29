@@ -1,6 +1,6 @@
 {
   "name": "@bucketfan/radio-api-client",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "OpenAPI client for the Radio API",
   "author": "Bucket, Inc.",
   "license": "UNLICENSED",
