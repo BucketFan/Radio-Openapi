@@ -111,9 +111,9 @@ paths:
           name: cursor
           description: 次ページへのカーソル（ProgramID）
         - schema:
-            type: string
+            type: boolean
           in: query
-          name: isDraft
+          name: isOnlyDraft
           description: ONの場合、下書きのみ取得する
       tags:
         - programs
