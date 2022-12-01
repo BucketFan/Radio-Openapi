@@ -58,18 +58,6 @@ export interface PlayLog {
     profileId: string;
     /**
      * 
-     * @type {string}
-     * @memberof PlayLog
-     */
-    session: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlayLog
-     */
-    playTime: number;
-    /**
-     * 
      * @type {number}
      * @memberof PlayLog
      */
@@ -80,6 +68,12 @@ export interface PlayLog {
      * @memberof PlayLog
      */
     createdAt: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof PlayLog
+     */
+    updatedAt: Date;
     /**
      * 
      * @type {Chapter}
@@ -103,10 +97,9 @@ export function instanceOfPlayLog(value: object): boolean {
     isInstance = isInstance && "programId" in value;
     isInstance = isInstance && "chapterId" in value;
     isInstance = isInstance && "profileId" in value;
-    isInstance = isInstance && "session" in value;
-    isInstance = isInstance && "playTime" in value;
     isInstance = isInstance && "elapsedSeconds" in value;
     isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "updatedAt" in value;
     isInstance = isInstance && "chapter" in value;
     isInstance = isInstance && "program" in value;
 
@@ -127,10 +120,9 @@ export function PlayLogFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'programId': json['programId'],
         'chapterId': json['chapterId'],
         'profileId': json['profileId'],
-        'session': json['session'],
-        'playTime': json['playTime'],
         'elapsedSeconds': json['elapsedSeconds'],
         'createdAt': (new Date(json['createdAt'])),
+        'updatedAt': (new Date(json['updatedAt'])),
         'chapter': ChapterFromJSON(json['chapter']),
         'program': ProgramFromJSON(json['program']),
     };
@@ -149,10 +141,9 @@ export function PlayLogToJSON(value?: PlayLog | null): any {
         'programId': value.programId,
         'chapterId': value.chapterId,
         'profileId': value.profileId,
-        'session': value.session,
-        'playTime': value.playTime,
         'elapsedSeconds': value.elapsedSeconds,
         'createdAt': (value.createdAt.toISOString()),
+        'updatedAt': (value.updatedAt.toISOString()),
         'chapter': ChapterToJSON(value.chapter),
         'program': ProgramToJSON(value.program),
     };

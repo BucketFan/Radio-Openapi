@@ -82,19 +82,8 @@ export interface paths {
   "/play_logs": {
     /** 特定のユーザーの再生履歴を返すAPI */
     get: operations["getPlayLogs"];
-    /**
-     * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
-     * Request Bodyに追加して送る必要がある。
-     */
+    /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */
     put: operations["chapterOfPlayLogEndChapterId"];
-    /**
-     * チャプター再生の開始時に叩くAPI。目的は、聴取ログを取得する。
-     *
-     * 返却値として、session（cookieのsessionとは関係ない。１つの聴取の始まりを文字化したもの）を返す。
-     *
-     * それをend時に、PUTして終了を検知する。
-     */
-    post: operations["chapterOfPlayLogStartChapterId"];
     parameters: {};
   };
   "/chapters/{id}": {
@@ -218,11 +207,11 @@ export interface components {
       programId: number;
       chapterId: number;
       profileId: string;
-      session: string;
-      playTime: number;
       elapsedSeconds: number;
       /** Format: date-time */
       createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
       chapter: components["schemas"]["Chapter"];
       program: components["schemas"]["Program"];
     };
@@ -292,7 +281,7 @@ export interface components {
     ChapterPlayLog: {
       content: {
         "application/json": {
-          session?: string;
+          playLogId?: number;
         };
       };
     };
@@ -367,8 +356,9 @@ export interface components {
     PutChapterPlayLog: {
       content: {
         "application/json": {
+          programId?: number;
           chapterId?: number;
-          session?: string;
+          elapsedSeconds?: number;
         };
       };
     };
@@ -536,36 +526,13 @@ export interface operations {
       200: components["responses"]["PlayLogs"];
     };
   };
-  /**
-   * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
-   * Request Bodyに追加して送る必要がある。
-   */
+  /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */
   chapterOfPlayLogEndChapterId: {
     parameters: {};
     responses: {
       200: components["responses"]["ChapterPlayLog"];
     };
     requestBody: components["requestBodies"]["PutChapterPlayLog"];
-  };
-  /**
-   * チャプター再生の開始時に叩くAPI。目的は、聴取ログを取得する。
-   *
-   * 返却値として、session（cookieのsessionとは関係ない。１つの聴取の始まりを文字化したもの）を返す。
-   *
-   * それをend時に、PUTして終了を検知する。
-   */
-  chapterOfPlayLogStartChapterId: {
-    parameters: {};
-    responses: {
-      200: components["responses"]["ChapterPlayLog"];
-    };
-    requestBody: {
-      content: {
-        "application/json": {
-          chapterId?: number;
-        };
-      };
-    };
   };
   /** Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI） */
   deleteChapterId: {

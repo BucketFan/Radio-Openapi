@@ -17,6 +17,7 @@ import * as runtime from '../runtime';
 import type {
   ChapterOfPlayLogEndChapterId200Response,
   ChapterOfPlayLogEndChapterIdRequest,
+  DeleteChapterId200Response,
   GetPlayLogs200Response,
 } from '../models';
 import {
@@ -24,12 +25,18 @@ import {
     ChapterOfPlayLogEndChapterId200ResponseToJSON,
     ChapterOfPlayLogEndChapterIdRequestFromJSON,
     ChapterOfPlayLogEndChapterIdRequestToJSON,
+    DeleteChapterId200ResponseFromJSON,
+    DeleteChapterId200ResponseToJSON,
     GetPlayLogs200ResponseFromJSON,
     GetPlayLogs200ResponseToJSON,
 } from '../models';
 
 export interface ChapterOfPlayLogEndChapterIdOperationRequest {
     chapterOfPlayLogEndChapterIdRequest?: ChapterOfPlayLogEndChapterIdRequest;
+}
+
+export interface DeleteChapterIdRequest {
+    id: number;
 }
 
 export interface GetPlayLogsRequest {
@@ -44,7 +51,7 @@ export interface GetPlayLogsRequest {
  */
 export interface PlayLogsApiInterface {
     /**
-     * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを Request Bodyに追加して送る必要がある。 
+     * チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 
      * @summary End record chapter play log.
      * @param {ChapterOfPlayLogEndChapterIdRequest} [chapterOfPlayLogEndChapterIdRequest] 
      * @param {*} [options] Override http request option.
@@ -54,10 +61,26 @@ export interface PlayLogsApiInterface {
     chapterOfPlayLogEndChapterIdRaw(requestParameters: ChapterOfPlayLogEndChapterIdOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChapterOfPlayLogEndChapterId200Response>>;
 
     /**
-     * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを Request Bodyに追加して送る必要がある。 
+     * チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 
      * End record chapter play log.
      */
     chapterOfPlayLogEndChapterId(chapterOfPlayLogEndChapterIdRequest?: ChapterOfPlayLogEndChapterIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChapterOfPlayLogEndChapterId200Response>;
+
+    /**
+     * Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
+     * @summary Delete Chapter\'s media file.
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlayLogsApiInterface
+     */
+    deleteChapterIdRaw(requestParameters: DeleteChapterIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteChapterId200Response>>;
+
+    /**
+     * Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
+     * Delete Chapter\'s media file.
+     */
+    deleteChapterId(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response>;
 
     /**
      * 特定のユーザーの再生履歴を返すAPI
@@ -83,7 +106,7 @@ export interface PlayLogsApiInterface {
 export class PlayLogsApi extends runtime.BaseAPI implements PlayLogsApiInterface {
 
     /**
-     * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを Request Bodyに追加して送る必要がある。 
+     * チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 
      * End record chapter play log.
      */
     async chapterOfPlayLogEndChapterIdRaw(requestParameters: ChapterOfPlayLogEndChapterIdOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChapterOfPlayLogEndChapterId200Response>> {
@@ -105,11 +128,43 @@ export class PlayLogsApi extends runtime.BaseAPI implements PlayLogsApiInterface
     }
 
     /**
-     * チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを Request Bodyに追加して送る必要がある。 
+     * チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 
      * End record chapter play log.
      */
     async chapterOfPlayLogEndChapterId(chapterOfPlayLogEndChapterIdRequest?: ChapterOfPlayLogEndChapterIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChapterOfPlayLogEndChapterId200Response> {
         const response = await this.chapterOfPlayLogEndChapterIdRaw({ chapterOfPlayLogEndChapterIdRequest: chapterOfPlayLogEndChapterIdRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
+     * Delete Chapter\'s media file.
+     */
+    async deleteChapterIdRaw(requestParameters: DeleteChapterIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeleteChapterId200Response>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteChapterId.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/chapters/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DeleteChapterId200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
+     * Delete Chapter\'s media file.
+     */
+    async deleteChapterId(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response> {
+        const response = await this.deleteChapterIdRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
