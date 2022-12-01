@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: e1ir6x6vaximw
+  id: m3m20fyqg0rmi
 info:
   title: radio_openapi
   version: '1.0'
@@ -8,7 +8,7 @@ info:
   contact:
     name: Anycloud
     email: info@anycloud.co.jp
-    url: https://anycloud.co.jp/
+    url: 'https://anycloud.co.jp/'
 servers:
   - url: ''
     description: Production server
@@ -222,28 +222,6 @@ paths:
         - reaction_comments
   /play_logs:
     parameters: []
-    post:
-      summary: Start record chapter play log.
-      operationId: chapterOfPlayLogStartChapterId
-      responses:
-        '200':
-          $ref: '#/components/responses/ChapterPlayLog'
-      description: |-
-        チャプター再生の開始時に叩くAPI。目的は、聴取ログを取得する。
-
-        返却値として、session（cookieのsessionとは関係ない。１つの聴取の始まりを文字化したもの）を返す。
-
-        それをend時に、PUTして終了を検知する。
-      tags:
-        - chapter
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                chapterId:
-                  type: integer
     put:
       summary: End record chapter play log.
       operationId: chapterOfPlayLogEndChapterId
@@ -251,8 +229,7 @@ paths:
         '200':
           $ref: '#/components/responses/ChapterPlayLog'
       description: |
-        チャプター再生の終了時に叩くAPI。聴取開始時にレスポンスとして取得したSessionを
-        Request Bodyに追加して送る必要がある。
+        チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。
       requestBody:
         $ref: '#/components/requestBodies/PutChapterPlayLog'
       tags:
@@ -286,7 +263,7 @@ paths:
         '200':
           $ref: '#/components/responses/Chapter'
       tags:
-        - chapter
+        - play_logs
   /pre_signed_url:
     post:
       summary: Publish pre-signed URL
@@ -303,7 +280,7 @@ paths:
   /healthcheck:
     get:
       summary: healthcheck
-      description: 'healthcheck'
+      description: healthcheck
       tags:
         - healthcheck
       responses:
@@ -317,7 +294,6 @@ paths:
                 example:
                   value: OK
       operationId: getHealthcheck
-
 components:
   schemas:
     Program:
@@ -560,13 +536,12 @@ components:
           type: number
         profileId:
           type: string
-        session:
-          type: string
-        playTime:
-          type: number
         elapsedSeconds:
           type: number
         createdAt:
+          type: string
+          format: date-time
+        updatedAt:
           type: string
           format: date-time
         chapter:
@@ -578,10 +553,9 @@ components:
         - programId
         - chapterId
         - profileId
-        - session
-        - playTime
         - elapsedSeconds
         - createdAt
+        - updatedAt
         - chapter
         - program
   responses:
@@ -978,8 +952,8 @@ components:
           schema:
             type: object
             properties:
-              session:
-                type: string
+              playLogId:
+                type: integer
     PlayLogs:
       description: Example response
       content:
@@ -1078,18 +1052,16 @@ components:
           schema:
             type: object
             properties:
+              programId:
+                type: integer
               chapterId:
                 type: integer
-              session:
-                type: string
+              elapsedSeconds:
+                type: integer
 tags:
-  - name: program
-    description: ''
   - name: programs
     description: ''
   - name: reaction_comments
-    description: ''
-  - name: chapter
     description: ''
   - name: play_logs
     description: ''
