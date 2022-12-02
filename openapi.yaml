@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: 35kishs1rz21q
+  id: gnxfflh1eez06
 info:
   title: radio_openapi
   version: '1.0'
@@ -243,14 +243,11 @@ paths:
       description: 特定のユーザーの再生履歴を返すAPI
       tags:
         - play_logs
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                cursor:
-                  type: string
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: cursor
   '/chapters/{id}':
     parameters:
       - schema:
