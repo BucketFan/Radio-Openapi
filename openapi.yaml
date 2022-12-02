@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: nhdg0ei85qpsj
+  id: gnxfflh1eez06
 info:
   title: radio_openapi
   version: '1.0'
@@ -241,13 +241,13 @@ paths:
         '200':
           $ref: '#/components/responses/PlayLogs'
       description: 特定のユーザーの再生履歴を返すAPI
+      tags:
+        - play_logs
       parameters:
         - schema:
             type: string
           in: query
-          name: profileId
-      tags:
-        - play_logs
+          name: cursor
   '/chapters/{id}':
     parameters:
       - schema:
@@ -369,8 +369,8 @@ components:
           description: 固定表示ON/OFF
         mediaUrl:
           type: string
-        playTimeSeconds:
-          type: integer
+        playLog:
+          $ref: '#/components/schemas/PlayLog'
         createdAt:
           type: string
           format: date-time
@@ -387,7 +387,6 @@ components:
         - title
         - isAttachedPin
         - mediaUrl
-        - playTimeSeconds
         - createdAt
         - updatedAt
     Plan:
