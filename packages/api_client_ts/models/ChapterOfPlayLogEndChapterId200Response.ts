@@ -21,10 +21,10 @@ import { exists, mapValues } from '../runtime';
 export interface ChapterOfPlayLogEndChapterId200Response {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof ChapterOfPlayLogEndChapterId200Response
      */
-    session?: string;
+    playLogId?: number;
 }
 
 /**
@@ -46,7 +46,7 @@ export function ChapterOfPlayLogEndChapterId200ResponseFromJSONTyped(json: any, 
     }
     return {
         
-        'session': !exists(json, 'session') ? undefined : json['session'],
+        'playLogId': !exists(json, 'playLogId') ? undefined : json['playLogId'],
     };
 }
 
@@ -59,7 +59,7 @@ export function ChapterOfPlayLogEndChapterId200ResponseToJSON(value?: ChapterOfP
     }
     return {
         
-        'session': value.session,
+        'playLogId': value.playLogId,
     };
 }
 

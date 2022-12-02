@@ -24,13 +24,19 @@ export interface ChapterOfPlayLogEndChapterIdRequest {
      * @type {number}
      * @memberof ChapterOfPlayLogEndChapterIdRequest
      */
+    programId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChapterOfPlayLogEndChapterIdRequest
+     */
     chapterId?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof ChapterOfPlayLogEndChapterIdRequest
      */
-    session?: string;
+    elapsedSeconds?: number;
 }
 
 /**
@@ -52,8 +58,9 @@ export function ChapterOfPlayLogEndChapterIdRequestFromJSONTyped(json: any, igno
     }
     return {
         
+        'programId': !exists(json, 'programId') ? undefined : json['programId'],
         'chapterId': !exists(json, 'chapterId') ? undefined : json['chapterId'],
-        'session': !exists(json, 'session') ? undefined : json['session'],
+        'elapsedSeconds': !exists(json, 'elapsedSeconds') ? undefined : json['elapsedSeconds'],
     };
 }
 
@@ -66,8 +73,9 @@ export function ChapterOfPlayLogEndChapterIdRequestToJSON(value?: ChapterOfPlayL
     }
     return {
         
+        'programId': value.programId,
         'chapterId': value.chapterId,
-        'session': value.session,
+        'elapsedSeconds': value.elapsedSeconds,
     };
 }
 

@@ -1,4 +1,3 @@
-apis/ChapterApi.ts
 apis/HealthcheckApi.ts
 apis/PlayLogsApi.ts
 apis/PreSignedUrlApi.ts
@@ -9,7 +8,6 @@ index.ts
 models/Chapter.ts
 models/ChapterOfPlayLogEndChapterId200Response.ts
 models/ChapterOfPlayLogEndChapterIdRequest.ts
-models/ChapterOfPlayLogStartChapterIdRequest.ts
 models/Club.ts
 models/CreateProgram200Response.ts
 models/CreateProgramRequest.ts

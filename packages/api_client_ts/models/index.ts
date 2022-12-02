@@ -3,7 +3,6 @@
 export * from './Chapter';
 export * from './ChapterOfPlayLogEndChapterId200Response';
 export * from './ChapterOfPlayLogEndChapterIdRequest';
-export * from './ChapterOfPlayLogStartChapterIdRequest';
 export * from './Club';
 export * from './CreateProgram200Response';
 export * from './CreateProgramRequest';
