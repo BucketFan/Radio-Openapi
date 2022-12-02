@@ -604,7 +604,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                       - id: 2
                         programId: 1
                         order: 2
@@ -614,7 +613,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                       - id: 3
                         programId: 1
                         order: 3
@@ -624,7 +622,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     attachedPlans:
                       - id: 1
                         clubId: 1
@@ -676,7 +673,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                       - id: 5
                         programId: 1
                         order: 2
@@ -686,7 +682,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                       - id: 6
                         programId: 1
                         order: 3
@@ -696,7 +691,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     attachedPlans:
                       - id: 1
                         clubId: 1
@@ -743,7 +737,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                       - id: 8
                         programId: 1
                         order: 2
@@ -753,7 +746,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                       - id: 9
                         programId: 1
                         order: 3
@@ -763,7 +755,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     attachedPlans:
                       - id: 1
                         clubId: 1
@@ -799,7 +790,6 @@ components:
                     playTimeSeconds: 0
                     createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                    deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                   - id: 2
                     programId: 1
                     order: 2
@@ -809,7 +799,6 @@ components:
                     playTimeSeconds: 0
                     createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                    deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                   - id: 3
                     programId: 1
                     order: 2
@@ -819,7 +808,6 @@ components:
                     playTimeSeconds: 0
                     createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                    deletedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
     ReactionComments:
       description: Example response
       content:
