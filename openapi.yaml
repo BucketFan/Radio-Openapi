@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: m3m20fyqg0rmi
+  id: 8m916pntrjsd6
 info:
   title: radio_openapi
   version: '1.0'
@@ -481,6 +481,9 @@ components:
           $ref: '#/components/schemas/Profile'
         isLiked:
           type: boolean
+        isHidden:
+          type: boolean
+          description: オーナーがコメントを非表示にしているかどうか判定をする
         createdAt:
           type: string
           format: date-time
@@ -497,6 +500,7 @@ components:
         - likedProfiles
         - profile
         - isLiked
+        - isHidden
         - createdAt
         - updatedAt
     Profile:
@@ -859,6 +863,7 @@ components:
                         isPublicProfile: true
                         type: member
                     isLiked: true
+                    isHidden: false
                     createdAt: '2019-08-24T14:15:22Z'
                     updatedAt: '2019-08-24T14:15:22Z'
                     deletedAt: '2019-08-24T14:15:22Z'
@@ -877,6 +882,7 @@ components:
                         isPublicProfile: true
                         type: member
                     isLiked: false
+                    isHidden: false
                     createdAt: '2019-08-24T14:15:22Z'
                     updatedAt: '2019-08-24T14:15:22Z'
                     deletedAt: '2019-08-24T14:15:22Z'
@@ -895,6 +901,7 @@ components:
                         isPublicProfile: true
                         type: member
                     isLiked: false
+                    isHidden: true
                     createdAt: '2019-08-24T14:15:22Z'
                     updatedAt: '2019-08-24T14:15:22Z'
                     deletedAt: '2019-08-24T14:15:22Z'
