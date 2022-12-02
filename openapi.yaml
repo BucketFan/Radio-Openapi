@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: 8m916pntrjsd6
+  id: nhdg0ei85qpsj
 info:
   title: radio_openapi
   version: '1.0'
@@ -144,7 +144,7 @@ paths:
         - programs
   '/reaction_comments/of_program/{programId}':
     get:
-      summary: Get Reactions Comment
+      summary: Get Program Reaction Comments
       tags:
         - reaction_comments
       operationId: getProgramReactionComments
@@ -169,8 +169,8 @@ paths:
         in: path
         required: true
     post:
-      summary: ''
-      operationId: postProgramReactionComments
+      summary: Create Program Reaction Comment
+      operationId: createProgramReactionComment
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
@@ -330,7 +330,6 @@ components:
         reservedAt:
           type: string
           format: date-time
-          nullable: true
         createdAt:
           type: string
           format: date-time
@@ -381,7 +380,6 @@ components:
         deletedAt:
           type: string
           format: date-time
-          nullable: true
       required:
         - id
         - programId
@@ -439,22 +437,16 @@ components:
             $ref: '#/components/schemas/Plan'
         twitter_url:
           type: string
-          nullable: true
         facebook_url:
           type: string
-          nullable: true
         line_url:
           type: string
-          nullable: true
         instagram_url:
           type: string
-          nullable: true
         youtube_url:
           type: string
-          nullable: true
         tiktok_url:
           type: string
-          nullable: true
       required:
         - id
         - name
@@ -493,7 +485,6 @@ components:
         deletedAt:
           type: string
           format: date-time
-          nullable: true
       required:
         - id
         - content
@@ -613,7 +604,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                       - id: 2
                         programId: 1
                         order: 2
@@ -623,7 +613,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                       - id: 3
                         programId: 1
                         order: 3
@@ -633,7 +622,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                     attachedPlans:
                       - id: 1
                         clubId: 1
@@ -685,7 +673,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                       - id: 5
                         programId: 1
                         order: 2
@@ -695,7 +682,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                       - id: 6
                         programId: 1
                         order: 3
@@ -705,7 +691,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                     attachedPlans:
                       - id: 1
                         clubId: 1
@@ -752,7 +737,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                       - id: 8
                         programId: 1
                         order: 2
@@ -762,7 +746,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                       - id: 9
                         programId: 1
                         order: 3
@@ -772,7 +755,6 @@ components:
                         playTimeSeconds: 0
                         createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                         updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                        deletedAt: null
                     attachedPlans:
                       - id: 1
                         clubId: 1
@@ -808,7 +790,6 @@ components:
                     playTimeSeconds: 0
                     createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                    deletedAt: null
                   - id: 2
                     programId: 1
                     order: 2
@@ -818,7 +799,6 @@ components:
                     playTimeSeconds: 0
                     createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                    deletedAt: null
                   - id: 3
                     programId: 1
                     order: 2
@@ -828,7 +808,6 @@ components:
                     playTimeSeconds: 0
                     createdAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
                     updatedAt: 'Fri Dec 17 2077 22:34:29 GMT+0900 (Japan Standard Time)'
-                    deletedAt: null
     ReactionComments:
       description: Example response
       content:
@@ -951,7 +930,6 @@ components:
                 $ref: '#/components/schemas/Chapter'
               elapsedSeconds:
                 type: number
-                nullable: true
     ChapterPlayLog:
       description: Example response
       content:
@@ -1005,7 +983,6 @@ components:
                       type: integer
                     id:
                       type: number
-                      nullable: true
               scope:
                 type: integer
               isDraft:
