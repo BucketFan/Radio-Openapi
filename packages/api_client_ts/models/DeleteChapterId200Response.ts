@@ -37,7 +37,7 @@ export interface DeleteChapterId200Response {
      * @type {number}
      * @memberof DeleteChapterId200Response
      */
-    elapsedSeconds?: number | null;
+    elapsedSeconds?: number;
 }
 
 /**

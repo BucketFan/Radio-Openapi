@@ -103,7 +103,7 @@ export interface Program {
      * @type {Date}
      * @memberof Program
      */
-    reservedAt?: Date | null;
+    reservedAt?: Date;
     /**
      * 
      * @type {Date}
@@ -159,7 +159,7 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'attachedPlans': ((json['attachedPlans'] as Array<any>).map(PlanFromJSON)),
         'isAttachedPin': json['isAttachedPin'],
         'reactionCommentsCount': json['reactionCommentsCount'],
-        'reservedAt': !exists(json, 'reservedAt') ? undefined : (json['reservedAt'] === null ? null : new Date(json['reservedAt'])),
+        'reservedAt': !exists(json, 'reservedAt') ? undefined : (new Date(json['reservedAt'])),
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
     };
@@ -184,7 +184,7 @@ export function ProgramToJSON(value?: Program | null): any {
         'attachedPlans': ((value.attachedPlans as Array<any>).map(PlanToJSON)),
         'isAttachedPin': value.isAttachedPin,
         'reactionCommentsCount': value.reactionCommentsCount,
-        'reservedAt': value.reservedAt === undefined ? undefined : (value.reservedAt === null ? null : value.reservedAt.toISOString()),
+        'reservedAt': value.reservedAt === undefined ? undefined : (value.reservedAt.toISOString()),
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
     };
