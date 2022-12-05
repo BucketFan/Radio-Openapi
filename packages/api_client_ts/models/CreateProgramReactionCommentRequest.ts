@@ -16,37 +16,37 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PostProgramReactionCommentsRequest
+ * @interface CreateProgramReactionCommentRequest
  */
-export interface PostProgramReactionCommentsRequest {
+export interface CreateProgramReactionCommentRequest {
     /**
      * 
      * @type {number}
-     * @memberof PostProgramReactionCommentsRequest
+     * @memberof CreateProgramReactionCommentRequest
      */
     programId?: number;
     /**
      * 
      * @type {string}
-     * @memberof PostProgramReactionCommentsRequest
+     * @memberof CreateProgramReactionCommentRequest
      */
     contents?: string;
 }
 
 /**
- * Check if a given object implements the PostProgramReactionCommentsRequest interface.
+ * Check if a given object implements the CreateProgramReactionCommentRequest interface.
  */
-export function instanceOfPostProgramReactionCommentsRequest(value: object): boolean {
+export function instanceOfCreateProgramReactionCommentRequest(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function PostProgramReactionCommentsRequestFromJSON(json: any): PostProgramReactionCommentsRequest {
-    return PostProgramReactionCommentsRequestFromJSONTyped(json, false);
+export function CreateProgramReactionCommentRequestFromJSON(json: any): CreateProgramReactionCommentRequest {
+    return CreateProgramReactionCommentRequestFromJSONTyped(json, false);
 }
 
-export function PostProgramReactionCommentsRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PostProgramReactionCommentsRequest {
+export function CreateProgramReactionCommentRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateProgramReactionCommentRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -57,7 +57,7 @@ export function PostProgramReactionCommentsRequestFromJSONTyped(json: any, ignor
     };
 }
 
-export function PostProgramReactionCommentsRequestToJSON(value?: PostProgramReactionCommentsRequest | null): any {
+export function CreateProgramReactionCommentRequestToJSON(value?: CreateProgramReactionCommentRequest | null): any {
     if (value === undefined) {
         return undefined;
     }

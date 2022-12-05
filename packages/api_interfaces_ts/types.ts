@@ -52,7 +52,7 @@ export interface paths {
     /** 特定のプログラムのリアクションコメントを取得するAPI */
     get: operations["getProgramReactionComments"];
     /** 特定のプログラムにリアクションコメントをするAPI */
-    post: operations["postProgramReactionComments"];
+    post: operations["createProgramReactionComment"];
     parameters: {
       path: {
         programId: number;
@@ -124,7 +124,7 @@ export interface components {
       isAttachedPin: boolean;
       reactionCommentsCount: number;
       /** Format: date-time */
-      reservedAt?: string | null;
+      reservedAt?: string;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -142,13 +142,13 @@ export interface components {
       /** @description 固定表示ON/OFF */
       isAttachedPin: boolean;
       mediaUrl: string;
-      playTimeSeconds: number;
+      playLog?: components["schemas"]["PlayLog"];
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
       /** Format: date-time */
-      deletedAt?: string | null;
+      deletedAt?: string;
     };
     /** Plan */
     Plan: {
@@ -168,12 +168,12 @@ export interface components {
       clubColor: string;
       url: string;
       programAttachedPlans: components["schemas"]["Plan"][];
-      twitter_url?: string | null;
-      facebook_url?: string | null;
-      line_url?: string | null;
-      instagram_url?: string | null;
-      youtube_url?: string | null;
-      tiktok_url?: string | null;
+      twitter_url?: string;
+      facebook_url?: string;
+      line_url?: string;
+      instagram_url?: string;
+      youtube_url?: string;
+      tiktok_url?: string;
     };
     /** ReactionComment */
     ReactionComment: {
@@ -182,12 +182,14 @@ export interface components {
       likedProfiles: components["schemas"]["Profile"][];
       profile: components["schemas"]["Profile"];
       isLiked: boolean;
+      /** @description オーナーがコメントを非表示にしているかどうか判定をする */
+      isHidden: boolean;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
       /** Format: date-time */
-      deletedAt?: string | null;
+      deletedAt?: string;
     };
     /**
      * Profile
@@ -273,7 +275,7 @@ export interface components {
       content: {
         "application/json": {
           chapter?: components["schemas"]["Chapter"];
-          elapsedSeconds?: number | null;
+          elapsedSeconds?: number;
         };
       };
     };
@@ -314,7 +316,7 @@ export interface components {
             contentType?: string;
             playTimeSeconds?: number;
             order?: number;
-            id?: number | null;
+            id?: number;
           }[];
           scope?: number;
           isDraft?: boolean;
@@ -471,7 +473,7 @@ export interface operations {
     };
   };
   /** 特定のプログラムにリアクションコメントをするAPI */
-  postProgramReactionComments: {
+  createProgramReactionComment: {
     parameters: {
       path: {
         programId: number;
@@ -519,7 +521,7 @@ export interface operations {
   getPlayLogs: {
     parameters: {
       query: {
-        profileId?: string;
+        cursor?: string;
       };
     };
     responses: {

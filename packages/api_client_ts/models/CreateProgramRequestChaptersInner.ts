@@ -60,7 +60,7 @@ export interface CreateProgramRequestChaptersInner {
      * @type {number}
      * @memberof CreateProgramRequestChaptersInner
      */
-    id?: number | null;
+    id?: number;
 }
 
 /**

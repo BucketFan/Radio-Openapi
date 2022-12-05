@@ -23,31 +23,31 @@ import {
 /**
  * 
  * @export
- * @interface PostProgramReactionComments200Response
+ * @interface CreateProgramReactionComment200Response
  */
-export interface PostProgramReactionComments200Response {
+export interface CreateProgramReactionComment200Response {
     /**
      * 
      * @type {ReactionComment}
-     * @memberof PostProgramReactionComments200Response
+     * @memberof CreateProgramReactionComment200Response
      */
     reactionComment?: ReactionComment;
 }
 
 /**
- * Check if a given object implements the PostProgramReactionComments200Response interface.
+ * Check if a given object implements the CreateProgramReactionComment200Response interface.
  */
-export function instanceOfPostProgramReactionComments200Response(value: object): boolean {
+export function instanceOfCreateProgramReactionComment200Response(value: object): boolean {
     let isInstance = true;
 
     return isInstance;
 }
 
-export function PostProgramReactionComments200ResponseFromJSON(json: any): PostProgramReactionComments200Response {
-    return PostProgramReactionComments200ResponseFromJSONTyped(json, false);
+export function CreateProgramReactionComment200ResponseFromJSON(json: any): CreateProgramReactionComment200Response {
+    return CreateProgramReactionComment200ResponseFromJSONTyped(json, false);
 }
 
-export function PostProgramReactionComments200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PostProgramReactionComments200Response {
+export function CreateProgramReactionComment200ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateProgramReactionComment200Response {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -57,7 +57,7 @@ export function PostProgramReactionComments200ResponseFromJSONTyped(json: any, i
     };
 }
 
-export function PostProgramReactionComments200ResponseToJSON(value?: PostProgramReactionComments200Response | null): any {
+export function CreateProgramReactionComment200ResponseToJSON(value?: CreateProgramReactionComment200Response | null): any {
     if (value === undefined) {
         return undefined;
     }

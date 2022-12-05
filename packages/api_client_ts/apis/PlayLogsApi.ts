@@ -40,7 +40,7 @@ export interface DeleteChapterIdRequest {
 }
 
 export interface GetPlayLogsRequest {
-    profileId?: string;
+    cursor?: string;
 }
 
 /**
@@ -85,7 +85,7 @@ export interface PlayLogsApiInterface {
     /**
      * 特定のユーザーの再生履歴を返すAPI
      * @summary 
-     * @param {string} [profileId] 
+     * @param {string} [cursor] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlayLogsApiInterface
@@ -96,7 +96,7 @@ export interface PlayLogsApiInterface {
      * 特定のユーザーの再生履歴を返すAPI
      * 
      */
-    getPlayLogs(profileId?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response>;
+    getPlayLogs(cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response>;
 
 }
 
@@ -175,8 +175,8 @@ export class PlayLogsApi extends runtime.BaseAPI implements PlayLogsApiInterface
     async getPlayLogsRaw(requestParameters: GetPlayLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPlayLogs200Response>> {
         const queryParameters: any = {};
 
-        if (requestParameters.profileId !== undefined) {
-            queryParameters['profileId'] = requestParameters.profileId;
+        if (requestParameters.cursor !== undefined) {
+            queryParameters['cursor'] = requestParameters.cursor;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -195,8 +195,8 @@ export class PlayLogsApi extends runtime.BaseAPI implements PlayLogsApiInterface
      * 特定のユーザーの再生履歴を返すAPI
      * 
      */
-    async getPlayLogs(profileId?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response> {
-        const response = await this.getPlayLogsRaw({ profileId: profileId }, initOverrides);
+    async getPlayLogs(cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response> {
+        const response = await this.getPlayLogsRaw({ cursor: cursor }, initOverrides);
         return await response.value();
     }
 

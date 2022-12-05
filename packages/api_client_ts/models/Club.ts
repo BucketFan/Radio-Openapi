@@ -79,37 +79,37 @@ export interface Club {
      * @type {string}
      * @memberof Club
      */
-    twitterUrl?: string | null;
+    twitterUrl?: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    facebookUrl?: string | null;
+    facebookUrl?: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    lineUrl?: string | null;
+    lineUrl?: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    instagramUrl?: string | null;
+    instagramUrl?: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    youtubeUrl?: string | null;
+    youtubeUrl?: string;
     /**
      * 
      * @type {string}
      * @memberof Club
      */
-    tiktokUrl?: string | null;
+    tiktokUrl?: string;
 }
 
 /**

@@ -57,6 +57,12 @@ export interface ReactionComment {
      */
     isLiked: boolean;
     /**
+     * オーナーがコメントを非表示にしているかどうか判定をする
+     * @type {boolean}
+     * @memberof ReactionComment
+     */
+    isHidden: boolean;
+    /**
      * 
      * @type {Date}
      * @memberof ReactionComment
@@ -73,7 +79,7 @@ export interface ReactionComment {
      * @type {Date}
      * @memberof ReactionComment
      */
-    deletedAt?: Date | null;
+    deletedAt?: Date;
 }
 
 /**
@@ -86,6 +92,7 @@ export function instanceOfReactionComment(value: object): boolean {
     isInstance = isInstance && "likedProfiles" in value;
     isInstance = isInstance && "profile" in value;
     isInstance = isInstance && "isLiked" in value;
+    isInstance = isInstance && "isHidden" in value;
     isInstance = isInstance && "createdAt" in value;
     isInstance = isInstance && "updatedAt" in value;
 
@@ -107,9 +114,10 @@ export function ReactionCommentFromJSONTyped(json: any, ignoreDiscriminator: boo
         'likedProfiles': ((json['likedProfiles'] as Array<any>).map(ProfileFromJSON)),
         'profile': ProfileFromJSON(json['profile']),
         'isLiked': json['isLiked'],
+        'isHidden': json['isHidden'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
-        'deletedAt': !exists(json, 'deletedAt') ? undefined : (json['deletedAt'] === null ? null : new Date(json['deletedAt'])),
+        'deletedAt': !exists(json, 'deletedAt') ? undefined : (new Date(json['deletedAt'])),
     };
 }
 
@@ -127,9 +135,10 @@ export function ReactionCommentToJSON(value?: ReactionComment | null): any {
         'likedProfiles': ((value.likedProfiles as Array<any>).map(ProfileToJSON)),
         'profile': ProfileToJSON(value.profile),
         'isLiked': value.isLiked,
+        'isHidden': value.isHidden,
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
-        'deletedAt': value.deletedAt === undefined ? undefined : (value.deletedAt === null ? null : value.deletedAt.toISOString()),
+        'deletedAt': value.deletedAt === undefined ? undefined : (value.deletedAt.toISOString()),
     };
 }
 
