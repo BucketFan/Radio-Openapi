@@ -564,6 +564,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Program'
+            required:
+              - programs
           examples:
             my-example:
               value:
@@ -776,6 +778,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Chapter'
+            required:
+              - chapters
           examples:
             my-example:
               value:
@@ -822,6 +826,8 @@ components:
                 type: string
               totalCounts:
                 type: integer
+            required:
+              - reactionComments
           examples:
             my-example:
               value:
@@ -894,6 +900,8 @@ components:
             properties:
               program:
                 $ref: '#/components/schemas/Program'
+            required:
+              - program
     ReactionComment:
       description: Example response
       content:
@@ -903,6 +911,8 @@ components:
             properties:
               reactionComment:
                 $ref: '#/components/schemas/ReactionComment'
+            required:
+              - reactionComment
     PreSignedUrl:
       description: PreSignedUrlが、S3アップロード用のURLです。s3Urlが、radioファイル等のファイル登録時のfilesのurlに埋め込むURLです。
       content:
@@ -929,6 +939,8 @@ components:
                 $ref: '#/components/schemas/Chapter'
               elapsedSeconds:
                 type: number
+            required:
+              - chapter
     ChapterPlayLog:
       description: Example response
       content:
@@ -949,6 +961,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/PlayLog'
+            required:
+              - playLogs
   requestBodies:
     Program:
       content:
