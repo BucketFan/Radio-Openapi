@@ -303,11 +303,12 @@ paths:
         required: true
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - programs
       responses:
         '200':
           $ref: '#/components/responses/Programs'
-      operationId: get-programs-of_club-id-for_attached_pin
+      operationId: getProgramsOfClubIdForAttachedPin
       description: クラブに登録されている固定プログラムの一覧を取得するAPI
 components:
   schemas:
