@@ -454,7 +454,7 @@ components:
           type: string
         slug:
           type: string
-        overview:
+        description:
           type: string
         icon:
           type: string
@@ -462,7 +462,7 @@ components:
           type: string
         url:
           type: string
-        programAttachedPlans:
+        plans:
           type: array
           items:
             $ref: '#/components/schemas/Plan'
@@ -482,10 +482,10 @@ components:
         - id
         - name
         - slug
-        - overview
+        - description
         - clubColor
         - url
-        - programAttachedPlans
+        - plans
     ReactionComment:
       title: ReactionComment
       x-stoplight:
