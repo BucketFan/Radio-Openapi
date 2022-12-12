@@ -31,7 +31,7 @@ export interface GetProgramReactionComments200Response {
      * @type {Array<ReactionComment>}
      * @memberof GetProgramReactionComments200Response
      */
-    reactionComments?: Array<ReactionComment>;
+    reactionComments: Array<ReactionComment>;
     /**
      * 
      * @type {string}
@@ -51,6 +51,7 @@ export interface GetProgramReactionComments200Response {
  */
 export function instanceOfGetProgramReactionComments200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "reactionComments" in value;
 
     return isInstance;
 }
@@ -65,7 +66,7 @@ export function GetProgramReactionComments200ResponseFromJSONTyped(json: any, ig
     }
     return {
         
-        'reactionComments': !exists(json, 'reactionComments') ? undefined : ((json['reactionComments'] as Array<any>).map(ReactionCommentFromJSON)),
+        'reactionComments': ((json['reactionComments'] as Array<any>).map(ReactionCommentFromJSON)),
         'nextCursor': !exists(json, 'nextCursor') ? undefined : json['nextCursor'],
         'totalCounts': !exists(json, 'totalCounts') ? undefined : json['totalCounts'],
     };
@@ -80,7 +81,7 @@ export function GetProgramReactionComments200ResponseToJSON(value?: GetProgramRe
     }
     return {
         
-        'reactionComments': value.reactionComments === undefined ? undefined : ((value.reactionComments as Array<any>).map(ReactionCommentToJSON)),
+        'reactionComments': ((value.reactionComments as Array<any>).map(ReactionCommentToJSON)),
         'nextCursor': value.nextCursor,
         'totalCounts': value.totalCounts,
     };

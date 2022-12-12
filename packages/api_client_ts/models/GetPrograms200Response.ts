@@ -31,7 +31,7 @@ export interface GetPrograms200Response {
      * @type {Array<Program>}
      * @memberof GetPrograms200Response
      */
-    programs?: Array<Program>;
+    programs: Array<Program>;
 }
 
 /**
@@ -39,6 +39,7 @@ export interface GetPrograms200Response {
  */
 export function instanceOfGetPrograms200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "programs" in value;
 
     return isInstance;
 }
@@ -53,7 +54,7 @@ export function GetPrograms200ResponseFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'programs': !exists(json, 'programs') ? undefined : ((json['programs'] as Array<any>).map(ProgramFromJSON)),
+        'programs': ((json['programs'] as Array<any>).map(ProgramFromJSON)),
     };
 }
 
@@ -66,7 +67,7 @@ export function GetPrograms200ResponseToJSON(value?: GetPrograms200Response | nu
     }
     return {
         
-        'programs': value.programs === undefined ? undefined : ((value.programs as Array<any>).map(ProgramToJSON)),
+        'programs': ((value.programs as Array<any>).map(ProgramToJSON)),
     };
 }
 

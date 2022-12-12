@@ -3,18 +3,30 @@
  * Do not make direct changes to the file.
  */
 
+
 export interface paths {
   "/programs": {
-    /** 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API */
+    /**
+     * List of programs available to members 
+     * @description 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API
+     */
     get: operations["getPrograms"];
-    /** Radioプログラム登録API */
+    /**
+     * Create Program 
+     * @description Radioプログラム登録API
+     */
     post: operations["createProgram"];
-    parameters: {};
   };
   "/programs/{id}": {
-    /** プログラム内の音声データ一覧を取得するAPI */
+    /**
+     * Get program's chapters 
+     * @description プログラム内の音声データ一覧を取得するAPI
+     */
     get: operations["getProgramChapters"];
-    /** Radioプログラム編集API（オーナー向け） */
+    /**
+     * Edit program 
+     * @description Radioプログラム編集API（オーナー向け）
+     */
     put: operations["putProgram"];
     parameters: {
       path: {
@@ -23,7 +35,10 @@ export interface paths {
     };
   };
   "/programs/of_club/{id}": {
-    /** クラブに登録されているプログラム一覧を取得するAPI */
+    /**
+     * GET Club's programs. 
+     * @description クラブに登録されているプログラム一覧を取得するAPI
+     */
     get: operations["getClubPrograms"];
     parameters: {
       path: {
@@ -32,7 +47,10 @@ export interface paths {
     };
   };
   "/programs/of_club/{id}/for_owner": {
-    /** クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある） */
+    /**
+     * GET Club's Programs For Owner's Admin page. 
+     * @description クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
+     */
     get: operations["getClubProgramsForOwner"];
     parameters: {
       path: {
@@ -42,16 +60,22 @@ export interface paths {
   };
   "/programs/reserved_to_pubslish": {
     /**
-     * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
+     * Switch reserved all program to publish 
+     * @description 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
      * （AWSのLambdaから定期的にリクエストが飛ぶ）
      */
     patch: operations["patchProgramsReservedToPublish"];
-    parameters: {};
   };
   "/reaction_comments/of_program/{programId}": {
-    /** 特定のプログラムのリアクションコメントを取得するAPI */
+    /**
+     * Get Program Reaction Comments 
+     * @description 特定のプログラムのリアクションコメントを取得するAPI
+     */
     get: operations["getProgramReactionComments"];
-    /** 特定のプログラムにリアクションコメントをするAPI */
+    /**
+     * Create Program Reaction Comment 
+     * @description 特定のプログラムにリアクションコメントをするAPI
+     */
     post: operations["createProgramReactionComment"];
     parameters: {
       path: {
@@ -60,7 +84,10 @@ export interface paths {
     };
   };
   "/reaction_comments/like_toggle/{commentId}": {
-    /** 指定したコメントIDをLikeをON/OFFするAPI */
+    /**
+     * Like ON/OFF 
+     * @description 指定したコメントIDをLikeをON/OFFするAPI
+     */
     patch: operations["patchReactionCommentsLikeToggleId"];
     parameters: {
       path: {
@@ -69,9 +96,15 @@ export interface paths {
     };
   };
   "/reaction_comments/{commentId}": {
-    /** リアクションコメントを削除するAPI。(コメント投稿者向け) */
+    /**
+     * Delete Reaction Comment 
+     * @description リアクションコメントを削除するAPI。(コメント投稿者向け)
+     */
     delete: operations["deleteReactionCommentsCommentId"];
-    /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
+    /**
+     * Hidden Reaction Comment 
+     * @description リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
+     */
     patch: operations["patchReactionCommentsCommentId"];
     parameters: {
       path: {
@@ -80,14 +113,19 @@ export interface paths {
     };
   };
   "/play_logs": {
-    /** 特定のユーザーの再生履歴を返すAPI */
+    /** @description 特定のユーザーの再生履歴を返すAPI */
     get: operations["getPlayLogs"];
-    /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */
+    /**
+     * End record chapter play log. 
+     * @description チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。
+     */
     put: operations["chapterOfPlayLogEndChapterId"];
-    parameters: {};
   };
   "/chapters/{id}": {
-    /** Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI） */
+    /**
+     * Delete Chapter's media file. 
+     * @description Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
+     */
     delete: operations["deleteChapterId"];
     parameters: {
       path: {
@@ -96,20 +134,39 @@ export interface paths {
     };
   };
   "/pre_signed_url": {
-    /** 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI */
+    /**
+     * Publish pre-signed URL 
+     * @description 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI
+     */
     post: operations["postPublishPreSignedUrl"];
-    parameters: {};
   };
   "/healthcheck": {
-    /** healthcheck */
+    /**
+     * healthcheck 
+     * @description healthcheck
+     */
     get: operations["getHealthcheck"];
   };
+  "/programs/of_club/{id}/for_attached_pin": {
+    /**
+     * Your GET endpoint 
+     * @description クラブに登録されている固定プログラムの一覧を取得するAPI
+     */
+    get: operations["getProgramsOfClubIdForAttachedPin"];
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+  };
 }
+
+export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
     /**
-     * Program
+     * Program 
      * @description Chapterの集合体
      */
     Program: {
@@ -119,8 +176,8 @@ export interface components {
       description: string;
       broadcastStatus: number;
       scope: number;
-      chapters: components["schemas"]["Chapter"][];
-      attachedPlans: components["schemas"]["Plan"][];
+      chapters: (components["schemas"]["Chapter"])[];
+      attachedPlans: (components["schemas"]["Plan"])[];
       isAttachedPin: boolean;
       reactionCommentsCount: number;
       /** Format: date-time */
@@ -131,7 +188,7 @@ export interface components {
       updatedAt: string;
     };
     /**
-     * Chapter
+     * Chapter 
      * @description 音声ファイルとその説明
      */
     Chapter: {
@@ -167,7 +224,7 @@ export interface components {
       icon?: string;
       clubColor: string;
       url: string;
-      programAttachedPlans: components["schemas"]["Plan"][];
+      programAttachedPlans: (components["schemas"]["Plan"])[];
       twitter_url?: string;
       facebook_url?: string;
       line_url?: string;
@@ -179,7 +236,7 @@ export interface components {
     ReactionComment: {
       id: number;
       content: string;
-      likedProfiles: components["schemas"]["Profile"][];
+      likedProfiles: (components["schemas"]["Profile"])[];
       profile: components["schemas"]["Profile"];
       isLiked: boolean;
       /** @description オーナーがコメントを非表示にしているかどうか判定をする */
@@ -192,7 +249,7 @@ export interface components {
       deletedAt?: string;
     };
     /**
-     * Profile
+     * Profile 
      * @description ユーザプロファイル（会員、オーナー、通りすがりの人がありえる）
      */
     Profile: {
@@ -219,49 +276,49 @@ export interface components {
     };
   };
   responses: {
-    /** Example response */
+    /** @description Example response */
     Programs: {
       content: {
         "application/json": {
-          programs?: components["schemas"]["Program"][];
+          programs: (components["schemas"]["Program"])[];
         };
       };
     };
-    /** Example response */
+    /** @description Example response */
     Chapters: {
       content: {
         "application/json": {
-          chapters?: components["schemas"]["Chapter"][];
+          chapters: (components["schemas"]["Chapter"])[];
         };
       };
     };
-    /** Example response */
+    /** @description Example response */
     ReactionComments: {
       content: {
         "application/json": {
-          reactionComments?: components["schemas"]["ReactionComment"][];
+          reactionComments: (components["schemas"]["ReactionComment"])[];
           nextCursor?: string;
           totalCounts?: number;
         };
       };
     };
-    /** Example response */
+    /** @description Example response */
     Program: {
       content: {
         "application/json": {
-          program?: components["schemas"]["Program"];
+          program: components["schemas"]["Program"];
         };
       };
     };
-    /** Example response */
+    /** @description Example response */
     ReactionComment: {
       content: {
         "application/json": {
-          reactionComment?: components["schemas"]["ReactionComment"];
+          reactionComment: components["schemas"]["ReactionComment"];
         };
       };
     };
-    /** PreSignedUrlが、S3アップロード用のURLです。s3Urlが、radioファイル等のファイル登録時のfilesのurlに埋め込むURLです。 */
+    /** @description PreSignedUrlが、S3アップロード用のURLです。s3Urlが、radioファイル等のファイル登録時のfilesのurlに埋め込むURLです。 */
     PreSignedUrl: {
       content: {
         "application/json": {
@@ -270,16 +327,16 @@ export interface components {
         };
       };
     };
-    /** Example response */
+    /** @description Example response */
     Chapter: {
       content: {
         "application/json": {
-          chapter?: components["schemas"]["Chapter"];
+          chapter: components["schemas"]["Chapter"];
           elapsedSeconds?: number;
         };
       };
     };
-    /** Example response */
+    /** @description Example response */
     ChapterPlayLog: {
       content: {
         "application/json": {
@@ -287,50 +344,51 @@ export interface components {
         };
       };
     };
-    /** Example response */
+    /** @description Example response */
     PlayLogs: {
       content: {
         "application/json": {
-          playLogs?: components["schemas"]["PlayLog"][];
+          playLogs: (components["schemas"]["PlayLog"])[];
         };
       };
     };
   };
+  parameters: never;
   requestBodies: {
     /**
-     * scopeは、誰でも見れる=0  プラン入会者しか見れない=1
+     * @description scopeは、誰でも見れる=0  プラン入会者しか見れない=1
      * broadcastStatusは、放映中=0, 予約中=1
      * attachedPlansIdsは、紐付けるPlanIdの配列
      */
-    Program: {
+    Program?: {
       content: {
         "application/json": {
           clubId?: number;
           title?: string;
           description?: string;
-          chapters?: {
-            title?: string;
-            fileName?: string;
-            mediaUrl?: string;
-            /** @description mineType 例：image/jpeg */
-            contentType?: string;
-            playTimeSeconds?: number;
-            order?: number;
-            id?: number;
-          }[];
+          chapters?: ({
+              title?: string;
+              fileName?: string;
+              mediaUrl?: string;
+              /** @description mineType 例：image/jpeg */
+              contentType?: string;
+              playTimeSeconds?: number;
+              order?: number;
+              id?: number;
+            })[];
           scope?: number;
           isDraft?: boolean;
-          attachedPlansIds?: number[];
+          attachedPlansIds?: (number)[];
           broadcastStatus?: number;
           /**
-           * Format: date-time
+           * Format: date-time 
            * @description 2022-06-07T14:59:43+09:00
            */
           reservedAt?: string;
         };
       };
     };
-    ReactionComment: {
+    ReactionComment?: {
       content: {
         "application/json": {
           programId?: number;
@@ -339,13 +397,13 @@ export interface components {
       };
     };
     /**
-     * contentTypeは無くても良いといえば良いのですが、s3に登録する際のmetadataとして登録します。
-     *
-     *
+     * @description contentTypeは無くても良いといえば良いのですが、s3に登録する際のmetadataとして登録します。
+     * 
+     * 
      * 例：
      * https://fanclove-radio.s3.ap-northeast-1.amazonaws.com/media/1(clubId)/abc.mp3(fileName)?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJTLX7NCWRPA2NHBA%2F20220708%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20220708T140416Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&x-id=PutObject&X-Amz-Signature=28d152cf695759fb6a6b86fe858c9ecafd8da298025b24481e2f69b7c153d198
      */
-    PreSignedUrl: {
+    PreSignedUrl?: {
       content: {
         "application/json": {
           clubId?: number;
@@ -355,7 +413,7 @@ export interface components {
         };
       };
     };
-    PutChapterPlayLog: {
+    PutChapterPlayLog?: {
       content: {
         "application/json": {
           programId?: number;
@@ -365,57 +423,62 @@ export interface components {
       };
     };
   };
+  headers: never;
+  pathItems: never;
 }
 
+export type external = Record<string, never>;
+
 export interface operations {
-  /** 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API */
+
   getPrograms: {
-    parameters: {};
+    /**
+     * List of programs available to members 
+     * @description 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API
+     */
     responses: {
       200: components["responses"]["Programs"];
     };
   };
-  /** Radioプログラム登録API */
   createProgram: {
-    parameters: {};
+    /**
+     * Create Program 
+     * @description Radioプログラム登録API
+     */
+    requestBody: components["requestBodies"]["Program"];
     responses: {
       200: components["responses"]["Program"];
     };
-    requestBody: components["requestBodies"]["Program"];
   };
-  /** プログラム内の音声データ一覧を取得するAPI */
   getProgramChapters: {
-    parameters: {
-      path: {
-        id: number;
-      };
-    };
+    /**
+     * Get program's chapters 
+     * @description プログラム内の音声データ一覧を取得するAPI
+     */
     responses: {
       200: components["responses"]["Program"];
     };
   };
-  /** Radioプログラム編集API（オーナー向け） */
   putProgram: {
-    parameters: {
-      path: {
-        id: number;
-      };
-    };
+    /**
+     * Edit program 
+     * @description Radioプログラム編集API（オーナー向け）
+     */
+    requestBody: components["requestBodies"]["Program"];
     responses: {
       200: components["responses"]["Program"];
     };
-    requestBody: components["requestBodies"]["Program"];
   };
-  /** クラブに登録されているプログラム一覧を取得するAPI */
   getClubPrograms: {
-    parameters: {
-      path: {
-        id: number;
-      };
-      query: {
-        /** 次ページへのカーソル（ProgramID） */
+    /**
+     * GET Club's programs. 
+     * @description クラブに登録されているプログラム一覧を取得するAPI
+     */
+    parameters?: {
+        /** @description 次ページへのカーソル（ProgramID） */
+        /** @description 全て、閲覧可能、プラン別のタブスイッチャー プランの場合は、プランID */
+      query?: {
         cursor?: string;
-        /** 全て、閲覧可能、プラン別のタブスイッチャー プランの場合は、プランID */
         switch?: string;
       };
     };
@@ -423,16 +486,16 @@ export interface operations {
       200: components["responses"]["Programs"];
     };
   };
-  /** クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある） */
   getClubProgramsForOwner: {
-    parameters: {
-      path: {
-        id: number;
-      };
-      query: {
-        /** 次ページへのカーソル（ProgramID） */
+    /**
+     * GET Club's Programs For Owner's Admin page. 
+     * @description クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
+     */
+    parameters?: {
+        /** @description 次ページへのカーソル（ProgramID） */
+        /** @description ONの場合、下書きのみ取得する */
+      query?: {
         cursor?: string;
-        /** ONの場合、下書きのみ取得する */
         isOnlyDraft?: boolean;
       };
     };
@@ -440,30 +503,31 @@ export interface operations {
       200: components["responses"]["Programs"];
     };
   };
-  /**
-   * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
-   * （AWSのLambdaから定期的にリクエストが飛ぶ）
-   */
   patchProgramsReservedToPublish: {
-    parameters: {
-      header: {
-        /** 固定の認証トークン */
+    /**
+     * Switch reserved all program to publish 
+     * @description 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
+     * （AWSのLambdaから定期的にリクエストが飛ぶ）
+     */
+    parameters?: {
+        /** @description 固定の認証トークン */
+      header?: {
         AuthrizedToken?: string;
       };
     };
     responses: {
-      /** OK */
-      200: unknown;
+      /** @description OK */
+      200: never;
     };
   };
-  /** 特定のプログラムのリアクションコメントを取得するAPI */
   getProgramReactionComments: {
-    parameters: {
-      path: {
-        programId: number;
-      };
-      query: {
-        /** asc or desc */
+    /**
+     * Get Program Reaction Comments 
+     * @description 特定のプログラムのリアクションコメントを取得するAPI
+     */
+    parameters?: {
+        /** @description asc or desc */
+      query?: {
         order?: string;
         cursor?: string;
       };
@@ -472,55 +536,47 @@ export interface operations {
       200: components["responses"]["ReactionComments"];
     };
   };
-  /** 特定のプログラムにリアクションコメントをするAPI */
   createProgramReactionComment: {
-    parameters: {
-      path: {
-        programId: number;
-      };
-    };
-    responses: {
-      200: components["responses"]["ReactionComment"];
-    };
+    /**
+     * Create Program Reaction Comment 
+     * @description 特定のプログラムにリアクションコメントをするAPI
+     */
     requestBody: components["requestBodies"]["ReactionComment"];
+    responses: {
+      200: components["responses"]["ReactionComment"];
+    };
   };
-  /** 指定したコメントIDをLikeをON/OFFするAPI */
   patchReactionCommentsLikeToggleId: {
-    parameters: {
-      path: {
-        commentId: number;
-      };
-    };
+    /**
+     * Like ON/OFF 
+     * @description 指定したコメントIDをLikeをON/OFFするAPI
+     */
     responses: {
       200: components["responses"]["ReactionComment"];
     };
   };
-  /** リアクションコメントを削除するAPI。(コメント投稿者向け) */
   deleteReactionCommentsCommentId: {
-    parameters: {
-      path: {
-        commentId: number;
-      };
-    };
+    /**
+     * Delete Reaction Comment 
+     * @description リアクションコメントを削除するAPI。(コメント投稿者向け)
+     */
     responses: {
       200: components["responses"]["ReactionComment"];
     };
   };
-  /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
   patchReactionCommentsCommentId: {
-    parameters: {
-      path: {
-        commentId: number;
-      };
-    };
+    /**
+     * Hidden Reaction Comment 
+     * @description リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
+     */
     responses: {
       200: components["responses"]["ReactionComment"];
     };
   };
-  /** 特定のユーザーの再生履歴を返すAPI */
   getPlayLogs: {
-    parameters: {
-      query: {
+    /** @description 特定のユーザーの再生履歴を返すAPI */
+    parameters?: {
+      query?: {
         cursor?: string;
       };
     };
@@ -528,37 +584,42 @@ export interface operations {
       200: components["responses"]["PlayLogs"];
     };
   };
-  /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */
   chapterOfPlayLogEndChapterId: {
-    parameters: {};
+    /**
+     * End record chapter play log. 
+     * @description チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。
+     */
+    requestBody: components["requestBodies"]["PutChapterPlayLog"];
     responses: {
       200: components["responses"]["ChapterPlayLog"];
     };
-    requestBody: components["requestBodies"]["PutChapterPlayLog"];
   };
-  /** Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI） */
   deleteChapterId: {
-    parameters: {
-      path: {
-        id: number;
-      };
-    };
+    /**
+     * Delete Chapter's media file. 
+     * @description Chapterデータを論理削除するのと、S3から音声ファイルを削除するAPI（登録済みデータのみ。つまり、編集中のみ使うAPI）
+     */
     responses: {
       200: components["responses"]["Chapter"];
     };
   };
-  /** 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI */
   postPublishPreSignedUrl: {
-    parameters: {};
+    /**
+     * Publish pre-signed URL 
+     * @description 音声メディアファイルをs3に直接アップロードするためのURLを発行するためのAPI
+     */
+    requestBody: components["requestBodies"]["PreSignedUrl"];
     responses: {
       200: components["responses"]["PreSignedUrl"];
     };
-    requestBody: components["requestBodies"]["PreSignedUrl"];
   };
-  /** healthcheck */
   getHealthcheck: {
+    /**
+     * healthcheck 
+     * @description healthcheck
+     */
     responses: {
-      /** OK */
+      /** @description OK */
       200: {
         content: {
           "text/plain": string;
@@ -566,6 +627,13 @@ export interface operations {
       };
     };
   };
+  getProgramsOfClubIdForAttachedPin: {
+    /**
+     * Your GET endpoint 
+     * @description クラブに登録されている固定プログラムの一覧を取得するAPI
+     */
+    responses: {
+      200: components["responses"]["Programs"];
+    };
+  };
 }
-
-export interface external {}

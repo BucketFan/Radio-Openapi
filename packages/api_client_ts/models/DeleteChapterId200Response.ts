@@ -31,7 +31,7 @@ export interface DeleteChapterId200Response {
      * @type {Chapter}
      * @memberof DeleteChapterId200Response
      */
-    chapter?: Chapter;
+    chapter: Chapter;
     /**
      * 
      * @type {number}
@@ -45,6 +45,7 @@ export interface DeleteChapterId200Response {
  */
 export function instanceOfDeleteChapterId200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "chapter" in value;
 
     return isInstance;
 }
@@ -59,7 +60,7 @@ export function DeleteChapterId200ResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'chapter': !exists(json, 'chapter') ? undefined : ChapterFromJSON(json['chapter']),
+        'chapter': ChapterFromJSON(json['chapter']),
         'elapsedSeconds': !exists(json, 'elapsedSeconds') ? undefined : json['elapsedSeconds'],
     };
 }

@@ -31,7 +31,7 @@ export interface GetPlayLogs200Response {
      * @type {Array<PlayLog>}
      * @memberof GetPlayLogs200Response
      */
-    playLogs?: Array<PlayLog>;
+    playLogs: Array<PlayLog>;
 }
 
 /**
@@ -39,6 +39,7 @@ export interface GetPlayLogs200Response {
  */
 export function instanceOfGetPlayLogs200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "playLogs" in value;
 
     return isInstance;
 }
@@ -53,7 +54,7 @@ export function GetPlayLogs200ResponseFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'playLogs': !exists(json, 'playLogs') ? undefined : ((json['playLogs'] as Array<any>).map(PlayLogFromJSON)),
+        'playLogs': ((json['playLogs'] as Array<any>).map(PlayLogFromJSON)),
     };
 }
 
@@ -66,7 +67,7 @@ export function GetPlayLogs200ResponseToJSON(value?: GetPlayLogs200Response | nu
     }
     return {
         
-        'playLogs': value.playLogs === undefined ? undefined : ((value.playLogs as Array<any>).map(PlayLogToJSON)),
+        'playLogs': ((value.playLogs as Array<any>).map(PlayLogToJSON)),
     };
 }
 
