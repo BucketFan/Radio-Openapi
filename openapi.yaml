@@ -321,6 +321,8 @@ components:
       properties:
         id:
           type: integer
+        clubId:
+          type: integer
         club:
           $ref: '#/components/schemas/Club'
         title:
@@ -354,6 +356,7 @@ components:
           format: date-time
       required:
         - id
+        - clubId
         - club
         - title
         - description
