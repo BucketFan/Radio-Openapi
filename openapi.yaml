@@ -310,6 +310,21 @@ paths:
           $ref: '#/components/responses/Programs'
       operationId: getProgramsOfClubIdForAttachedPin
       description: クラブに登録されている固定プログラムの一覧を取得するAPI
+  '/clubs/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Club'
+      operationId: getClubById
+      description: idからクラブを取得するAPI
 components:
   schemas:
     Program:
@@ -979,6 +994,19 @@ components:
                   $ref: '#/components/schemas/PlayLog'
             required:
               - playLogs
+    Club:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              club:
+                $ref: '#/components/schemas/Club'
+        application/xml:
+          schema:
+            type: object
+            properties: {}
   requestBodies:
     Program:
       content:
