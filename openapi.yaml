@@ -294,6 +294,22 @@ paths:
                 example:
                   value: OK
       operationId: getHealthcheck
+  '/programs/of_club/{id}/for_attached_pin':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - programs
+      responses:
+        '200':
+          $ref: '#/components/responses/Programs'
+      operationId: getProgramsOfClubIdForAttachedPin
+      description: クラブに登録されている固定プログラムの一覧を取得するAPI
 components:
   schemas:
     Program:
