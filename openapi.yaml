@@ -319,7 +319,8 @@ paths:
         required: true
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - clubs
       responses:
         '200':
           $ref: '#/components/responses/Club'
