@@ -48,6 +48,10 @@ export interface GetProgramChaptersRequest {
     id: number;
 }
 
+export interface GetProgramsOfClubIdForAttachedPinRequest {
+    id: string;
+}
+
 export interface PatchProgramsReservedToPublishRequest {
     authrizedToken?: string;
 }
@@ -146,6 +150,22 @@ export interface ProgramsApiInterface {
      * List of programs available to members
      */
     getPrograms(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
+
+    /**
+     * クラブに登録されている固定プログラムの一覧を取得するAPI
+     * @summary Your GET endpoint
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramsApiInterface
+     */
+    getProgramsOfClubIdForAttachedPinRaw(requestParameters: GetProgramsOfClubIdForAttachedPinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPrograms200Response>>;
+
+    /**
+     * クラブに登録されている固定プログラムの一覧を取得するAPI
+     * Your GET endpoint
+     */
+    getProgramsOfClubIdForAttachedPin(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。 （AWSのLambdaから定期的にリクエストが飛ぶ）
@@ -355,6 +375,38 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      */
     async getPrograms(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
         const response = await this.getProgramsRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * クラブに登録されている固定プログラムの一覧を取得するAPI
+     * Your GET endpoint
+     */
+    async getProgramsOfClubIdForAttachedPinRaw(requestParameters: GetProgramsOfClubIdForAttachedPinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPrograms200Response>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProgramsOfClubIdForAttachedPin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/programs/of_club/{id}/for_attached_pin`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetPrograms200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * クラブに登録されている固定プログラムの一覧を取得するAPI
+     * Your GET endpoint
+     */
+    async getProgramsOfClubIdForAttachedPin(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
+        const response = await this.getProgramsOfClubIdForAttachedPinRaw({ id: id }, initOverrides);
         return await response.value();
     }
 

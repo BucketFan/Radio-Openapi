@@ -31,7 +31,7 @@ export interface CreateProgram200Response {
      * @type {Program}
      * @memberof CreateProgram200Response
      */
-    program?: Program;
+    program: Program;
 }
 
 /**
@@ -39,6 +39,7 @@ export interface CreateProgram200Response {
  */
 export function instanceOfCreateProgram200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "program" in value;
 
     return isInstance;
 }
@@ -53,7 +54,7 @@ export function CreateProgram200ResponseFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
-        'program': !exists(json, 'program') ? undefined : ProgramFromJSON(json['program']),
+        'program': ProgramFromJSON(json['program']),
     };
 }
 

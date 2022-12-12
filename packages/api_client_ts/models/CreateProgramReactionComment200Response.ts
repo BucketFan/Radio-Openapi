@@ -31,7 +31,7 @@ export interface CreateProgramReactionComment200Response {
      * @type {ReactionComment}
      * @memberof CreateProgramReactionComment200Response
      */
-    reactionComment?: ReactionComment;
+    reactionComment: ReactionComment;
 }
 
 /**
@@ -39,6 +39,7 @@ export interface CreateProgramReactionComment200Response {
  */
 export function instanceOfCreateProgramReactionComment200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "reactionComment" in value;
 
     return isInstance;
 }
@@ -53,7 +54,7 @@ export function CreateProgramReactionComment200ResponseFromJSONTyped(json: any, 
     }
     return {
         
-        'reactionComment': !exists(json, 'reactionComment') ? undefined : ReactionCommentFromJSON(json['reactionComment']),
+        'reactionComment': ReactionCommentFromJSON(json['reactionComment']),
     };
 }
 
