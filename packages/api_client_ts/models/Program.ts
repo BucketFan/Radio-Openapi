@@ -46,6 +46,12 @@ export interface Program {
     id: number;
     /**
      * 
+     * @type {number}
+     * @memberof Program
+     */
+    clubId: number;
+    /**
+     * 
      * @type {Club}
      * @memberof Program
      */
@@ -67,13 +73,13 @@ export interface Program {
      * @type {number}
      * @memberof Program
      */
-    broadcastStatus: number;
+    broadcastStatus: ProgramBroadcastStatusEnum;
     /**
      * 
      * @type {number}
      * @memberof Program
      */
-    scope: number;
+    scope: ProgramScopeEnum;
     /**
      * 
      * @type {Array<Chapter>}
@@ -100,6 +106,12 @@ export interface Program {
     reactionCommentsCount: number;
     /**
      * 
+     * @type {boolean}
+     * @memberof Program
+     */
+    isDraft?: boolean;
+    /**
+     * 
      * @type {Date}
      * @memberof Program
      */
@@ -118,12 +130,33 @@ export interface Program {
     updatedAt: Date;
 }
 
+
+/**
+ * @export
+ */
+export const ProgramBroadcastStatusEnum = {
+    NUMBER_null: null,
+    NUMBER_null: null
+} as const;
+export type ProgramBroadcastStatusEnum = typeof ProgramBroadcastStatusEnum[keyof typeof ProgramBroadcastStatusEnum];
+
+/**
+ * @export
+ */
+export const ProgramScopeEnum = {
+    NUMBER_null: null,
+    NUMBER_null: null
+} as const;
+export type ProgramScopeEnum = typeof ProgramScopeEnum[keyof typeof ProgramScopeEnum];
+
+
 /**
  * Check if a given object implements the Program interface.
  */
 export function instanceOfProgram(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "clubId" in value;
     isInstance = isInstance && "club" in value;
     isInstance = isInstance && "title" in value;
     isInstance = isInstance && "description" in value;
@@ -150,6 +183,7 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
     return {
         
         'id': json['id'],
+        'clubId': json['clubId'],
         'club': ClubFromJSON(json['club']),
         'title': json['title'],
         'description': json['description'],
@@ -159,6 +193,7 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'attachedPlans': ((json['attachedPlans'] as Array<any>).map(PlanFromJSON)),
         'isAttachedPin': json['isAttachedPin'],
         'reactionCommentsCount': json['reactionCommentsCount'],
+        'isDraft': !exists(json, 'isDraft') ? undefined : json['isDraft'],
         'reservedAt': !exists(json, 'reservedAt') ? undefined : (new Date(json['reservedAt'])),
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
@@ -175,6 +210,7 @@ export function ProgramToJSON(value?: Program | null): any {
     return {
         
         'id': value.id,
+        'clubId': value.clubId,
         'club': ClubToJSON(value.club),
         'title': value.title,
         'description': value.description,
@@ -184,6 +220,7 @@ export function ProgramToJSON(value?: Program | null): any {
         'attachedPlans': ((value.attachedPlans as Array<any>).map(PlanToJSON)),
         'isAttachedPin': value.isAttachedPin,
         'reactionCommentsCount': value.reactionCommentsCount,
+        'isDraft': value.isDraft,
         'reservedAt': value.reservedAt === undefined ? undefined : (value.reservedAt.toISOString()),
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
