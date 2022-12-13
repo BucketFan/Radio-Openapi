@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: gnxfflh1eez06
+  id: l35wz8tt7vcfv
 info:
   title: radio_openapi
   version: '1.0'
@@ -367,6 +367,10 @@ components:
         isAttachedPin:
           type: boolean
           description: 固定表示ON/OFF
+        playTimeSeconds:
+          type: integer
+          description: |
+            総再生時間
         mediaUrl:
           type: string
         playLog:
@@ -386,6 +390,7 @@ components:
         - order
         - title
         - isAttachedPin
+        - playTimeSeconds
         - mediaUrl
         - createdAt
         - updatedAt
