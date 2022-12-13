@@ -336,6 +336,9 @@ components:
             - RESERVED
         scope:
           type: integer
+          enum:
+            - PUBLIC
+            - PRIVATE
         chapters:
           type: array
           items:
