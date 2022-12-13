@@ -345,6 +345,8 @@ components:
           type: boolean
         reactionCommentsCount:
           type: integer
+        isDraft:
+          type: boolean
         reservedAt:
           type: string
           format: date-time
