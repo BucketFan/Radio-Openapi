@@ -331,8 +331,14 @@ components:
           type: string
         broadcastStatus:
           type: integer
+          enum:
+            - ON_AIR
+            - RESERVED
         scope:
           type: integer
+          enum:
+            - PUBLIC
+            - PRIVATE
         chapters:
           type: array
           items:
