@@ -368,7 +368,6 @@ components:
         - attachedPlans
         - isAttachedPin
         - reactionCommentsCount
-        - isDraft
         - createdAt
         - updatedAt
     Chapter:
