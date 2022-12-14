@@ -21,10 +21,10 @@ import { exists, mapValues } from '../runtime';
 export interface Profile {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof Profile
      */
-    id: string;
+    id: number;
     /**
      * 
      * @type {string}
