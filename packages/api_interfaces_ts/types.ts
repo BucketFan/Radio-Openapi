@@ -113,6 +113,15 @@ export interface paths {
       };
     };
   };
+  "/clubs/{id}": {
+    /** idからクラブを取得するAPI */
+    get: operations["getClubById"];
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+  };
 }
 
 export interface components {
@@ -127,9 +136,9 @@ export interface components {
       club: components["schemas"]["Club"];
       title: string;
       description: string;
-      /** @enum {integer} */
+      /** @enum {string} */
       broadcastStatus: "ON_AIR" | "RESERVED";
-      /** @enum {integer} */
+      /** @enum {string} */
       scope: "PUBLIC" | "PRIVATE";
       chapters: components["schemas"]["Chapter"][];
       attachedPlans: components["schemas"]["Plan"][];
@@ -154,6 +163,8 @@ export interface components {
       title: string;
       /** @description 固定表示ON/OFF */
       isAttachedPin: boolean;
+      /** @description 総再生時間 */
+      playTimeSeconds: number;
       mediaUrl: string;
       playLog?: components["schemas"]["PlayLog"];
       /** Format: date-time */
@@ -176,11 +187,11 @@ export interface components {
       id: number;
       name: string;
       slug: string;
-      overview: string;
+      description: string;
       icon?: string;
       clubColor: string;
       url: string;
-      programAttachedPlans: components["schemas"]["Plan"][];
+      plans: components["schemas"]["Plan"][];
       twitter_url?: string;
       facebook_url?: string;
       line_url?: string;
@@ -306,6 +317,15 @@ export interface components {
         "application/json": {
           playLogs: components["schemas"]["PlayLog"][];
         };
+      };
+    };
+    /** Example response */
+    Club: {
+      content: {
+        "application/json": {
+          club?: components["schemas"]["Club"];
+        };
+        "application/xml": { [key: string]: unknown };
       };
     };
   };
@@ -588,6 +608,17 @@ export interface operations {
     };
     responses: {
       200: components["responses"]["Programs"];
+    };
+  };
+  /** idからクラブを取得するAPI */
+  getClubById: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    responses: {
+      200: components["responses"]["Club"];
     };
   };
 }

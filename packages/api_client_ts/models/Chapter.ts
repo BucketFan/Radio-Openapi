@@ -57,6 +57,12 @@ export interface Chapter {
      */
     isAttachedPin: boolean;
     /**
+     * 総再生時間
+     * @type {number}
+     * @memberof Chapter
+     */
+    playTimeSeconds: number;
+    /**
      * 
      * @type {string}
      * @memberof Chapter
@@ -98,6 +104,7 @@ export function instanceOfChapter(value: object): boolean {
     isInstance = isInstance && "order" in value;
     isInstance = isInstance && "title" in value;
     isInstance = isInstance && "isAttachedPin" in value;
+    isInstance = isInstance && "playTimeSeconds" in value;
     isInstance = isInstance && "mediaUrl" in value;
     isInstance = isInstance && "createdAt" in value;
     isInstance = isInstance && "updatedAt" in value;
@@ -120,6 +127,7 @@ export function ChapterFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
         'order': json['order'],
         'title': json['title'],
         'isAttachedPin': json['isAttachedPin'],
+        'playTimeSeconds': json['playTimeSeconds'],
         'mediaUrl': json['mediaUrl'],
         'playLog': !exists(json, 'playLog') ? undefined : PlayLogFromJSON(json['playLog']),
         'createdAt': (new Date(json['createdAt'])),
@@ -142,6 +150,7 @@ export function ChapterToJSON(value?: Chapter | null): any {
         'order': value.order,
         'title': value.title,
         'isAttachedPin': value.isAttachedPin,
+        'playTimeSeconds': value.playTimeSeconds,
         'mediaUrl': value.mediaUrl,
         'playLog': PlayLogToJSON(value.playLog),
         'createdAt': (value.createdAt.toISOString()),
