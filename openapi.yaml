@@ -313,7 +313,7 @@ paths:
   '/clubs/{id}':
     parameters:
       - schema:
-          type: string
+          type: number
         name: id
         in: path
         required: true
