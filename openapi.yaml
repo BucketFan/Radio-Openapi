@@ -330,12 +330,12 @@ components:
         description:
           type: string
         broadcastStatus:
-          type: integer
+          type: string
           enum:
             - ON_AIR
             - RESERVED
         scope:
-          type: integer
+          type: string
           enum:
             - PUBLIC
             - PRIVATE
