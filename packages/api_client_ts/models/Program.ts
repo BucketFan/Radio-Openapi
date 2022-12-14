@@ -70,13 +70,13 @@ export interface Program {
     description: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Program
      */
     broadcastStatus: ProgramBroadcastStatusEnum;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Program
      */
     scope: ProgramScopeEnum;
@@ -135,8 +135,8 @@ export interface Program {
  * @export
  */
 export const ProgramBroadcastStatusEnum = {
-    NUMBER_null: null,
-    NUMBER_null: null
+    OnAir: 'ON_AIR',
+    Reserved: 'RESERVED'
 } as const;
 export type ProgramBroadcastStatusEnum = typeof ProgramBroadcastStatusEnum[keyof typeof ProgramBroadcastStatusEnum];
 
@@ -144,8 +144,8 @@ export type ProgramBroadcastStatusEnum = typeof ProgramBroadcastStatusEnum[keyof
  * @export
  */
 export const ProgramScopeEnum = {
-    NUMBER_null: null,
-    NUMBER_null: null
+    Public: 'PUBLIC',
+    Private: 'PRIVATE'
 } as const;
 export type ProgramScopeEnum = typeof ProgramScopeEnum[keyof typeof ProgramScopeEnum];
 

@@ -1,3 +1,4 @@
+apis/ClubsApi.ts
 apis/HealthcheckApi.ts
 apis/PlayLogsApi.ts
 apis/PreSignedUrlApi.ts
@@ -15,6 +16,7 @@ models/CreateProgramReactionCommentRequest.ts
 models/CreateProgramRequest.ts
 models/CreateProgramRequestChaptersInner.ts
 models/DeleteChapterId200Response.ts
+models/GetClubById200Response.ts
 models/GetPlayLogs200Response.ts
 models/GetProgramReactionComments200Response.ts
 models/GetPrograms200Response.ts

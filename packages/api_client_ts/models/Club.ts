@@ -49,7 +49,7 @@ export interface Club {
      * @type {string}
      * @memberof Club
      */
-    overview: string;
+    description: string;
     /**
      * 
      * @type {string}
@@ -73,7 +73,7 @@ export interface Club {
      * @type {Array<Plan>}
      * @memberof Club
      */
-    programAttachedPlans: Array<Plan>;
+    plans: Array<Plan>;
     /**
      * 
      * @type {string}
@@ -120,10 +120,10 @@ export function instanceOfClub(value: object): boolean {
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "slug" in value;
-    isInstance = isInstance && "overview" in value;
+    isInstance = isInstance && "description" in value;
     isInstance = isInstance && "clubColor" in value;
     isInstance = isInstance && "url" in value;
-    isInstance = isInstance && "programAttachedPlans" in value;
+    isInstance = isInstance && "plans" in value;
 
     return isInstance;
 }
@@ -141,11 +141,11 @@ export function ClubFromJSONTyped(json: any, ignoreDiscriminator: boolean): Club
         'id': json['id'],
         'name': json['name'],
         'slug': json['slug'],
-        'overview': json['overview'],
+        'description': json['description'],
         'icon': !exists(json, 'icon') ? undefined : json['icon'],
         'clubColor': json['clubColor'],
         'url': json['url'],
-        'programAttachedPlans': ((json['programAttachedPlans'] as Array<any>).map(PlanFromJSON)),
+        'plans': ((json['plans'] as Array<any>).map(PlanFromJSON)),
         'twitterUrl': !exists(json, 'twitter_url') ? undefined : json['twitter_url'],
         'facebookUrl': !exists(json, 'facebook_url') ? undefined : json['facebook_url'],
         'lineUrl': !exists(json, 'line_url') ? undefined : json['line_url'],
@@ -167,11 +167,11 @@ export function ClubToJSON(value?: Club | null): any {
         'id': value.id,
         'name': value.name,
         'slug': value.slug,
-        'overview': value.overview,
+        'description': value.description,
         'icon': value.icon,
         'clubColor': value.clubColor,
         'url': value.url,
-        'programAttachedPlans': ((value.programAttachedPlans as Array<any>).map(PlanToJSON)),
+        'plans': ((value.plans as Array<any>).map(PlanToJSON)),
         'twitter_url': value.twitterUrl,
         'facebook_url': value.facebookUrl,
         'line_url': value.lineUrl,
