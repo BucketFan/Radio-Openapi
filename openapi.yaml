@@ -245,7 +245,7 @@ paths:
         - play_logs
       parameters:
         - schema:
-            type: string
+            type: integer
           in: query
           name: cursor
   '/chapters/{id}':
