@@ -549,7 +549,7 @@ components:
       description: ユーザプロファイル（会員、オーナー、通りすがりの人がありえる）
       properties:
         id:
-          type: string
+          type: number
         name:
           type: string
         thumbnail:
@@ -577,7 +577,7 @@ components:
         chapterId:
           type: number
         profileId:
-          type: string
+          type: number
         elapsedSeconds:
           type: number
         createdAt:
