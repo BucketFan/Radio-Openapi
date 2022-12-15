@@ -40,7 +40,7 @@ export interface DeleteChapterIdRequest {
 }
 
 export interface GetPlayLogsRequest {
-    cursor?: string;
+    cursor?: number;
 }
 
 /**
@@ -85,7 +85,7 @@ export interface PlayLogsApiInterface {
     /**
      * 特定のユーザーの再生履歴を返すAPI
      * @summary 
-     * @param {string} [cursor] 
+     * @param {number} [cursor] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlayLogsApiInterface
@@ -96,7 +96,7 @@ export interface PlayLogsApiInterface {
      * 特定のユーザーの再生履歴を返すAPI
      * 
      */
-    getPlayLogs(cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response>;
+    getPlayLogs(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response>;
 
 }
 
@@ -195,7 +195,7 @@ export class PlayLogsApi extends runtime.BaseAPI implements PlayLogsApiInterface
      * 特定のユーザーの再生履歴を返すAPI
      * 
      */
-    async getPlayLogs(cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response> {
+    async getPlayLogs(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response> {
         const response = await this.getPlayLogsRaw({ cursor: cursor }, initOverrides);
         return await response.value();
     }

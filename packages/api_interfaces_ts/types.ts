@@ -118,7 +118,7 @@ export interface paths {
     get: operations["getClubById"];
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
   };
@@ -220,7 +220,7 @@ export interface components {
      * @description ユーザプロファイル（会員、オーナー、通りすがりの人がありえる）
      */
     Profile: {
-      id: string;
+      id: number;
       name: string;
       thumbnail?: string;
       isPublicProfile: boolean;
@@ -232,7 +232,7 @@ export interface components {
       id: number;
       programId: number;
       chapterId: number;
-      profileId: string;
+      profileId: number;
       elapsedSeconds: number;
       /** Format: date-time */
       createdAt: string;
@@ -554,7 +554,7 @@ export interface operations {
   getPlayLogs: {
     parameters: {
       query: {
-        cursor?: string;
+        cursor?: number;
       };
     };
     responses: {
@@ -614,7 +614,7 @@ export interface operations {
   getClubById: {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {

@@ -52,10 +52,10 @@ export interface PlayLog {
     chapterId: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof PlayLog
      */
-    profileId: string;
+    profileId: number;
     /**
      * 
      * @type {number}

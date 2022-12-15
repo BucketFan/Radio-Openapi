@@ -23,7 +23,7 @@ import {
 } from '../models';
 
 export interface GetClubByIdRequest {
-    id: string;
+    id: number;
 }
 
 /**
@@ -36,7 +36,7 @@ export interface ClubsApiInterface {
     /**
      * idからクラブを取得するAPI
      * @summary Your GET endpoint
-     * @param {string} id 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApiInterface
@@ -47,7 +47,7 @@ export interface ClubsApiInterface {
      * idからクラブを取得するAPI
      * Your GET endpoint
      */
-    getClubById(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetClubById200Response>;
+    getClubById(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetClubById200Response>;
 
 }
 
@@ -83,7 +83,7 @@ export class ClubsApi extends runtime.BaseAPI implements ClubsApiInterface {
      * idからクラブを取得するAPI
      * Your GET endpoint
      */
-    async getClubById(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetClubById200Response> {
+    async getClubById(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetClubById200Response> {
         const response = await this.getClubByIdRaw({ id: id }, initOverrides);
         return await response.value();
     }
