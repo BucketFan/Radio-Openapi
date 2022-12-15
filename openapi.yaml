@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: l35wz8tt7vcfv
+  id: 0nckmxijz57h5
 info:
   title: radio_openapi
   version: '1.0'
@@ -1058,7 +1058,10 @@ components:
                     id:
                       type: number
               scope:
-                type: integer
+                type: string
+                enum:
+                  - PUBLIC
+                  - PRIVATE
               isDraft:
                 type: boolean
               attachedPlansIds:
@@ -1066,7 +1069,10 @@ components:
                 items:
                   type: integer
               broadcastStatus:
-                type: integer
+                type: string
+                enum:
+                  - ON_AIR
+                  - RESERVED
               reservedAt:
                 type: string
                 description: '2022-06-07T14:59:43+09:00'
