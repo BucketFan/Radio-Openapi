@@ -297,12 +297,12 @@ paths:
   '/programs/of_club/{id}/for_attached_pin':
     parameters:
       - schema:
-          type: string
+          type: number
         name: id
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get attached pin club's programs
       tags:
         - programs
       responses:
@@ -1020,6 +1020,8 @@ components:
             properties:
               club:
                 $ref: '#/components/schemas/Club'
+            required:
+              - club
         application/xml:
           schema:
             type: object
