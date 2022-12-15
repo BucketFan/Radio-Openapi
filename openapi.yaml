@@ -1020,6 +1020,8 @@ components:
             properties:
               club:
                 $ref: '#/components/schemas/Club'
+            required:
+              - club
         application/xml:
           schema:
             type: object
