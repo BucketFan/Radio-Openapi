@@ -52,10 +52,10 @@ export interface CreateProgramRequest {
     chapters?: Array<CreateProgramRequestChaptersInner>;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof CreateProgramRequest
      */
-    scope?: number;
+    scope?: CreateProgramRequestScopeEnum;
     /**
      * 
      * @type {boolean}
@@ -70,10 +70,10 @@ export interface CreateProgramRequest {
     attachedPlansIds?: Array<number>;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof CreateProgramRequest
      */
-    broadcastStatus?: number;
+    broadcastStatus?: CreateProgramRequestBroadcastStatusEnum;
     /**
      * 2022-06-07T14:59:43+09:00
      * @type {Date}
@@ -81,6 +81,26 @@ export interface CreateProgramRequest {
      */
     reservedAt?: Date;
 }
+
+
+/**
+ * @export
+ */
+export const CreateProgramRequestScopeEnum = {
+    Public: 'PUBLIC',
+    Private: 'PRIVATE'
+} as const;
+export type CreateProgramRequestScopeEnum = typeof CreateProgramRequestScopeEnum[keyof typeof CreateProgramRequestScopeEnum];
+
+/**
+ * @export
+ */
+export const CreateProgramRequestBroadcastStatusEnum = {
+    OnAir: 'ON_AIR',
+    Reserved: 'RESERVED'
+} as const;
+export type CreateProgramRequestBroadcastStatusEnum = typeof CreateProgramRequestBroadcastStatusEnum[keyof typeof CreateProgramRequestBroadcastStatusEnum];
+
 
 /**
  * Check if a given object implements the CreateProgramRequest interface.

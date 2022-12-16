@@ -109,7 +109,7 @@ export interface paths {
     get: operations["getProgramsOfClubIdForAttachedPin"];
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
   };
@@ -198,6 +198,7 @@ export interface components {
       instagram_url?: string;
       youtube_url?: string;
       tiktok_url?: string;
+      backgroundImage?: string;
     };
     /** ReactionComment */
     ReactionComment: {
@@ -323,7 +324,7 @@ export interface components {
     Club: {
       content: {
         "application/json": {
-          club?: components["schemas"]["Club"];
+          club: components["schemas"]["Club"];
         };
         "application/xml": { [key: string]: unknown };
       };
@@ -351,10 +352,12 @@ export interface components {
             order?: number;
             id?: number;
           }[];
-          scope?: number;
+          /** @enum {string} */
+          scope?: "PUBLIC" | "PRIVATE";
           isDraft?: boolean;
           attachedPlansIds?: number[];
-          broadcastStatus?: number;
+          /** @enum {string} */
+          broadcastStatus?: "ON_AIR" | "RESERVED";
           /**
            * Format: date-time
            * @description 2022-06-07T14:59:43+09:00
@@ -603,7 +606,7 @@ export interface operations {
   getProgramsOfClubIdForAttachedPin: {
     parameters: {
       path: {
-        id: string;
+        id: number;
       };
     };
     responses: {

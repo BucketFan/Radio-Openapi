@@ -49,7 +49,7 @@ export interface GetProgramChaptersRequest {
 }
 
 export interface GetProgramsOfClubIdForAttachedPinRequest {
-    id: string;
+    id: number;
 }
 
 export interface PatchProgramsReservedToPublishRequest {
@@ -153,8 +153,8 @@ export interface ProgramsApiInterface {
 
     /**
      * クラブに登録されている固定プログラムの一覧を取得するAPI
-     * @summary Your GET endpoint
-     * @param {string} id 
+     * @summary Get attached pin club\'s programs
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface
@@ -163,9 +163,9 @@ export interface ProgramsApiInterface {
 
     /**
      * クラブに登録されている固定プログラムの一覧を取得するAPI
-     * Your GET endpoint
+     * Get attached pin club\'s programs
      */
-    getProgramsOfClubIdForAttachedPin(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
+    getProgramsOfClubIdForAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。 （AWSのLambdaから定期的にリクエストが飛ぶ）
@@ -380,7 +380,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
 
     /**
      * クラブに登録されている固定プログラムの一覧を取得するAPI
-     * Your GET endpoint
+     * Get attached pin club\'s programs
      */
     async getProgramsOfClubIdForAttachedPinRaw(requestParameters: GetProgramsOfClubIdForAttachedPinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPrograms200Response>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -403,9 +403,9 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
 
     /**
      * クラブに登録されている固定プログラムの一覧を取得するAPI
-     * Your GET endpoint
+     * Get attached pin club\'s programs
      */
-    async getProgramsOfClubIdForAttachedPin(id: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
+    async getProgramsOfClubIdForAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
         const response = await this.getProgramsOfClubIdForAttachedPinRaw({ id: id }, initOverrides);
         return await response.value();
     }
