@@ -378,6 +378,10 @@ components:
         updatedAt:
           type: string
           format: date-time
+        playLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayLog'
       required:
         - id
         - clubId
