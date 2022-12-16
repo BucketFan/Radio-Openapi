@@ -31,7 +31,7 @@ export interface GetClubById200Response {
      * @type {Club}
      * @memberof GetClubById200Response
      */
-    club?: Club;
+    club: Club;
 }
 
 /**
@@ -39,6 +39,7 @@ export interface GetClubById200Response {
  */
 export function instanceOfGetClubById200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "club" in value;
 
     return isInstance;
 }
@@ -53,7 +54,7 @@ export function GetClubById200ResponseFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'club': !exists(json, 'club') ? undefined : ClubFromJSON(json['club']),
+        'club': ClubFromJSON(json['club']),
     };
 }
 
