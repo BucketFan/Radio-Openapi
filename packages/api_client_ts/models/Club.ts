@@ -110,6 +110,12 @@ export interface Club {
      * @memberof Club
      */
     tiktokUrl?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Club
+     */
+    backgroundImage?: string;
 }
 
 /**
@@ -152,6 +158,7 @@ export function ClubFromJSONTyped(json: any, ignoreDiscriminator: boolean): Club
         'instagramUrl': !exists(json, 'instagram_url') ? undefined : json['instagram_url'],
         'youtubeUrl': !exists(json, 'youtube_url') ? undefined : json['youtube_url'],
         'tiktokUrl': !exists(json, 'tiktok_url') ? undefined : json['tiktok_url'],
+        'backgroundImage': !exists(json, 'backgroundImage') ? undefined : json['backgroundImage'],
     };
 }
 
@@ -178,6 +185,7 @@ export function ClubToJSON(value?: Club | null): any {
         'instagram_url': value.instagramUrl,
         'youtube_url': value.youtubeUrl,
         'tiktok_url': value.tiktokUrl,
+        'backgroundImage': value.backgroundImage,
     };
 }
 
