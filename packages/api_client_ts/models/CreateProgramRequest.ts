@@ -31,55 +31,49 @@ export interface CreateProgramRequest {
      * @type {number}
      * @memberof CreateProgramRequest
      */
-    clubId?: number;
+    clubId: number;
     /**
      * 
      * @type {string}
      * @memberof CreateProgramRequest
      */
-    title?: string;
+    title: string;
     /**
      * 
      * @type {string}
      * @memberof CreateProgramRequest
      */
-    description?: string;
+    description: string;
     /**
      * 
      * @type {Array<CreateProgramRequestChaptersInner>}
      * @memberof CreateProgramRequest
      */
-    chapters?: Array<CreateProgramRequestChaptersInner>;
+    chapters: Array<CreateProgramRequestChaptersInner>;
     /**
      * 
      * @type {string}
      * @memberof CreateProgramRequest
      */
-    scope?: CreateProgramRequestScopeEnum;
+    scope: CreateProgramRequestScopeEnum;
     /**
      * 
      * @type {boolean}
      * @memberof CreateProgramRequest
      */
-    isDraft?: boolean;
+    isDraft: boolean;
     /**
      * 
      * @type {Array<number>}
      * @memberof CreateProgramRequest
      */
-    attachedPlansIds?: Array<number>;
+    attachedPlansIds: Array<number>;
     /**
      * 
      * @type {string}
      * @memberof CreateProgramRequest
      */
-    broadcastStatus?: CreateProgramRequestBroadcastStatusEnum;
-    /**
-     * 2022-06-07T14:59:43+09:00
-     * @type {Date}
-     * @memberof CreateProgramRequest
-     */
-    reservedAt?: Date;
+    releasedAt?: string;
 }
 
 
@@ -92,21 +86,19 @@ export const CreateProgramRequestScopeEnum = {
 } as const;
 export type CreateProgramRequestScopeEnum = typeof CreateProgramRequestScopeEnum[keyof typeof CreateProgramRequestScopeEnum];
 
-/**
- * @export
- */
-export const CreateProgramRequestBroadcastStatusEnum = {
-    OnAir: 'ON_AIR',
-    Reserved: 'RESERVED'
-} as const;
-export type CreateProgramRequestBroadcastStatusEnum = typeof CreateProgramRequestBroadcastStatusEnum[keyof typeof CreateProgramRequestBroadcastStatusEnum];
-
 
 /**
  * Check if a given object implements the CreateProgramRequest interface.
  */
 export function instanceOfCreateProgramRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "clubId" in value;
+    isInstance = isInstance && "title" in value;
+    isInstance = isInstance && "description" in value;
+    isInstance = isInstance && "chapters" in value;
+    isInstance = isInstance && "scope" in value;
+    isInstance = isInstance && "isDraft" in value;
+    isInstance = isInstance && "attachedPlansIds" in value;
 
     return isInstance;
 }
@@ -121,15 +113,14 @@ export function CreateProgramRequestFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'clubId': !exists(json, 'clubId') ? undefined : json['clubId'],
-        'title': !exists(json, 'title') ? undefined : json['title'],
-        'description': !exists(json, 'description') ? undefined : json['description'],
-        'chapters': !exists(json, 'chapters') ? undefined : ((json['chapters'] as Array<any>).map(CreateProgramRequestChaptersInnerFromJSON)),
-        'scope': !exists(json, 'scope') ? undefined : json['scope'],
-        'isDraft': !exists(json, 'isDraft') ? undefined : json['isDraft'],
-        'attachedPlansIds': !exists(json, 'attachedPlansIds') ? undefined : json['attachedPlansIds'],
-        'broadcastStatus': !exists(json, 'broadcastStatus') ? undefined : json['broadcastStatus'],
-        'reservedAt': !exists(json, 'reservedAt') ? undefined : (new Date(json['reservedAt'])),
+        'clubId': json['clubId'],
+        'title': json['title'],
+        'description': json['description'],
+        'chapters': ((json['chapters'] as Array<any>).map(CreateProgramRequestChaptersInnerFromJSON)),
+        'scope': json['scope'],
+        'isDraft': json['isDraft'],
+        'attachedPlansIds': json['attachedPlansIds'],
+        'releasedAt': !exists(json, 'releasedAt') ? undefined : json['releasedAt'],
     };
 }
 
@@ -145,12 +136,11 @@ export function CreateProgramRequestToJSON(value?: CreateProgramRequest | null):
         'clubId': value.clubId,
         'title': value.title,
         'description': value.description,
-        'chapters': value.chapters === undefined ? undefined : ((value.chapters as Array<any>).map(CreateProgramRequestChaptersInnerToJSON)),
+        'chapters': ((value.chapters as Array<any>).map(CreateProgramRequestChaptersInnerToJSON)),
         'scope': value.scope,
         'isDraft': value.isDraft,
         'attachedPlansIds': value.attachedPlansIds,
-        'broadcastStatus': value.broadcastStatus,
-        'reservedAt': value.reservedAt === undefined ? undefined : (value.reservedAt.toISOString()),
+        'releasedAt': value.releasedAt,
     };
 }
 

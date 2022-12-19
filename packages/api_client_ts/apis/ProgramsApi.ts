@@ -71,7 +71,7 @@ export interface ProgramsApiInterface {
     /**
      * Radioプログラム登録API
      * @summary Create Program
-     * @param {CreateProgramRequest} [createProgramRequest] scopeは、誰でも見れる&#x3D;0  プラン入会者しか見れない&#x3D;1 broadcastStatusは、放映中&#x3D;0, 予約中&#x3D;1 attachedPlansIdsは、紐付けるPlanIdの配列
+     * @param {CreateProgramRequest} [createProgramRequest] scopeは、誰でも見れる&#x3D;0  プラン入会者しか見れない&#x3D;1 attachedPlansIdsは、紐付けるPlanIdの配列 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface
@@ -187,7 +187,7 @@ export interface ProgramsApiInterface {
      * Radioプログラム編集API（オーナー向け）
      * @summary Edit program
      * @param {number} id 
-     * @param {CreateProgramRequest} [createProgramRequest] scopeは、誰でも見れる&#x3D;0  プラン入会者しか見れない&#x3D;1 broadcastStatusは、放映中&#x3D;0, 予約中&#x3D;1 attachedPlansIdsは、紐付けるPlanIdの配列
+     * @param {CreateProgramRequest} [createProgramRequest] scopeは、誰でも見れる&#x3D;0  プラン入会者しか見れない&#x3D;1 attachedPlansIdsは、紐付けるPlanIdの配列 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface

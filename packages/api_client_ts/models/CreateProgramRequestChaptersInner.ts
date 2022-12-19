@@ -24,43 +24,43 @@ export interface CreateProgramRequestChaptersInner {
      * @type {string}
      * @memberof CreateProgramRequestChaptersInner
      */
-    title?: string;
+    title: string;
     /**
      * 
      * @type {string}
      * @memberof CreateProgramRequestChaptersInner
      */
-    fileName?: string;
+    fileName: string;
     /**
      * 
      * @type {string}
      * @memberof CreateProgramRequestChaptersInner
      */
-    mediaUrl?: string;
+    mediaUrl: string;
     /**
      * mineType 例：image/jpeg
      * @type {string}
      * @memberof CreateProgramRequestChaptersInner
      */
-    contentType?: string;
+    contentType: string;
     /**
      * 
      * @type {number}
      * @memberof CreateProgramRequestChaptersInner
      */
-    playTimeSeconds?: number;
+    playTimeSeconds: number;
     /**
      * 
      * @type {number}
      * @memberof CreateProgramRequestChaptersInner
      */
-    order?: number;
+    order: number;
     /**
      * 
      * @type {number}
      * @memberof CreateProgramRequestChaptersInner
      */
-    id?: number;
+    id: number;
 }
 
 /**
@@ -68,6 +68,13 @@ export interface CreateProgramRequestChaptersInner {
  */
 export function instanceOfCreateProgramRequestChaptersInner(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "title" in value;
+    isInstance = isInstance && "fileName" in value;
+    isInstance = isInstance && "mediaUrl" in value;
+    isInstance = isInstance && "contentType" in value;
+    isInstance = isInstance && "playTimeSeconds" in value;
+    isInstance = isInstance && "order" in value;
+    isInstance = isInstance && "id" in value;
 
     return isInstance;
 }
@@ -82,13 +89,13 @@ export function CreateProgramRequestChaptersInnerFromJSONTyped(json: any, ignore
     }
     return {
         
-        'title': !exists(json, 'title') ? undefined : json['title'],
-        'fileName': !exists(json, 'fileName') ? undefined : json['fileName'],
-        'mediaUrl': !exists(json, 'mediaUrl') ? undefined : json['mediaUrl'],
-        'contentType': !exists(json, 'contentType') ? undefined : json['contentType'],
-        'playTimeSeconds': !exists(json, 'playTimeSeconds') ? undefined : json['playTimeSeconds'],
-        'order': !exists(json, 'order') ? undefined : json['order'],
-        'id': !exists(json, 'id') ? undefined : json['id'],
+        'title': json['title'],
+        'fileName': json['fileName'],
+        'mediaUrl': json['mediaUrl'],
+        'contentType': json['contentType'],
+        'playTimeSeconds': json['playTimeSeconds'],
+        'order': json['order'],
+        'id': json['id'],
     };
 }
 

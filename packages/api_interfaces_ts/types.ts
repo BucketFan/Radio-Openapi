@@ -137,8 +137,6 @@ export interface components {
       title: string;
       description: string;
       /** @enum {string} */
-      broadcastStatus: "ON_AIR" | "RESERVED";
-      /** @enum {string} */
       scope: "PUBLIC" | "PRIVATE";
       chapters: components["schemas"]["Chapter"][];
       attachedPlans: components["schemas"]["Plan"][];
@@ -146,11 +144,12 @@ export interface components {
       reactionCommentsCount: number;
       isDraft?: boolean;
       /** Format: date-time */
-      reservedAt?: string;
+      releasedAt?: string;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
+      playLogs?: components["schemas"]["PlayLog"][];
     };
     /**
      * Chapter
@@ -333,36 +332,29 @@ export interface components {
   requestBodies: {
     /**
      * scopeは、誰でも見れる=0  プラン入会者しか見れない=1
-     * broadcastStatusは、放映中=0, 予約中=1
      * attachedPlansIdsは、紐付けるPlanIdの配列
      */
     Program: {
       content: {
         "application/json": {
-          clubId?: number;
-          title?: string;
-          description?: string;
-          chapters?: {
-            title?: string;
-            fileName?: string;
-            mediaUrl?: string;
+          clubId: number;
+          title: string;
+          description: string;
+          chapters: {
+            title: string;
+            fileName: string;
+            mediaUrl: string;
             /** @description mineType 例：image/jpeg */
-            contentType?: string;
-            playTimeSeconds?: number;
-            order?: number;
-            id?: number;
+            contentType: string;
+            playTimeSeconds: number;
+            order: number;
+            id: number;
           }[];
           /** @enum {string} */
-          scope?: "PUBLIC" | "PRIVATE";
-          isDraft?: boolean;
-          attachedPlansIds?: number[];
-          /** @enum {string} */
-          broadcastStatus?: "ON_AIR" | "RESERVED";
-          /**
-           * Format: date-time
-           * @description 2022-06-07T14:59:43+09:00
-           */
-          reservedAt?: string;
+          scope: "PUBLIC" | "PRIVATE";
+          isDraft: boolean;
+          attachedPlansIds: number[];
+          releasedAt?: string;
         };
       };
     };
