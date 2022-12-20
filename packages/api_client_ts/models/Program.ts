@@ -31,6 +31,12 @@ import {
     PlanFromJSONTyped,
     PlanToJSON,
 } from './Plan';
+import type { PlayLog } from './PlayLog';
+import {
+    PlayLogFromJSON,
+    PlayLogFromJSONTyped,
+    PlayLogToJSON,
+} from './PlayLog';
 
 /**
  * Chapterの集合体
@@ -73,12 +79,6 @@ export interface Program {
      * @type {string}
      * @memberof Program
      */
-    broadcastStatus: ProgramBroadcastStatusEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Program
-     */
     scope: ProgramScopeEnum;
     /**
      * 
@@ -115,7 +115,7 @@ export interface Program {
      * @type {Date}
      * @memberof Program
      */
-    reservedAt?: Date;
+    releasedAt?: Date;
     /**
      * 
      * @type {Date}
@@ -128,17 +128,14 @@ export interface Program {
      * @memberof Program
      */
     updatedAt: Date;
+    /**
+     * 
+     * @type {Array<PlayLog>}
+     * @memberof Program
+     */
+    playLogs?: Array<PlayLog>;
 }
 
-
-/**
- * @export
- */
-export const ProgramBroadcastStatusEnum = {
-    OnAir: 'ON_AIR',
-    Reserved: 'RESERVED'
-} as const;
-export type ProgramBroadcastStatusEnum = typeof ProgramBroadcastStatusEnum[keyof typeof ProgramBroadcastStatusEnum];
 
 /**
  * @export
@@ -160,7 +157,6 @@ export function instanceOfProgram(value: object): boolean {
     isInstance = isInstance && "club" in value;
     isInstance = isInstance && "title" in value;
     isInstance = isInstance && "description" in value;
-    isInstance = isInstance && "broadcastStatus" in value;
     isInstance = isInstance && "scope" in value;
     isInstance = isInstance && "chapters" in value;
     isInstance = isInstance && "attachedPlans" in value;
@@ -187,16 +183,16 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'club': ClubFromJSON(json['club']),
         'title': json['title'],
         'description': json['description'],
-        'broadcastStatus': json['broadcastStatus'],
         'scope': json['scope'],
         'chapters': ((json['chapters'] as Array<any>).map(ChapterFromJSON)),
         'attachedPlans': ((json['attachedPlans'] as Array<any>).map(PlanFromJSON)),
         'isAttachedPin': json['isAttachedPin'],
         'reactionCommentsCount': json['reactionCommentsCount'],
         'isDraft': !exists(json, 'isDraft') ? undefined : json['isDraft'],
-        'reservedAt': !exists(json, 'reservedAt') ? undefined : (new Date(json['reservedAt'])),
+        'releasedAt': !exists(json, 'releasedAt') ? undefined : (new Date(json['releasedAt'])),
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
+        'playLogs': !exists(json, 'playLogs') ? undefined : ((json['playLogs'] as Array<any>).map(PlayLogFromJSON)),
     };
 }
 
@@ -214,16 +210,16 @@ export function ProgramToJSON(value?: Program | null): any {
         'club': ClubToJSON(value.club),
         'title': value.title,
         'description': value.description,
-        'broadcastStatus': value.broadcastStatus,
         'scope': value.scope,
         'chapters': ((value.chapters as Array<any>).map(ChapterToJSON)),
         'attachedPlans': ((value.attachedPlans as Array<any>).map(PlanToJSON)),
         'isAttachedPin': value.isAttachedPin,
         'reactionCommentsCount': value.reactionCommentsCount,
         'isDraft': value.isDraft,
-        'reservedAt': value.reservedAt === undefined ? undefined : (value.reservedAt.toISOString()),
+        'releasedAt': value.releasedAt === undefined ? undefined : (value.releasedAt.toISOString()),
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
+        'playLogs': value.playLogs === undefined ? undefined : ((value.playLogs as Array<any>).map(PlayLogToJSON)),
     };
 }
 
