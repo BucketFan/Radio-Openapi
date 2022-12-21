@@ -966,11 +966,15 @@ components:
       content:
         application/json:
           schema:
+            type: object
             properties:
               preSignedUrl:
                 type: string
               s3Url:
                 type: string
+            required:
+              - preSignedUrl
+              - s3Url
           examples:
             my-example:
               value:
