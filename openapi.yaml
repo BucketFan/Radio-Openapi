@@ -1057,8 +1057,6 @@ components:
                       type: integer
                     order:
                       type: integer
-                    id:
-                      type: number
                   required:
                     - title
                     - fileName
@@ -1066,7 +1064,6 @@ components:
                     - contentType
                     - playTimeSeconds
                     - order
-                    - id
               scope:
                 type: string
                 enum:
@@ -1080,6 +1077,7 @@ components:
                   type: integer
               releasedAt:
                 type: string
+                format: date-time
             required:
               - clubId
               - title
