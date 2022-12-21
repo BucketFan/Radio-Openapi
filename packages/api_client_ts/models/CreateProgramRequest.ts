@@ -70,10 +70,10 @@ export interface CreateProgramRequest {
     attachedPlansIds: Array<number>;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof CreateProgramRequest
      */
-    releasedAt?: string;
+    releasedAt?: Date;
 }
 
 
@@ -120,7 +120,7 @@ export function CreateProgramRequestFromJSONTyped(json: any, ignoreDiscriminator
         'scope': json['scope'],
         'isDraft': json['isDraft'],
         'attachedPlansIds': json['attachedPlansIds'],
-        'releasedAt': !exists(json, 'releasedAt') ? undefined : json['releasedAt'],
+        'releasedAt': !exists(json, 'releasedAt') ? undefined : (new Date(json['releasedAt'])),
     };
 }
 
@@ -140,7 +140,7 @@ export function CreateProgramRequestToJSON(value?: CreateProgramRequest | null):
         'scope': value.scope,
         'isDraft': value.isDraft,
         'attachedPlansIds': value.attachedPlansIds,
-        'releasedAt': value.releasedAt,
+        'releasedAt': value.releasedAt === undefined ? undefined : (value.releasedAt.toISOString()),
     };
 }
 

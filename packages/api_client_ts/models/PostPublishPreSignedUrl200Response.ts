@@ -24,13 +24,13 @@ export interface PostPublishPreSignedUrl200Response {
      * @type {string}
      * @memberof PostPublishPreSignedUrl200Response
      */
-    preSignedUrl?: string;
+    preSignedUrl: string;
     /**
      * 
      * @type {string}
      * @memberof PostPublishPreSignedUrl200Response
      */
-    s3Url?: string;
+    s3Url: string;
 }
 
 /**
@@ -38,6 +38,8 @@ export interface PostPublishPreSignedUrl200Response {
  */
 export function instanceOfPostPublishPreSignedUrl200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "preSignedUrl" in value;
+    isInstance = isInstance && "s3Url" in value;
 
     return isInstance;
 }
@@ -52,8 +54,8 @@ export function PostPublishPreSignedUrl200ResponseFromJSONTyped(json: any, ignor
     }
     return {
         
-        'preSignedUrl': !exists(json, 'preSignedUrl') ? undefined : json['preSignedUrl'],
-        's3Url': !exists(json, 's3Url') ? undefined : json['s3Url'],
+        'preSignedUrl': json['preSignedUrl'],
+        's3Url': json['s3Url'],
     };
 }
 
