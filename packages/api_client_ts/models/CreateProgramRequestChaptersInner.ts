@@ -55,12 +55,6 @@ export interface CreateProgramRequestChaptersInner {
      * @memberof CreateProgramRequestChaptersInner
      */
     order: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateProgramRequestChaptersInner
-     */
-    id: number;
 }
 
 /**
@@ -74,7 +68,6 @@ export function instanceOfCreateProgramRequestChaptersInner(value: object): bool
     isInstance = isInstance && "contentType" in value;
     isInstance = isInstance && "playTimeSeconds" in value;
     isInstance = isInstance && "order" in value;
-    isInstance = isInstance && "id" in value;
 
     return isInstance;
 }
@@ -95,7 +88,6 @@ export function CreateProgramRequestChaptersInnerFromJSONTyped(json: any, ignore
         'contentType': json['contentType'],
         'playTimeSeconds': json['playTimeSeconds'],
         'order': json['order'],
-        'id': json['id'],
     };
 }
 
@@ -114,7 +106,6 @@ export function CreateProgramRequestChaptersInnerToJSON(value?: CreateProgramReq
         'contentType': value.contentType,
         'playTimeSeconds': value.playTimeSeconds,
         'order': value.order,
-        'id': value.id,
     };
 }
 

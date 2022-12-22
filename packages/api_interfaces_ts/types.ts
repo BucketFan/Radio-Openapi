@@ -289,8 +289,8 @@ export interface components {
     PreSignedUrl: {
       content: {
         "application/json": {
-          preSignedUrl?: string;
-          s3Url?: string;
+          preSignedUrl: string;
+          s3Url: string;
         };
       };
     };
@@ -348,12 +348,12 @@ export interface components {
             contentType: string;
             playTimeSeconds: number;
             order: number;
-            id: number;
           }[];
           /** @enum {string} */
           scope: "PUBLIC" | "PRIVATE";
           isDraft: boolean;
           attachedPlansIds: number[];
+          /** Format: date-time */
           releasedAt?: string;
         };
       };
