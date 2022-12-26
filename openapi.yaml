@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: 43jrppetz6opv
+  id: kckt5lfe3fktp
 info:
   title: radio_openapi
   version: '1.0'
@@ -1079,6 +1079,8 @@ components:
                 type: array
                 items:
                   type: integer
+              isAttachedPin:
+                type: boolean
               releasedAt:
                 type: string
                 format: date-time
@@ -1090,6 +1092,7 @@ components:
               - scope
               - isDraft
               - attachedPlansIds
+              - isAttachedPin
       description: |
         scopeは、誰でも見れる=0  プラン入会者しか見れない=1
         attachedPlansIdsは、紐付けるPlanIdの配列
