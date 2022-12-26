@@ -576,7 +576,7 @@ components:
           type: number
         chapterId:
           type: number
-        profileId:
+        accountId:
           type: number
         elapsedSeconds:
           type: number
@@ -594,7 +594,7 @@ components:
         - id
         - programId
         - chapterId
-        - profileId
+        - accountId
         - elapsedSeconds
         - createdAt
         - updatedAt
