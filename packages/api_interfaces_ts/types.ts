@@ -232,7 +232,7 @@ export interface components {
       id: number;
       programId: number;
       chapterId: number;
-      profileId: number;
+      accountId: number;
       elapsedSeconds: number;
       /** Format: date-time */
       createdAt: string;
@@ -353,6 +353,7 @@ export interface components {
           scope: "PUBLIC" | "PRIVATE";
           isDraft: boolean;
           attachedPlansIds: number[];
+          isAttachedPin: boolean;
           /** Format: date-time */
           releasedAt?: string;
         };

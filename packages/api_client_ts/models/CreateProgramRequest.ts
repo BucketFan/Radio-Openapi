@@ -70,6 +70,12 @@ export interface CreateProgramRequest {
     attachedPlansIds: Array<number>;
     /**
      * 
+     * @type {boolean}
+     * @memberof CreateProgramRequest
+     */
+    isAttachedPin: boolean;
+    /**
+     * 
      * @type {Date}
      * @memberof CreateProgramRequest
      */
@@ -99,6 +105,7 @@ export function instanceOfCreateProgramRequest(value: object): boolean {
     isInstance = isInstance && "scope" in value;
     isInstance = isInstance && "isDraft" in value;
     isInstance = isInstance && "attachedPlansIds" in value;
+    isInstance = isInstance && "isAttachedPin" in value;
 
     return isInstance;
 }
@@ -120,6 +127,7 @@ export function CreateProgramRequestFromJSONTyped(json: any, ignoreDiscriminator
         'scope': json['scope'],
         'isDraft': json['isDraft'],
         'attachedPlansIds': json['attachedPlansIds'],
+        'isAttachedPin': json['isAttachedPin'],
         'releasedAt': !exists(json, 'releasedAt') ? undefined : (new Date(json['releasedAt'])),
     };
 }
@@ -140,6 +148,7 @@ export function CreateProgramRequestToJSON(value?: CreateProgramRequest | null):
         'scope': value.scope,
         'isDraft': value.isDraft,
         'attachedPlansIds': value.attachedPlansIds,
+        'isAttachedPin': value.isAttachedPin,
         'releasedAt': value.releasedAt === undefined ? undefined : (value.releasedAt.toISOString()),
     };
 }
