@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: kckt5lfe3fktp
+  id: f5wyqmrr0dmek
 info:
   title: radio_openapi
   version: '1.0'
@@ -414,8 +414,6 @@ components:
             総再生時間
         mediaUrl:
           type: string
-        playLog:
-          $ref: '#/components/schemas/PlayLog'
         createdAt:
           type: string
           format: date-time
