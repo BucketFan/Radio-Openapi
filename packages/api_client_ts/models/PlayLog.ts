@@ -55,7 +55,7 @@ export interface PlayLog {
      * @type {number}
      * @memberof PlayLog
      */
-    profileId: number;
+    accountId: number;
     /**
      * 
      * @type {number}
@@ -96,7 +96,7 @@ export function instanceOfPlayLog(value: object): boolean {
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "programId" in value;
     isInstance = isInstance && "chapterId" in value;
-    isInstance = isInstance && "profileId" in value;
+    isInstance = isInstance && "accountId" in value;
     isInstance = isInstance && "elapsedSeconds" in value;
     isInstance = isInstance && "createdAt" in value;
     isInstance = isInstance && "updatedAt" in value;
@@ -119,7 +119,7 @@ export function PlayLogFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'id': json['id'],
         'programId': json['programId'],
         'chapterId': json['chapterId'],
-        'profileId': json['profileId'],
+        'accountId': json['accountId'],
         'elapsedSeconds': json['elapsedSeconds'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
@@ -140,7 +140,7 @@ export function PlayLogToJSON(value?: PlayLog | null): any {
         'id': value.id,
         'programId': value.programId,
         'chapterId': value.chapterId,
-        'profileId': value.profileId,
+        'accountId': value.accountId,
         'elapsedSeconds': value.elapsedSeconds,
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
