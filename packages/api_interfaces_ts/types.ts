@@ -165,7 +165,6 @@ export interface components {
       /** @description 総再生時間 */
       playTimeSeconds: number;
       mediaUrl: string;
-      playLog?: components["schemas"]["PlayLog"];
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */

@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { PlayLog } from './PlayLog';
-import {
-    PlayLogFromJSON,
-    PlayLogFromJSONTyped,
-    PlayLogToJSON,
-} from './PlayLog';
-
 /**
  * 音声ファイルとその説明
  * @export
@@ -68,12 +61,6 @@ export interface Chapter {
      * @memberof Chapter
      */
     mediaUrl: string;
-    /**
-     * 
-     * @type {PlayLog}
-     * @memberof Chapter
-     */
-    playLog?: PlayLog;
     /**
      * 
      * @type {Date}
@@ -129,7 +116,6 @@ export function ChapterFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
         'isAttachedPin': json['isAttachedPin'],
         'playTimeSeconds': json['playTimeSeconds'],
         'mediaUrl': json['mediaUrl'],
-        'playLog': !exists(json, 'playLog') ? undefined : PlayLogFromJSON(json['playLog']),
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
         'deletedAt': !exists(json, 'deletedAt') ? undefined : (new Date(json['deletedAt'])),
@@ -152,7 +138,6 @@ export function ChapterToJSON(value?: Chapter | null): any {
         'isAttachedPin': value.isAttachedPin,
         'playTimeSeconds': value.playTimeSeconds,
         'mediaUrl': value.mediaUrl,
-        'playLog': PlayLogToJSON(value.playLog),
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
         'deletedAt': value.deletedAt === undefined ? undefined : (value.deletedAt.toISOString()),
