@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { PlayLog } from './PlayLog';
+import {
+    PlayLogFromJSON,
+    PlayLogFromJSONTyped,
+    PlayLogToJSON,
+} from './PlayLog';
+
 /**
  * 音声ファイルとその説明
  * @export
@@ -79,6 +86,12 @@ export interface Chapter {
      * @memberof Chapter
      */
     deletedAt?: Date;
+    /**
+     * 
+     * @type {PlayLog}
+     * @memberof Chapter
+     */
+    playLog?: PlayLog;
 }
 
 /**
@@ -119,6 +132,7 @@ export function ChapterFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
         'deletedAt': !exists(json, 'deletedAt') ? undefined : (new Date(json['deletedAt'])),
+        'playLog': !exists(json, 'playLog') ? undefined : PlayLogFromJSON(json['playLog']),
     };
 }
 
@@ -141,6 +155,7 @@ export function ChapterToJSON(value?: Chapter | null): any {
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
         'deletedAt': value.deletedAt === undefined ? undefined : (value.deletedAt.toISOString()),
+        'playLog': PlayLogToJSON(value.playLog),
     };
 }
 

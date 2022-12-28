@@ -30,19 +30,7 @@ export interface CreateProgramRequestChaptersInner {
      * @type {string}
      * @memberof CreateProgramRequestChaptersInner
      */
-    fileName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateProgramRequestChaptersInner
-     */
     mediaUrl: string;
-    /**
-     * mineType 例：image/jpeg
-     * @type {string}
-     * @memberof CreateProgramRequestChaptersInner
-     */
-    contentType: string;
     /**
      * 
      * @type {number}
@@ -63,9 +51,7 @@ export interface CreateProgramRequestChaptersInner {
 export function instanceOfCreateProgramRequestChaptersInner(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "title" in value;
-    isInstance = isInstance && "fileName" in value;
     isInstance = isInstance && "mediaUrl" in value;
-    isInstance = isInstance && "contentType" in value;
     isInstance = isInstance && "playTimeSeconds" in value;
     isInstance = isInstance && "order" in value;
 
@@ -83,9 +69,7 @@ export function CreateProgramRequestChaptersInnerFromJSONTyped(json: any, ignore
     return {
         
         'title': json['title'],
-        'fileName': json['fileName'],
         'mediaUrl': json['mediaUrl'],
-        'contentType': json['contentType'],
         'playTimeSeconds': json['playTimeSeconds'],
         'order': json['order'],
     };
@@ -101,9 +85,7 @@ export function CreateProgramRequestChaptersInnerToJSON(value?: CreateProgramReq
     return {
         
         'title': value.title,
-        'fileName': value.fileName,
         'mediaUrl': value.mediaUrl,
-        'contentType': value.contentType,
         'playTimeSeconds': value.playTimeSeconds,
         'order': value.order,
     };

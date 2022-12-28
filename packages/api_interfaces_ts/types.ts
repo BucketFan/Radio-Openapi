@@ -171,6 +171,7 @@ export interface components {
       updatedAt: string;
       /** Format: date-time */
       deletedAt?: string;
+      playLog?: components["schemas"]["PlayLog"];
     };
     /** Plan */
     Plan: {
@@ -341,10 +342,7 @@ export interface components {
           description: string;
           chapters: {
             title: string;
-            fileName: string;
             mediaUrl: string;
-            /** @description mineType 例：image/jpeg */
-            contentType: string;
             playTimeSeconds: number;
             order: number;
           }[];
