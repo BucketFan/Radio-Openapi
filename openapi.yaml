@@ -423,6 +423,8 @@ components:
         deletedAt:
           type: string
           format: date-time
+        playLog:
+          $ref: '#/components/schemas/PlayLog'
       required:
         - id
         - programId
