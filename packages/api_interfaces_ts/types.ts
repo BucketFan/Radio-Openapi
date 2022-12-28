@@ -165,6 +165,7 @@ export interface components {
       /** @description 総再生時間 */
       playTimeSeconds: number;
       mediaUrl: string;
+      fileName: string;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -345,6 +346,7 @@ export interface components {
             mediaUrl: string;
             playTimeSeconds: number;
             order: number;
+            fileName?: string;
           }[];
           /** @enum {string} */
           scope: "PUBLIC" | "PRIVATE";
