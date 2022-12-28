@@ -1053,16 +1053,17 @@ components:
                   properties:
                     title:
                       type: string
+                    fileName:
+                      type: string
                     mediaUrl:
                       type: string
                     playTimeSeconds:
                       type: integer
                     order:
                       type: integer
-                    fileName:
-                      type: string
                   required:
                     - title
+                    - fileName
                     - mediaUrl
                     - playTimeSeconds
                     - order
