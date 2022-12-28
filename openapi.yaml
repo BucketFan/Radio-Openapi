@@ -414,6 +414,8 @@ components:
             総再生時間
         mediaUrl:
           type: string
+        fileName:
+          type: string
         createdAt:
           type: string
           format: date-time
@@ -433,6 +435,7 @@ components:
         - isAttachedPin
         - playTimeSeconds
         - mediaUrl
+        - fileName
         - createdAt
         - updatedAt
     Plan:
@@ -1056,6 +1059,8 @@ components:
                       type: integer
                     order:
                       type: integer
+                    fileName:
+                      type: string
                   required:
                     - title
                     - mediaUrl
