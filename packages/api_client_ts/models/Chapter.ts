@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { PlayLog } from './PlayLog';
+import {
+    PlayLogFromJSON,
+    PlayLogFromJSONTyped,
+    PlayLogToJSON,
+} from './PlayLog';
+
 /**
  * 音声ファイルとその説明
  * @export
@@ -63,6 +70,12 @@ export interface Chapter {
     mediaUrl: string;
     /**
      * 
+     * @type {string}
+     * @memberof Chapter
+     */
+    fileName: string;
+    /**
+     * 
      * @type {Date}
      * @memberof Chapter
      */
@@ -79,6 +92,12 @@ export interface Chapter {
      * @memberof Chapter
      */
     deletedAt?: Date;
+    /**
+     * 
+     * @type {PlayLog}
+     * @memberof Chapter
+     */
+    playLog?: PlayLog;
 }
 
 /**
@@ -93,6 +112,7 @@ export function instanceOfChapter(value: object): boolean {
     isInstance = isInstance && "isAttachedPin" in value;
     isInstance = isInstance && "playTimeSeconds" in value;
     isInstance = isInstance && "mediaUrl" in value;
+    isInstance = isInstance && "fileName" in value;
     isInstance = isInstance && "createdAt" in value;
     isInstance = isInstance && "updatedAt" in value;
 
@@ -116,9 +136,11 @@ export function ChapterFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
         'isAttachedPin': json['isAttachedPin'],
         'playTimeSeconds': json['playTimeSeconds'],
         'mediaUrl': json['mediaUrl'],
+        'fileName': json['fileName'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
         'deletedAt': !exists(json, 'deletedAt') ? undefined : (new Date(json['deletedAt'])),
+        'playLog': !exists(json, 'playLog') ? undefined : PlayLogFromJSON(json['playLog']),
     };
 }
 
@@ -138,9 +160,11 @@ export function ChapterToJSON(value?: Chapter | null): any {
         'isAttachedPin': value.isAttachedPin,
         'playTimeSeconds': value.playTimeSeconds,
         'mediaUrl': value.mediaUrl,
+        'fileName': value.fileName,
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
         'deletedAt': value.deletedAt === undefined ? undefined : (value.deletedAt.toISOString()),
+        'playLog': PlayLogToJSON(value.playLog),
     };
 }
 

@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: f5wyqmrr0dmek
+  id: bemc1bv2a59v5
 info:
   title: radio_openapi
   version: '1.0'
@@ -414,6 +414,8 @@ components:
             総再生時間
         mediaUrl:
           type: string
+        fileName:
+          type: string
         createdAt:
           type: string
           format: date-time
@@ -433,6 +435,7 @@ components:
         - isAttachedPin
         - playTimeSeconds
         - mediaUrl
+        - fileName
         - createdAt
         - updatedAt
     Plan:
@@ -1054,9 +1057,6 @@ components:
                       type: string
                     mediaUrl:
                       type: string
-                    contentType:
-                      type: string
-                      description: mineType 例：image/jpeg
                     playTimeSeconds:
                       type: integer
                     order:
@@ -1065,7 +1065,6 @@ components:
                     - title
                     - fileName
                     - mediaUrl
-                    - contentType
                     - playTimeSeconds
                     - order
               scope:

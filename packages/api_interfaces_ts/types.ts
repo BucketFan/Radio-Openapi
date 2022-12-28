@@ -165,12 +165,14 @@ export interface components {
       /** @description 総再生時間 */
       playTimeSeconds: number;
       mediaUrl: string;
+      fileName: string;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
       /** Format: date-time */
       deletedAt?: string;
+      playLog?: components["schemas"]["PlayLog"];
     };
     /** Plan */
     Plan: {
@@ -343,8 +345,6 @@ export interface components {
             title: string;
             fileName: string;
             mediaUrl: string;
-            /** @description mineType 例：image/jpeg */
-            contentType: string;
             playTimeSeconds: number;
             order: number;
           }[];
