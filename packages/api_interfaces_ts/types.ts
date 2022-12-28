@@ -343,10 +343,10 @@ export interface components {
           description: string;
           chapters: {
             title: string;
+            fileName: string;
             mediaUrl: string;
             playTimeSeconds: number;
             order: number;
-            fileName?: string;
           }[];
           /** @enum {string} */
           scope: "PUBLIC" | "PRIVATE";
