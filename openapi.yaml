@@ -377,6 +377,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlayLog'
+        canYouListen:
+          type: boolean
+          description: APIを実行したアカウントがこのプログラムを聞けるかどうか。
       required:
         - id
         - clubId
