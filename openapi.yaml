@@ -630,6 +630,12 @@ components:
                       icon: 'https://picsum.photos/seed/picsum/200/300'
                       clubColor: red
                       url: string
+                      plans:
+                        - id: 0
+                          clubId: 0
+                          name: string
+                          info: string
+                          image: 'https://picsum.photos/seed/picsum/200/300'
                       programAttachedPlans:
                         - id: 0
                           clubId: 0
@@ -699,6 +705,12 @@ components:
                       icon: 'https://picsum.photos/seed/picsum/200/300'
                       clubColor: red
                       url: string
+                      plans:
+                        - id: 0
+                          clubId: 0
+                          name: string
+                          info: string
+                          image: 'https://picsum.photos/seed/picsum/200/300'
                       programAttachedPlans:
                         - id: 0
                           clubId: 0
@@ -763,6 +775,12 @@ components:
                       icon: 'https://picsum.photos/seed/picsum/200/300'
                       clubColor: red
                       url: string
+                      plans:
+                        - id: 0
+                          clubId: 0
+                          name: string
+                          info: string
+                          image: 'https://picsum.photos/seed/picsum/200/300'
                       programAttachedPlans:
                         - id: 0
                           clubId: 0
