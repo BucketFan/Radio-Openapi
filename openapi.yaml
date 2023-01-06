@@ -234,20 +234,6 @@ paths:
         $ref: '#/components/requestBodies/PutChapterPlayLog'
       tags:
         - play_logs
-    get:
-      summary: ''
-      operationId: getPlayLogs
-      responses:
-        '200':
-          $ref: '#/components/responses/PlayLogs'
-      description: 特定のユーザーの再生履歴を返すAPI
-      tags:
-        - play_logs
-      parameters:
-        - schema:
-            type: integer
-          in: query
-          name: cursor
   '/chapters/{id}':
     parameters:
       - schema:
@@ -326,6 +312,21 @@ paths:
           $ref: '#/components/responses/Club'
       operationId: getClubById
       description: idからクラブを取得するAPI
+  /programs/played:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - programs
+      responses:
+        '200':
+          $ref: '#/components/responses/Programs'
+      operationId: get-programs-played
+      description: 特定のユーザーの再生履歴からプログラム一覧を返すAPI
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: cursor
 components:
   schemas:
     Program:
@@ -589,10 +590,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-        chapter:
-          $ref: '#/components/schemas/Chapter'
-        program:
-          $ref: '#/components/schemas/Program'
       required:
         - id
         - programId
@@ -601,8 +598,6 @@ components:
         - elapsedSeconds
         - createdAt
         - updatedAt
-        - chapter
-        - program
   responses:
     Programs:
       description: Example response
