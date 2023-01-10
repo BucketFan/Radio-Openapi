@@ -320,7 +320,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Programs'
-      operationId: get-programs-played
+      operationId: getProgramsPlayed
       description: 特定のユーザーの再生履歴からプログラム一覧を返すAPI
       parameters:
         - schema:
