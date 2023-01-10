@@ -11,7 +11,6 @@ export * from './CreateProgramRequest';
 export * from './CreateProgramRequestChaptersInner';
 export * from './DeleteChapterId200Response';
 export * from './GetClubById200Response';
-export * from './GetPlayLogs200Response';
 export * from './GetProgramReactionComments200Response';
 export * from './GetPrograms200Response';
 export * from './Plan';
