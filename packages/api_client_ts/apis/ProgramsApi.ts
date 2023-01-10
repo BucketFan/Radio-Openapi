@@ -52,6 +52,10 @@ export interface GetProgramsOfClubIdForAttachedPinRequest {
     id: number;
 }
 
+export interface GetProgramsPlayedRequest {
+    cursor?: number;
+}
+
 export interface PatchProgramsReservedToPublishRequest {
     authrizedToken?: string;
 }
@@ -166,6 +170,22 @@ export interface ProgramsApiInterface {
      * Get attached pin club\'s programs
      */
     getProgramsOfClubIdForAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
+
+    /**
+     * 特定のユーザーの再生履歴からプログラム一覧を返すAPI
+     * @summary Your GET endpoint
+     * @param {number} [cursor] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramsApiInterface
+     */
+    getProgramsPlayedRaw(requestParameters: GetProgramsPlayedRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPrograms200Response>>;
+
+    /**
+     * 特定のユーザーの再生履歴からプログラム一覧を返すAPI
+     * Your GET endpoint
+     */
+    getProgramsPlayed(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。 （AWSのLambdaから定期的にリクエストが飛ぶ）
@@ -407,6 +427,38 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      */
     async getProgramsOfClubIdForAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
         const response = await this.getProgramsOfClubIdForAttachedPinRaw({ id: id }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * 特定のユーザーの再生履歴からプログラム一覧を返すAPI
+     * Your GET endpoint
+     */
+    async getProgramsPlayedRaw(requestParameters: GetProgramsPlayedRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPrograms200Response>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.cursor !== undefined) {
+            queryParameters['cursor'] = requestParameters.cursor;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/programs/played`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetPrograms200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * 特定のユーザーの再生履歴からプログラム一覧を返すAPI
+     * Your GET endpoint
+     */
+    async getProgramsPlayed(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
+        const response = await this.getProgramsPlayedRaw({ cursor: cursor }, initOverrides);
         return await response.value();
     }
 

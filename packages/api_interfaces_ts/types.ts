@@ -80,8 +80,6 @@ export interface paths {
     };
   };
   "/play_logs": {
-    /** 特定のユーザーの再生履歴を返すAPI */
-    get: operations["getPlayLogs"];
     /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */
     put: operations["chapterOfPlayLogEndChapterId"];
     parameters: {};
@@ -121,6 +119,10 @@ export interface paths {
         id: number;
       };
     };
+  };
+  "/programs/played": {
+    /** 特定のユーザーの再生履歴からプログラム一覧を返すAPI */
+    get: operations["getProgramsPlayed"];
   };
 }
 
@@ -239,8 +241,6 @@ export interface components {
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
-      chapter: components["schemas"]["Chapter"];
-      program: components["schemas"]["Program"];
     };
   };
   responses: {
@@ -545,17 +545,6 @@ export interface operations {
       200: components["responses"]["ReactionComment"];
     };
   };
-  /** 特定のユーザーの再生履歴を返すAPI */
-  getPlayLogs: {
-    parameters: {
-      query: {
-        cursor?: number;
-      };
-    };
-    responses: {
-      200: components["responses"]["PlayLogs"];
-    };
-  };
   /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */
   chapterOfPlayLogEndChapterId: {
     parameters: {};
@@ -614,6 +603,17 @@ export interface operations {
     };
     responses: {
       200: components["responses"]["Club"];
+    };
+  };
+  /** 特定のユーザーの再生履歴からプログラム一覧を返すAPI */
+  getProgramsPlayed: {
+    parameters: {
+      query: {
+        cursor?: number;
+      };
+    };
+    responses: {
+      200: components["responses"]["Programs"];
     };
   };
 }

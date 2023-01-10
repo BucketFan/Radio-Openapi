@@ -18,7 +18,6 @@ import type {
   ChapterOfPlayLogEndChapterId200Response,
   ChapterOfPlayLogEndChapterIdRequest,
   DeleteChapterId200Response,
-  GetPlayLogs200Response,
 } from '../models';
 import {
     ChapterOfPlayLogEndChapterId200ResponseFromJSON,
@@ -27,8 +26,6 @@ import {
     ChapterOfPlayLogEndChapterIdRequestToJSON,
     DeleteChapterId200ResponseFromJSON,
     DeleteChapterId200ResponseToJSON,
-    GetPlayLogs200ResponseFromJSON,
-    GetPlayLogs200ResponseToJSON,
 } from '../models';
 
 export interface ChapterOfPlayLogEndChapterIdOperationRequest {
@@ -37,10 +34,6 @@ export interface ChapterOfPlayLogEndChapterIdOperationRequest {
 
 export interface DeleteChapterIdRequest {
     id: number;
-}
-
-export interface GetPlayLogsRequest {
-    cursor?: number;
 }
 
 /**
@@ -81,22 +74,6 @@ export interface PlayLogsApiInterface {
      * Delete Chapter\'s media file.
      */
     deleteChapterId(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response>;
-
-    /**
-     * 特定のユーザーの再生履歴を返すAPI
-     * @summary 
-     * @param {number} [cursor] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PlayLogsApiInterface
-     */
-    getPlayLogsRaw(requestParameters: GetPlayLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPlayLogs200Response>>;
-
-    /**
-     * 特定のユーザーの再生履歴を返すAPI
-     * 
-     */
-    getPlayLogs(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response>;
 
 }
 
@@ -165,38 +142,6 @@ export class PlayLogsApi extends runtime.BaseAPI implements PlayLogsApiInterface
      */
     async deleteChapterId(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeleteChapterId200Response> {
         const response = await this.deleteChapterIdRaw({ id: id }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * 特定のユーザーの再生履歴を返すAPI
-     * 
-     */
-    async getPlayLogsRaw(requestParameters: GetPlayLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPlayLogs200Response>> {
-        const queryParameters: any = {};
-
-        if (requestParameters.cursor !== undefined) {
-            queryParameters['cursor'] = requestParameters.cursor;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/play_logs`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => GetPlayLogs200ResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * 特定のユーザーの再生履歴を返すAPI
-     * 
-     */
-    async getPlayLogs(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayLogs200Response> {
-        const response = await this.getPlayLogsRaw({ cursor: cursor }, initOverrides);
         return await response.value();
     }
 
