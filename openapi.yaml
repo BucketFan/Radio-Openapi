@@ -35,12 +35,23 @@ paths:
     get:
       summary: List of programs available to members
       operationId: getPrograms
-      description: 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API
+      description: 主にマイページ向けの、特定の会員の拝聴可能なRadioプログラムの一覧取得API(最新順)
       responses:
         '200':
           $ref: '#/components/responses/Programs'
       tags:
         - programs
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: cursor
+          description: 次ページへのカーソル（ProgramID）
+        - schema:
+            type: string
+          in: query
+          name: limit
+          description: 取得件数
   '/programs/{id}':
     parameters:
       - schema:
@@ -123,25 +134,6 @@ paths:
         name: id
         in: path
         required: true
-  /programs/reserved_to_pubslish:
-    parameters: []
-    patch:
-      summary: Switch reserved all program to publish
-      operationId: patchProgramsReservedToPublish
-      responses:
-        '200':
-          description: OK
-      description: |-
-        放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。
-        （AWSのLambdaから定期的にリクエストが飛ぶ）
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: AuthrizedToken
-          description: 固定の認証トークン
-      tags:
-        - programs
   '/reaction_comments/of_program/{programId}':
     get:
       summary: Get Program Reaction Comments
@@ -615,6 +607,10 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Program'
+              nextCursor:
+                type: string
+              totalCounts:
+                type: integer
             required:
               - programs
           examples:
