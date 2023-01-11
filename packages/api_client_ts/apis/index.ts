@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export * from './AccountsApi';
 export * from './ClubsApi';
 export * from './HealthcheckApi';
 export * from './PlayLogsApi';

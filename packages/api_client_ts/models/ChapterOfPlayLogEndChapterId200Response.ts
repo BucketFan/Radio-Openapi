@@ -24,7 +24,7 @@ export interface ChapterOfPlayLogEndChapterId200Response {
      * @type {number}
      * @memberof ChapterOfPlayLogEndChapterId200Response
      */
-    playLogId?: number;
+    playLogId: number;
 }
 
 /**
@@ -32,6 +32,7 @@ export interface ChapterOfPlayLogEndChapterId200Response {
  */
 export function instanceOfChapterOfPlayLogEndChapterId200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "playLogId" in value;
 
     return isInstance;
 }
@@ -46,7 +47,7 @@ export function ChapterOfPlayLogEndChapterId200ResponseFromJSONTyped(json: any, 
     }
     return {
         
-        'playLogId': !exists(json, 'playLogId') ? undefined : json['playLogId'],
+        'playLogId': json['playLogId'],
     };
 }
 
