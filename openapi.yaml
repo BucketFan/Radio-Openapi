@@ -327,6 +327,17 @@ paths:
             type: number
           in: query
           name: cursor
+  /current_account:
+    parameters: []
+    get:
+      summary: Your GET endpoint
+      tags:
+        - accounts
+      responses:
+        '200':
+          $ref: '#/components/responses/Account'
+      operationId: getCurrentAccount
+      description: ログイン中のアカウント情報を取得するAPI
 components:
   schemas:
     Program:
@@ -598,6 +609,21 @@ components:
         - elapsedSeconds
         - createdAt
         - updatedAt
+    Account:
+      title: Account
+      x-stoplight:
+        id: zo7qq3x2xv08y
+      type: object
+      properties:
+        id:
+          type: number
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plan'
+      required:
+        - id
+        - plans
   responses:
     Programs:
       description: Example response
@@ -1048,6 +1074,15 @@ components:
           schema:
             type: object
             properties: {}
+    Account:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account:
+                $ref: '#/components/schemas/Account'
   requestBodies:
     Program:
       content:
