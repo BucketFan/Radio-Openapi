@@ -13,19 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { Chapter } from './Chapter';
-import {
-    ChapterFromJSON,
-    ChapterFromJSONTyped,
-    ChapterToJSON,
-} from './Chapter';
-import type { Program } from './Program';
-import {
-    ProgramFromJSON,
-    ProgramFromJSONTyped,
-    ProgramToJSON,
-} from './Program';
-
 /**
  * 
  * @export
@@ -74,18 +61,6 @@ export interface PlayLog {
      * @memberof PlayLog
      */
     updatedAt: Date;
-    /**
-     * 
-     * @type {Chapter}
-     * @memberof PlayLog
-     */
-    chapter: Chapter;
-    /**
-     * 
-     * @type {Program}
-     * @memberof PlayLog
-     */
-    program: Program;
 }
 
 /**
@@ -100,8 +75,6 @@ export function instanceOfPlayLog(value: object): boolean {
     isInstance = isInstance && "elapsedSeconds" in value;
     isInstance = isInstance && "createdAt" in value;
     isInstance = isInstance && "updatedAt" in value;
-    isInstance = isInstance && "chapter" in value;
-    isInstance = isInstance && "program" in value;
 
     return isInstance;
 }
@@ -123,8 +96,6 @@ export function PlayLogFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'elapsedSeconds': json['elapsedSeconds'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
-        'chapter': ChapterFromJSON(json['chapter']),
-        'program': ProgramFromJSON(json['program']),
     };
 }
 
@@ -144,8 +115,6 @@ export function PlayLogToJSON(value?: PlayLog | null): any {
         'elapsedSeconds': value.elapsedSeconds,
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
-        'chapter': ChapterToJSON(value.chapter),
-        'program': ProgramToJSON(value.program),
     };
 }
 
