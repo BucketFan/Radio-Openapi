@@ -1018,6 +1018,8 @@ components:
             properties:
               playLogId:
                 type: integer
+            required:
+              - playLogId
     PlayLogs:
       description: Example response
       content:
@@ -1149,6 +1151,10 @@ components:
                 type: integer
               elapsedSeconds:
                 type: integer
+            required:
+              - programId
+              - chapterId
+              - elapsedSeconds
 tags:
   - name: programs
     description: ''
