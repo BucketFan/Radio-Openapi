@@ -327,13 +327,8 @@ paths:
             type: number
           in: query
           name: cursor
-  '/accounts/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
+  /current_account:
+    parameters: []
     get:
       summary: Your GET endpoint
       tags:
@@ -341,8 +336,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Account'
-      operationId: getAccountsId
-      description: idからアカウント情報を取得するAPI
+      operationId: getCurrentAccount
+      description: ログイン中のアカウント情報を取得するAPI
 components:
   schemas:
     Program:
