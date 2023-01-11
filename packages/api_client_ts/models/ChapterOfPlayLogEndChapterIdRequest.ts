@@ -24,19 +24,19 @@ export interface ChapterOfPlayLogEndChapterIdRequest {
      * @type {number}
      * @memberof ChapterOfPlayLogEndChapterIdRequest
      */
-    programId?: number;
+    programId: number;
     /**
      * 
      * @type {number}
      * @memberof ChapterOfPlayLogEndChapterIdRequest
      */
-    chapterId?: number;
+    chapterId: number;
     /**
      * 
      * @type {number}
      * @memberof ChapterOfPlayLogEndChapterIdRequest
      */
-    elapsedSeconds?: number;
+    elapsedSeconds: number;
 }
 
 /**
@@ -44,6 +44,9 @@ export interface ChapterOfPlayLogEndChapterIdRequest {
  */
 export function instanceOfChapterOfPlayLogEndChapterIdRequest(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "programId" in value;
+    isInstance = isInstance && "chapterId" in value;
+    isInstance = isInstance && "elapsedSeconds" in value;
 
     return isInstance;
 }
@@ -58,9 +61,9 @@ export function ChapterOfPlayLogEndChapterIdRequestFromJSONTyped(json: any, igno
     }
     return {
         
-        'programId': !exists(json, 'programId') ? undefined : json['programId'],
-        'chapterId': !exists(json, 'chapterId') ? undefined : json['chapterId'],
-        'elapsedSeconds': !exists(json, 'elapsedSeconds') ? undefined : json['elapsedSeconds'],
+        'programId': json['programId'],
+        'chapterId': json['chapterId'],
+        'elapsedSeconds': json['elapsedSeconds'],
     };
 }
 

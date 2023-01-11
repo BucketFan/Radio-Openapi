@@ -1,3 +1,4 @@
+apis/AccountsApi.ts
 apis/ClubsApi.ts
 apis/HealthcheckApi.ts
 apis/PlayLogsApi.ts
@@ -6,6 +7,7 @@ apis/ProgramsApi.ts
 apis/ReactionCommentsApi.ts
 apis/index.ts
 index.ts
+models/Account.ts
 models/Chapter.ts
 models/ChapterOfPlayLogEndChapterId200Response.ts
 models/ChapterOfPlayLogEndChapterIdRequest.ts
@@ -17,6 +19,7 @@ models/CreateProgramRequest.ts
 models/CreateProgramRequestChaptersInner.ts
 models/DeleteChapterId200Response.ts
 models/GetClubById200Response.ts
+models/GetCurrentAccount200Response.ts
 models/GetProgramReactionComments200Response.ts
 models/GetPrograms200Response.ts
 models/Plan.ts

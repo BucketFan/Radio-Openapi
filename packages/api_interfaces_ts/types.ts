@@ -124,6 +124,11 @@ export interface paths {
     /** 特定のユーザーの再生履歴からプログラム一覧を返すAPI */
     get: operations["getProgramsPlayed"];
   };
+  "/current_account": {
+    /** ログイン中のアカウント情報を取得するAPI */
+    get: operations["getCurrentAccount"];
+    parameters: {};
+  };
 }
 
 export interface components {
@@ -242,6 +247,11 @@ export interface components {
       /** Format: date-time */
       updatedAt: string;
     };
+    /** Account */
+    Account: {
+      id: number;
+      plans: components["schemas"]["Plan"][];
+    };
   };
   responses: {
     /** Example response */
@@ -308,7 +318,7 @@ export interface components {
     ChapterPlayLog: {
       content: {
         "application/json": {
-          playLogId?: number;
+          playLogId: number;
         };
       };
     };
@@ -327,6 +337,14 @@ export interface components {
           club: components["schemas"]["Club"];
         };
         "application/xml": { [key: string]: unknown };
+      };
+    };
+    /** Example response */
+    Account: {
+      content: {
+        "application/json": {
+          account?: components["schemas"]["Account"];
+        };
       };
     };
   };
@@ -386,9 +404,9 @@ export interface components {
     PutChapterPlayLog: {
       content: {
         "application/json": {
-          programId?: number;
-          chapterId?: number;
-          elapsedSeconds?: number;
+          programId: number;
+          chapterId: number;
+          elapsedSeconds: number;
         };
       };
     };
@@ -614,6 +632,13 @@ export interface operations {
     };
     responses: {
       200: components["responses"]["Programs"];
+    };
+  };
+  /** ログイン中のアカウント情報を取得するAPI */
+  getCurrentAccount: {
+    parameters: {};
+    responses: {
+      200: components["responses"]["Account"];
     };
   };
 }
