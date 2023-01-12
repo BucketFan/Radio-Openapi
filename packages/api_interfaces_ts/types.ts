@@ -627,7 +627,7 @@ export interface operations {
   getProgramsPlayed: {
     parameters: {
       query: {
-        cursor?: number;
+        cursor?: string;
       };
     };
     responses: {
