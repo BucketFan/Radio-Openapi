@@ -1112,6 +1112,8 @@ components:
                       type: integer
                     order:
                       type: integer
+                    id:
+                      type: number
                   required:
                     - title
                     - fileName
