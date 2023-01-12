@@ -53,7 +53,7 @@ export interface GetProgramsOfClubIdForAttachedPinRequest {
 }
 
 export interface GetProgramsPlayedRequest {
-    cursor?: number;
+    cursor?: Date;
 }
 
 export interface PatchProgramsReservedToPublishRequest {
@@ -174,7 +174,7 @@ export interface ProgramsApiInterface {
     /**
      * 特定のユーザーの再生履歴からプログラム一覧を返すAPI
      * @summary Your GET endpoint
-     * @param {number} [cursor] 
+     * @param {Date} [cursor] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface
@@ -185,7 +185,7 @@ export interface ProgramsApiInterface {
      * 特定のユーザーの再生履歴からプログラム一覧を返すAPI
      * Your GET endpoint
      */
-    getProgramsPlayed(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
+    getProgramsPlayed(cursor?: Date, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。 （AWSのLambdaから定期的にリクエストが飛ぶ）
@@ -438,7 +438,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
         const queryParameters: any = {};
 
         if (requestParameters.cursor !== undefined) {
-            queryParameters['cursor'] = requestParameters.cursor;
+            queryParameters['cursor'] = (requestParameters.cursor as any).toISOString();
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -457,7 +457,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * 特定のユーザーの再生履歴からプログラム一覧を返すAPI
      * Your GET endpoint
      */
-    async getProgramsPlayed(cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
+    async getProgramsPlayed(cursor?: Date, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
         const response = await this.getProgramsPlayedRaw({ cursor: cursor }, initOverrides);
         return await response.value();
     }
