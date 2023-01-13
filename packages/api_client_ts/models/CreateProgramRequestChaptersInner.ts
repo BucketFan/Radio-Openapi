@@ -49,6 +49,12 @@ export interface CreateProgramRequestChaptersInner {
      * @memberof CreateProgramRequestChaptersInner
      */
     order: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateProgramRequestChaptersInner
+     */
+    id?: number;
 }
 
 /**
@@ -80,6 +86,7 @@ export function CreateProgramRequestChaptersInnerFromJSONTyped(json: any, ignore
         'mediaUrl': json['mediaUrl'],
         'playTimeSeconds': json['playTimeSeconds'],
         'order': json['order'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
     };
 }
 
@@ -97,6 +104,7 @@ export function CreateProgramRequestChaptersInnerToJSON(value?: CreateProgramReq
         'mediaUrl': value.mediaUrl,
         'playTimeSeconds': value.playTimeSeconds,
         'order': value.order,
+        'id': value.id,
     };
 }
 
