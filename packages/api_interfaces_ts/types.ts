@@ -365,6 +365,7 @@ export interface components {
             mediaUrl: string;
             playTimeSeconds: number;
             order: number;
+            id?: number;
           }[];
           /** @enum {string} */
           scope: "PUBLIC" | "PRIVATE";
