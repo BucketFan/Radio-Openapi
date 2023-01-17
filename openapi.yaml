@@ -159,7 +159,7 @@ paths:
           name: order
           description: asc or desc
         - schema:
-            type: string
+            type: number
           in: query
           name: cursor
     parameters:
