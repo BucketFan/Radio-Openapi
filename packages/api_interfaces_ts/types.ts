@@ -512,7 +512,7 @@ export interface operations {
       query: {
         /** asc or desc */
         order?: string;
-        cursor?: string;
+        cursor?: number;
       };
     };
     responses: {

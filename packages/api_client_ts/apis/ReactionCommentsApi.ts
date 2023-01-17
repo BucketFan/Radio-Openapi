@@ -40,7 +40,7 @@ export interface DeleteReactionCommentsCommentIdRequest {
 export interface GetProgramReactionCommentsRequest {
     programId: number;
     order?: string;
-    cursor?: string;
+    cursor?: number;
 }
 
 export interface PatchReactionCommentsCommentIdRequest {
@@ -96,7 +96,7 @@ export interface ReactionCommentsApiInterface {
      * @summary Get Program Reaction Comments
      * @param {number} programId 
      * @param {string} [order] asc or desc
-     * @param {string} [cursor] 
+     * @param {number} [cursor] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
@@ -107,7 +107,7 @@ export interface ReactionCommentsApiInterface {
      * 特定のプログラムのリアクションコメントを取得するAPI
      * Get Program Reaction Comments
      */
-    getProgramReactionComments(programId: number, order?: string, cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response>;
+    getProgramReactionComments(programId: number, order?: string, cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response>;
 
     /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
@@ -250,7 +250,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * 特定のプログラムのリアクションコメントを取得するAPI
      * Get Program Reaction Comments
      */
-    async getProgramReactionComments(programId: number, order?: string, cursor?: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response> {
+    async getProgramReactionComments(programId: number, order?: string, cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response> {
         const response = await this.getProgramReactionCommentsRaw({ programId: programId, order: order, cursor: cursor }, initOverrides);
         return await response.value();
     }
