@@ -330,15 +330,6 @@ paths:
         name: commentId
         in: path
         required: true
-    patch:
-      summary: ''
-      operationId: likeReactionComment
-      responses:
-        '200':
-          $ref: '#/components/responses/ReactionComment'
-      description: 特定のコメントをいいねするAPI
-      tags:
-        - reaction_comments
     delete:
       summary: ''
       operationId: deleteReactionCommentsLike
@@ -346,6 +337,15 @@ paths:
         '200':
           $ref: '#/components/responses/ReactionComment'
       description: 特定のコメントのいいねを取り消すAPI
+      tags:
+        - reaction_comments
+    post:
+      summary: ''
+      operationId: likeReactionComment
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      description: 特定のコメントをいいねするAPI
       tags:
         - reaction_comments
 components:
