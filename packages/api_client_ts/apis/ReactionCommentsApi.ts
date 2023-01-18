@@ -37,17 +37,21 @@ export interface DeleteReactionCommentsCommentIdRequest {
     commentId: number;
 }
 
+export interface DeleteReactionCommentsLikeRequest {
+    commentId: string;
+}
+
 export interface GetProgramReactionCommentsRequest {
     programId: number;
     order?: string;
     cursor?: number;
 }
 
-export interface PatchReactionCommentsCommentIdRequest {
-    commentId: number;
+export interface LikeReactionCommentRequest {
+    commentId: string;
 }
 
-export interface PatchReactionCommentsLikeToggleIdRequest {
+export interface PatchReactionCommentsCommentIdRequest {
     commentId: number;
 }
 
@@ -92,6 +96,22 @@ export interface ReactionCommentsApiInterface {
     deleteReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
 
     /**
+     * 特定のコメントのいいねを取り消すAPI
+     * @summary 
+     * @param {string} commentId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReactionCommentsApiInterface
+     */
+    deleteReactionCommentsLikeRaw(requestParameters: DeleteReactionCommentsLikeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>>;
+
+    /**
+     * 特定のコメントのいいねを取り消すAPI
+     * 
+     */
+    deleteReactionCommentsLike(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
+
+    /**
      * 特定のプログラムのリアクションコメントを取得するAPI
      * @summary Get Program Reaction Comments
      * @param {number} programId 
@@ -110,6 +130,22 @@ export interface ReactionCommentsApiInterface {
     getProgramReactionComments(programId: number, order?: string, cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response>;
 
     /**
+     * 特定のコメントをいいねするAPI
+     * @summary 
+     * @param {string} commentId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReactionCommentsApiInterface
+     */
+    likeReactionCommentRaw(requestParameters: LikeReactionCommentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>>;
+
+    /**
+     * 特定のコメントをいいねするAPI
+     * 
+     */
+    likeReactionComment(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
+
+    /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
      * @summary Hidden Reaction Comment
      * @param {number} commentId 
@@ -124,22 +160,6 @@ export interface ReactionCommentsApiInterface {
      * Hidden Reaction Comment
      */
     patchReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
-
-    /**
-     * 指定したコメントIDをLikeをON/OFFするAPI
-     * @summary Like ON/OFF
-     * @param {number} commentId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReactionCommentsApiInterface
-     */
-    patchReactionCommentsLikeToggleIdRaw(requestParameters: PatchReactionCommentsLikeToggleIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>>;
-
-    /**
-     * 指定したコメントIDをLikeをON/OFFするAPI
-     * Like ON/OFF
-     */
-    patchReactionCommentsLikeToggleId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
 
 }
 
@@ -216,6 +236,38 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
     }
 
     /**
+     * 特定のコメントのいいねを取り消すAPI
+     * 
+     */
+    async deleteReactionCommentsLikeRaw(requestParameters: DeleteReactionCommentsLikeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>> {
+        if (requestParameters.commentId === null || requestParameters.commentId === undefined) {
+            throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling deleteReactionCommentsLike.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/reaction_comments/like/{commentId}`.replace(`{${"commentId"}}`, encodeURIComponent(String(requestParameters.commentId))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgramReactionComment200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * 特定のコメントのいいねを取り消すAPI
+     * 
+     */
+    async deleteReactionCommentsLike(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
+        const response = await this.deleteReactionCommentsLikeRaw({ commentId: commentId }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * 特定のプログラムのリアクションコメントを取得するAPI
      * Get Program Reaction Comments
      */
@@ -256,6 +308,38 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
     }
 
     /**
+     * 特定のコメントをいいねするAPI
+     * 
+     */
+    async likeReactionCommentRaw(requestParameters: LikeReactionCommentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>> {
+        if (requestParameters.commentId === null || requestParameters.commentId === undefined) {
+            throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling likeReactionComment.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/reaction_comments/like/{commentId}`.replace(`{${"commentId"}}`, encodeURIComponent(String(requestParameters.commentId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgramReactionComment200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * 特定のコメントをいいねするAPI
+     * 
+     */
+    async likeReactionComment(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
+        const response = await this.likeReactionCommentRaw({ commentId: commentId }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
      * Hidden Reaction Comment
      */
@@ -284,38 +368,6 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      */
     async patchReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
         const response = await this.patchReactionCommentsCommentIdRaw({ commentId: commentId }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * 指定したコメントIDをLikeをON/OFFするAPI
-     * Like ON/OFF
-     */
-    async patchReactionCommentsLikeToggleIdRaw(requestParameters: PatchReactionCommentsLikeToggleIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>> {
-        if (requestParameters.commentId === null || requestParameters.commentId === undefined) {
-            throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling patchReactionCommentsLikeToggleId.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/reaction_comments/like_toggle/{commentId}`.replace(`{${"commentId"}}`, encodeURIComponent(String(requestParameters.commentId))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgramReactionComment200ResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * 指定したコメントIDをLikeをON/OFFするAPI
-     * Like ON/OFF
-     */
-    async patchReactionCommentsLikeToggleId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
-        const response = await this.patchReactionCommentsLikeToggleIdRaw({ commentId: commentId }, initOverrides);
         return await response.value();
     }
 
