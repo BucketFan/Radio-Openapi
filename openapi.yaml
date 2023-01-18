@@ -348,7 +348,7 @@ paths:
         required: true
     delete:
       summary: ''
-      operationId: CancelLikeReactionComment
+      operationId: cancelLikeReactionComment
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
