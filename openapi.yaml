@@ -179,22 +179,6 @@ paths:
         $ref: '#/components/requestBodies/ReactionComment'
       tags:
         - reaction_comments
-  '/reaction_comments/like_toggle/{commentId}':
-    parameters:
-      - schema:
-          type: integer
-        name: commentId
-        in: path
-        required: true
-    patch:
-      summary: Like ON/OFF
-      operationId: patchReactionCommentsLikeToggleId
-      responses:
-        '200':
-          $ref: '#/components/responses/ReactionComment'
-      description: 指定したコメントIDをLikeをON/OFFするAPI
-      tags:
-        - reaction_comments
   '/reaction_comments/{commentId}':
     parameters:
       - schema:
@@ -339,6 +323,31 @@ paths:
           $ref: '#/components/responses/Account'
       operationId: getCurrentAccount
       description: ログイン中のアカウント情報を取得するAPI
+  '/reaction_comments/like/{commentId}':
+    parameters:
+      - schema:
+          type: string
+        name: commentId
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: deleteReactionCommentsLike
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      description: 特定のコメントのいいねを取り消すAPI
+      tags:
+        - reaction_comments
+    post:
+      summary: ''
+      operationId: likeReactionComment
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      description: 特定のコメントをいいねするAPI
+      tags:
+        - reaction_comments
 components:
   schemas:
     Program:
