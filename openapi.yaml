@@ -395,10 +395,9 @@ components:
         updatedAt:
           type: string
           format: date-time
-        playLogs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlayLog'
+        latestPlayLogUpdatedAt:
+          type: string
+          format: date-time
       required:
         - id
         - clubId
@@ -1041,8 +1040,6 @@ components:
             properties:
               chapter:
                 $ref: '#/components/schemas/Chapter'
-              elapsedSeconds:
-                type: number
             required:
               - chapter
     ChapterPlayLog:
