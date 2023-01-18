@@ -399,6 +399,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlayLog'
+        latestPlayLogUpdatedAt:
+          type: string
+          format: date-time
       required:
         - id
         - clubId
