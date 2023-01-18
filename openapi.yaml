@@ -339,16 +339,9 @@ paths:
       description: 特定のコメントをいいねするAPI
       tags:
         - reaction_comments
-  '/reaction_comments/cancel_like/{commentId}':
-    parameters:
-      - schema:
-          type: string
-        name: commentId
-        in: path
-        required: true
     delete:
       summary: ''
-      operationId: cancelLikeReactionComment
+      operationId: deleteReactionCommentsLike
       responses:
         '200':
           $ref: '#/components/responses/ReactionComment'
