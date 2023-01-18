@@ -179,13 +179,6 @@ paths:
         $ref: '#/components/requestBodies/ReactionComment'
       tags:
         - reaction_comments
-  '/reaction_comments/like_toggle/{commentId}':
-    parameters:
-      - schema:
-          type: integer
-        name: commentId
-        in: path
-        required: true
   '/reaction_comments/{commentId}':
     parameters:
       - schema:
