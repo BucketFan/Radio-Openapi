@@ -1040,8 +1040,6 @@ components:
             properties:
               chapter:
                 $ref: '#/components/schemas/Chapter'
-              elapsedSeconds:
-                type: number
             required:
               - chapter
     ChapterPlayLog:
