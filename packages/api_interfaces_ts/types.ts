@@ -59,15 +59,6 @@ export interface paths {
       };
     };
   };
-  "/reaction_comments/like_toggle/{commentId}": {
-    /** 指定したコメントIDをLikeをON/OFFするAPI */
-    patch: operations["patchReactionCommentsLikeToggleId"];
-    parameters: {
-      path: {
-        commentId: number;
-      };
-    };
-  };
   "/reaction_comments/{commentId}": {
     /** リアクションコメントを削除するAPI。(コメント投稿者向け) */
     delete: operations["deleteReactionCommentsCommentId"];
@@ -129,6 +120,17 @@ export interface paths {
     get: operations["getCurrentAccount"];
     parameters: {};
   };
+  "/reaction_comments/like/{commentId}": {
+    /** 特定のコメントをいいねするAPI */
+    post: operations["likeReactionComment"];
+    /** 特定のコメントのいいねを取り消すAPI */
+    delete: operations["deleteReactionCommentsLike"];
+    parameters: {
+      path: {
+        commentId: string;
+      };
+    };
+  };
 }
 
 export interface components {
@@ -156,7 +158,8 @@ export interface components {
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
-      playLogs?: components["schemas"]["PlayLog"][];
+      /** Format: date-time */
+      latestPlayLogUpdatedAt?: string;
     };
     /**
      * Chapter
@@ -310,7 +313,6 @@ export interface components {
       content: {
         "application/json": {
           chapter: components["schemas"]["Chapter"];
-          elapsedSeconds?: number;
         };
       };
     };
@@ -531,17 +533,6 @@ export interface operations {
     };
     requestBody: components["requestBodies"]["ReactionComment"];
   };
-  /** 指定したコメントIDをLikeをON/OFFするAPI */
-  patchReactionCommentsLikeToggleId: {
-    parameters: {
-      path: {
-        commentId: number;
-      };
-    };
-    responses: {
-      200: components["responses"]["ReactionComment"];
-    };
-  };
   /** リアクションコメントを削除するAPI。(コメント投稿者向け) */
   deleteReactionCommentsCommentId: {
     parameters: {
@@ -640,6 +631,28 @@ export interface operations {
     parameters: {};
     responses: {
       200: components["responses"]["Account"];
+    };
+  };
+  /** 特定のコメントをいいねするAPI */
+  likeReactionComment: {
+    parameters: {
+      path: {
+        commentId: string;
+      };
+    };
+    responses: {
+      200: components["responses"]["ReactionComment"];
+    };
+  };
+  /** 特定のコメントのいいねを取り消すAPI */
+  deleteReactionCommentsLike: {
+    parameters: {
+      path: {
+        commentId: string;
+      };
+    };
+    responses: {
+      200: components["responses"]["ReactionComment"];
     };
   };
 }

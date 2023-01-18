@@ -31,12 +31,6 @@ import {
     PlanFromJSONTyped,
     PlanToJSON,
 } from './Plan';
-import type { PlayLog } from './PlayLog';
-import {
-    PlayLogFromJSON,
-    PlayLogFromJSONTyped,
-    PlayLogToJSON,
-} from './PlayLog';
 
 /**
  * Chapterの集合体
@@ -130,10 +124,10 @@ export interface Program {
     updatedAt: Date;
     /**
      * 
-     * @type {Array<PlayLog>}
+     * @type {Date}
      * @memberof Program
      */
-    playLogs?: Array<PlayLog>;
+    latestPlayLogUpdatedAt?: Date;
 }
 
 
@@ -192,7 +186,7 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'releasedAt': !exists(json, 'releasedAt') ? undefined : (new Date(json['releasedAt'])),
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
-        'playLogs': !exists(json, 'playLogs') ? undefined : ((json['playLogs'] as Array<any>).map(PlayLogFromJSON)),
+        'latestPlayLogUpdatedAt': !exists(json, 'latestPlayLogUpdatedAt') ? undefined : (new Date(json['latestPlayLogUpdatedAt'])),
     };
 }
 
@@ -219,7 +213,7 @@ export function ProgramToJSON(value?: Program | null): any {
         'releasedAt': value.releasedAt === undefined ? undefined : (value.releasedAt.toISOString()),
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
-        'playLogs': value.playLogs === undefined ? undefined : ((value.playLogs as Array<any>).map(PlayLogToJSON)),
+        'latestPlayLogUpdatedAt': value.latestPlayLogUpdatedAt === undefined ? undefined : (value.latestPlayLogUpdatedAt.toISOString()),
     };
 }
 
