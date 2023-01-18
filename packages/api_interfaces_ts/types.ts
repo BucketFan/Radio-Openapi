@@ -127,7 +127,7 @@ export interface paths {
     delete: operations["deleteReactionCommentsLike"];
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
   };
@@ -637,7 +637,7 @@ export interface operations {
   likeReactionComment: {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
@@ -648,7 +648,7 @@ export interface operations {
   deleteReactionCommentsLike: {
     parameters: {
       path: {
-        commentId: string;
+        commentId: number;
       };
     };
     responses: {
