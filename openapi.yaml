@@ -326,7 +326,7 @@ paths:
   '/reaction_comments/like/{commentId}':
     parameters:
       - schema:
-          type: string
+          type: number
         name: commentId
         in: path
         required: true
