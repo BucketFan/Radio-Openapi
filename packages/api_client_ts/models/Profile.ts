@@ -44,12 +44,24 @@ export interface Profile {
      */
     isPublicProfile: boolean;
     /**
-     * owner or member or passerby
+     * 
      * @type {string}
      * @memberof Profile
      */
-    type: string;
+    type: ProfileTypeEnum;
 }
+
+
+/**
+ * @export
+ */
+export const ProfileTypeEnum = {
+    Owner: 'OWNER',
+    Member: 'MEMBER',
+    Passerby: 'PASSERBY'
+} as const;
+export type ProfileTypeEnum = typeof ProfileTypeEnum[keyof typeof ProfileTypeEnum];
+
 
 /**
  * Check if a given object implements the Profile interface.

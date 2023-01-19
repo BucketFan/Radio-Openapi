@@ -235,8 +235,8 @@ export interface components {
       name: string;
       thumbnail?: string;
       isPublicProfile: boolean;
-      /** @description owner or member or passerby */
-      type: string;
+      /** @enum {string} */
+      type: "OWNER" | "MEMBER" | "PASSERBY";
     };
     /** PlayLog */
     PlayLog: {
@@ -278,7 +278,7 @@ export interface components {
       content: {
         "application/json": {
           reactionComments: components["schemas"]["ReactionComment"][];
-          nextCursor?: string;
+          nextCursor?: number;
           totalCounts?: number;
         };
       };
@@ -512,8 +512,7 @@ export interface operations {
         programId: number;
       };
       query: {
-        /** asc or desc */
-        order?: string;
+        order?: "ASC" | "DESC";
         cursor?: number;
       };
     };
