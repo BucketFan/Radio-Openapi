@@ -38,7 +38,7 @@ export interface DeleteReactionCommentsCommentIdRequest {
 }
 
 export interface DeleteReactionCommentsLikeRequest {
-    commentId: string;
+    commentId: number;
 }
 
 export interface GetProgramReactionCommentsRequest {
@@ -48,7 +48,7 @@ export interface GetProgramReactionCommentsRequest {
 }
 
 export interface LikeReactionCommentRequest {
-    commentId: string;
+    commentId: number;
 }
 
 export interface PatchReactionCommentsCommentIdRequest {
@@ -98,7 +98,7 @@ export interface ReactionCommentsApiInterface {
     /**
      * 特定のコメントのいいねを取り消すAPI
      * @summary 
-     * @param {string} commentId 
+     * @param {number} commentId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
@@ -109,7 +109,7 @@ export interface ReactionCommentsApiInterface {
      * 特定のコメントのいいねを取り消すAPI
      * 
      */
-    deleteReactionCommentsLike(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
+    deleteReactionCommentsLike(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
 
     /**
      * 特定のプログラムのリアクションコメントを取得するAPI
@@ -132,7 +132,7 @@ export interface ReactionCommentsApiInterface {
     /**
      * 特定のコメントをいいねするAPI
      * @summary 
-     * @param {string} commentId 
+     * @param {number} commentId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
@@ -143,7 +143,7 @@ export interface ReactionCommentsApiInterface {
      * 特定のコメントをいいねするAPI
      * 
      */
-    likeReactionComment(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
+    likeReactionComment(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
 
     /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
@@ -262,7 +262,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * 特定のコメントのいいねを取り消すAPI
      * 
      */
-    async deleteReactionCommentsLike(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
+    async deleteReactionCommentsLike(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
         const response = await this.deleteReactionCommentsLikeRaw({ commentId: commentId }, initOverrides);
         return await response.value();
     }
@@ -334,7 +334,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * 特定のコメントをいいねするAPI
      * 
      */
-    async likeReactionComment(commentId: string, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
+    async likeReactionComment(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
         const response = await this.likeReactionCommentRaw({ commentId: commentId }, initOverrides);
         return await response.value();
     }
