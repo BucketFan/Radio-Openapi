@@ -43,7 +43,7 @@ export interface DeleteReactionCommentsLikeRequest {
 
 export interface GetProgramReactionCommentsRequest {
     programId: number;
-    order?: string;
+    order?: GetProgramReactionCommentsOrderEnum;
     cursor?: number;
 }
 
@@ -115,7 +115,7 @@ export interface ReactionCommentsApiInterface {
      * 特定のプログラムのリアクションコメントを取得するAPI
      * @summary Get Program Reaction Comments
      * @param {number} programId 
-     * @param {string} [order] asc or desc
+     * @param {'ASC' | 'DESC'} [order] 
      * @param {number} [cursor] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -127,7 +127,7 @@ export interface ReactionCommentsApiInterface {
      * 特定のプログラムのリアクションコメントを取得するAPI
      * Get Program Reaction Comments
      */
-    getProgramReactionComments(programId: number, order?: string, cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response>;
+    getProgramReactionComments(programId: number, order?: GetProgramReactionCommentsOrderEnum, cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response>;
 
     /**
      * 特定のコメントをいいねするAPI
@@ -302,7 +302,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * 特定のプログラムのリアクションコメントを取得するAPI
      * Get Program Reaction Comments
      */
-    async getProgramReactionComments(programId: number, order?: string, cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response> {
+    async getProgramReactionComments(programId: number, order?: GetProgramReactionCommentsOrderEnum, cursor?: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetProgramReactionComments200Response> {
         const response = await this.getProgramReactionCommentsRaw({ programId: programId, order: order, cursor: cursor }, initOverrides);
         return await response.value();
     }
@@ -372,3 +372,12 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
     }
 
 }
+
+/**
+ * @export
+ */
+export const GetProgramReactionCommentsOrderEnum = {
+    Asc: 'ASC',
+    Desc: 'DESC'
+} as const;
+export type GetProgramReactionCommentsOrderEnum = typeof GetProgramReactionCommentsOrderEnum[keyof typeof GetProgramReactionCommentsOrderEnum];

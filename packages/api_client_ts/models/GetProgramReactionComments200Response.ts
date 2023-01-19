@@ -34,10 +34,10 @@ export interface GetProgramReactionComments200Response {
     reactionComments: Array<ReactionComment>;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof GetProgramReactionComments200Response
      */
-    nextCursor?: string;
+    nextCursor?: number;
     /**
      * 
      * @type {number}
