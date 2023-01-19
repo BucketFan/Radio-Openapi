@@ -155,9 +155,11 @@ paths:
       parameters:
         - schema:
             type: string
+            enum:
+              - ASC
+              - DESC
           in: query
           name: order
-          description: asc or desc
         - schema:
             type: number
           in: query
@@ -582,7 +584,10 @@ components:
           type: boolean
         type:
           type: string
-          description: owner or member or passerby
+          enum:
+            - OWNER
+            - MEMBER
+            - PASSERBY
       required:
         - id
         - name
@@ -922,7 +927,7 @@ components:
                 items:
                   $ref: '#/components/schemas/ReactionComment'
               nextCursor:
-                type: string
+                type: number
               totalCounts:
                 type: integer
             required:
