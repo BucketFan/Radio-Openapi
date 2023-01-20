@@ -62,8 +62,6 @@ export interface paths {
   "/reaction_comments/{commentId}": {
     /** リアクションコメントを削除するAPI。(コメント投稿者向け) */
     delete: operations["deleteReactionCommentsCommentId"];
-    /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
-    patch: operations["patchReactionCommentsCommentId"];
     parameters: {
       path: {
         commentId: number;
@@ -125,6 +123,15 @@ export interface paths {
     post: operations["likeReactionComment"];
     /** 特定のコメントのいいねを取り消すAPI */
     delete: operations["deleteReactionCommentsLike"];
+    parameters: {
+      path: {
+        commentId: number;
+      };
+    };
+  };
+  "/reaction_comments/{commentId}/hidden": {
+    /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
+    patch: operations["patchReactionCommentsCommentIdHidden"];
     parameters: {
       path: {
         commentId: number;
@@ -543,17 +550,6 @@ export interface operations {
       200: components["responses"]["ReactionComment"];
     };
   };
-  /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
-  patchReactionCommentsCommentId: {
-    parameters: {
-      path: {
-        commentId: number;
-      };
-    };
-    responses: {
-      200: components["responses"]["ReactionComment"];
-    };
-  };
   /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */
   chapterOfPlayLogEndChapterId: {
     parameters: {};
@@ -645,6 +641,17 @@ export interface operations {
   };
   /** 特定のコメントのいいねを取り消すAPI */
   deleteReactionCommentsLike: {
+    parameters: {
+      path: {
+        commentId: number;
+      };
+    };
+    responses: {
+      200: components["responses"]["ReactionComment"];
+    };
+  };
+  /** リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け） */
+  patchReactionCommentsCommentIdHidden: {
     parameters: {
       path: {
         commentId: number;

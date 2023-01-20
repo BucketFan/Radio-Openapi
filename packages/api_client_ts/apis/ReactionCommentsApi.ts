@@ -51,7 +51,7 @@ export interface LikeReactionCommentRequest {
     commentId: number;
 }
 
-export interface PatchReactionCommentsCommentIdRequest {
+export interface PatchReactionCommentsCommentIdHiddenRequest {
     commentId: number;
 }
 
@@ -147,19 +147,19 @@ export interface ReactionCommentsApiInterface {
 
     /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
-     * @summary Hidden Reaction Comment
+     * @summary 
      * @param {number} commentId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
      */
-    patchReactionCommentsCommentIdRaw(requestParameters: PatchReactionCommentsCommentIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>>;
+    patchReactionCommentsCommentIdHiddenRaw(requestParameters: PatchReactionCommentsCommentIdHiddenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>>;
 
     /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
-     * Hidden Reaction Comment
+     * 
      */
-    patchReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
+    patchReactionCommentsCommentIdHidden(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
 
 }
 
@@ -341,11 +341,11 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
 
     /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
-     * Hidden Reaction Comment
+     * 
      */
-    async patchReactionCommentsCommentIdRaw(requestParameters: PatchReactionCommentsCommentIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>> {
+    async patchReactionCommentsCommentIdHiddenRaw(requestParameters: PatchReactionCommentsCommentIdHiddenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>> {
         if (requestParameters.commentId === null || requestParameters.commentId === undefined) {
-            throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling patchReactionCommentsCommentId.');
+            throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling patchReactionCommentsCommentIdHidden.');
         }
 
         const queryParameters: any = {};
@@ -353,7 +353,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/reaction_comments/{commentId}`.replace(`{${"commentId"}}`, encodeURIComponent(String(requestParameters.commentId))),
+            path: `/reaction_comments/{commentId}/hidden`.replace(`{${"commentId"}}`, encodeURIComponent(String(requestParameters.commentId))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -364,10 +364,10 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
 
     /**
      * リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
-     * Hidden Reaction Comment
+     * 
      */
-    async patchReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
-        const response = await this.patchReactionCommentsCommentIdRaw({ commentId: commentId }, initOverrides);
+    async patchReactionCommentsCommentIdHidden(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
+        const response = await this.patchReactionCommentsCommentIdHiddenRaw({ commentId: commentId }, initOverrides);
         return await response.value();
     }
 
