@@ -197,15 +197,6 @@ paths:
           $ref: '#/components/responses/ReactionComment'
       tags:
         - reaction_comments
-    patch:
-      summary: Hidden Reaction Comment
-      operationId: patchReactionCommentsCommentId
-      responses:
-        '200':
-          $ref: '#/components/responses/ReactionComment'
-      description: リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
-      tags:
-        - reaction_comments
   /play_logs:
     parameters: []
     put:
@@ -348,6 +339,22 @@ paths:
         '200':
           $ref: '#/components/responses/ReactionComment'
       description: 特定のコメントをいいねするAPI
+      tags:
+        - reaction_comments
+  '/reaction_comments/{commentId}/hidden':
+    parameters:
+      - schema:
+          type: number
+        name: commentId
+        in: path
+        required: true
+    patch:
+      summary: ''
+      operationId: patchReactionCommentsCommentIdHidden
+      responses:
+        '200':
+          $ref: '#/components/responses/ReactionComment'
+      description: リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
       tags:
         - reaction_comments
 components:
