@@ -122,6 +122,9 @@ paths:
           description: 1ページごとの取得件数
         - schema:
             type: string
+            enum:
+              - ASC
+              - DESC
           in: query
           name: order
           description: 'Enum: "ASC" "DESC"'
