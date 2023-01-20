@@ -667,6 +667,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Program'
+              maxPage:
+                type: number
             required:
               - programs
           examples:
