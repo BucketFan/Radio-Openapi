@@ -261,6 +261,7 @@ export interface components {
     Account: {
       id: number;
       plans: components["schemas"]["Plan"][];
+      ownerClubIds: number[];
     };
   };
   responses: {

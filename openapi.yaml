@@ -655,9 +655,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Plan'
+        ownerClubIds:
+          type: array
+          items:
+            type: number
       required:
         - id
         - plans
+        - ownerClubIds
   responses:
     Programs:
       description: Example response
