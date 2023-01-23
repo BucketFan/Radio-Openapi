@@ -205,11 +205,11 @@ paths:
       summary: Delete Reaction Comment
       operationId: deleteReactionCommentsCommentId
       description: リアクションコメントを削除するAPI。(コメント投稿者向け)
-      responses:
-        '200':
-          $ref: '#/components/responses/ReactionComment'
       tags:
         - reaction_comments
+      responses:
+        '200':
+          description: OK
   /play_logs:
     parameters: []
     put:
