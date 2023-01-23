@@ -38,6 +38,12 @@ export interface Account {
      * @memberof Account
      */
     plans: Array<Plan>;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof Account
+     */
+    ownerClubIds: Array<number>;
 }
 
 /**
@@ -47,6 +53,7 @@ export function instanceOfAccount(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "plans" in value;
+    isInstance = isInstance && "ownerClubIds" in value;
 
     return isInstance;
 }
@@ -63,6 +70,7 @@ export function AccountFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
         
         'id': json['id'],
         'plans': ((json['plans'] as Array<any>).map(PlanFromJSON)),
+        'ownerClubIds': json['ownerClubIds'],
     };
 }
 
@@ -77,6 +85,7 @@ export function AccountToJSON(value?: Account | null): any {
         
         'id': value.id,
         'plans': ((value.plans as Array<any>).map(PlanToJSON)),
+        'ownerClubIds': value.ownerClubIds,
     };
 }
 
