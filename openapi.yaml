@@ -106,15 +106,28 @@ paths:
       description: クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
       parameters:
         - schema:
-            type: string
+            type: number
           in: query
-          name: cursor
-          description: 次ページへのカーソル（ProgramID）
+          name: page
+          description: ページ数
         - schema:
             type: boolean
           in: query
           name: isOnlyDraft
           description: ONの場合、下書きのみ取得する
+        - schema:
+            type: number
+          in: query
+          name: pageSize
+          description: 1ページごとの取得件数
+        - schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+          in: query
+          name: order
+          description: 'Enum: "ASC" "DESC"'
       tags:
         - programs
     parameters:
@@ -657,6 +670,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Program'
+              maxPage:
+                type: number
             required:
               - programs
           examples:
