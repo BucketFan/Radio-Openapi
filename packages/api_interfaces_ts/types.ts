@@ -269,6 +269,7 @@ export interface components {
       content: {
         "application/json": {
           programs: components["schemas"]["Program"][];
+          maxPage?: number;
         };
       };
     };
@@ -486,10 +487,14 @@ export interface operations {
         id: number;
       };
       query: {
-        /** 次ページへのカーソル（ProgramID） */
-        cursor?: string;
+        /** ページ数 */
+        page?: number;
         /** ONの場合、下書きのみ取得する */
         isOnlyDraft?: boolean;
+        /** 1ページごとの取得件数 */
+        pageSize?: number;
+        /** Enum: "ASC" "DESC" */
+        order?: "ASC" | "DESC";
       };
     };
     responses: {

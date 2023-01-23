@@ -32,6 +32,12 @@ export interface GetPrograms200Response {
      * @memberof GetPrograms200Response
      */
     programs: Array<Program>;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetPrograms200Response
+     */
+    maxPage?: number;
 }
 
 /**
@@ -55,6 +61,7 @@ export function GetPrograms200ResponseFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'programs': ((json['programs'] as Array<any>).map(ProgramFromJSON)),
+        'maxPage': !exists(json, 'maxPage') ? undefined : json['maxPage'],
     };
 }
 
@@ -68,6 +75,7 @@ export function GetPrograms200ResponseToJSON(value?: GetPrograms200Response | nu
     return {
         
         'programs': ((value.programs as Array<any>).map(ProgramToJSON)),
+        'maxPage': value.maxPage,
     };
 }
 
