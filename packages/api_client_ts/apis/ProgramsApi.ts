@@ -40,8 +40,10 @@ export interface GetClubProgramsRequest {
 
 export interface GetClubProgramsForOwnerRequest {
     id: number;
-    cursor?: string;
+    page?: number;
     isOnlyDraft?: boolean;
+    pageSize?: number;
+    order?: GetClubProgramsForOwnerOrderEnum;
 }
 
 export interface GetProgramChaptersRequest {
@@ -110,8 +112,10 @@ export interface ProgramsApiInterface {
      * クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
      * @summary GET Club\'s Programs For Owner\'s Admin page.
      * @param {number} id 
-     * @param {string} [cursor] 次ページへのカーソル（ProgramID）
+     * @param {number} [page] ページ数
      * @param {boolean} [isOnlyDraft] ONの場合、下書きのみ取得する
+     * @param {number} [pageSize] 1ページごとの取得件数
+     * @param {'ASC' | 'DESC'} [order] Enum: \&quot;ASC\&quot; \&quot;DESC\&quot;
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface
@@ -122,7 +126,7 @@ export interface ProgramsApiInterface {
      * クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
      * GET Club\'s Programs For Owner\'s Admin page.
      */
-    getClubProgramsForOwner(id: number, cursor?: string, isOnlyDraft?: boolean, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
+    getClubProgramsForOwner(id: number, page?: number, isOnlyDraft?: boolean, pageSize?: number, order?: GetClubProgramsForOwnerOrderEnum, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
      * プログラム内の音声データ一覧を取得するAPI
@@ -309,12 +313,20 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
 
         const queryParameters: any = {};
 
-        if (requestParameters.cursor !== undefined) {
-            queryParameters['cursor'] = requestParameters.cursor;
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
         }
 
         if (requestParameters.isOnlyDraft !== undefined) {
             queryParameters['isOnlyDraft'] = requestParameters.isOnlyDraft;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.order !== undefined) {
+            queryParameters['order'] = requestParameters.order;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -333,8 +345,8 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * クラブに登録されているプログラム一覧を取得するAPI。オーナー管理画面向け（下書きでフィルター機能がある）
      * GET Club\'s Programs For Owner\'s Admin page.
      */
-    async getClubProgramsForOwner(id: number, cursor?: string, isOnlyDraft?: boolean, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
-        const response = await this.getClubProgramsForOwnerRaw({ id: id, cursor: cursor, isOnlyDraft: isOnlyDraft }, initOverrides);
+    async getClubProgramsForOwner(id: number, page?: number, isOnlyDraft?: boolean, pageSize?: number, order?: GetClubProgramsForOwnerOrderEnum, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
+        const response = await this.getClubProgramsForOwnerRaw({ id: id, page: page, isOnlyDraft: isOnlyDraft, pageSize: pageSize, order: order }, initOverrides);
         return await response.value();
     }
 
@@ -529,3 +541,12 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
     }
 
 }
+
+/**
+ * @export
+ */
+export const GetClubProgramsForOwnerOrderEnum = {
+    Asc: 'ASC',
+    Desc: 'DESC'
+} as const;
+export type GetClubProgramsForOwnerOrderEnum = typeof GetClubProgramsForOwnerOrderEnum[keyof typeof GetClubProgramsForOwnerOrderEnum];
