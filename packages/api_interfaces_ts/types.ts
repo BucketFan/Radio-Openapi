@@ -553,7 +553,8 @@ export interface operations {
       };
     };
     responses: {
-      200: components["responses"]["ReactionComment"];
+      /** OK */
+      200: unknown;
     };
   };
   /** チャプター再生の終了時に叩くAPI。再生停止時に経過時間をrequest bodyに入れるようにする。 */

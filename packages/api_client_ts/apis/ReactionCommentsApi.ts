@@ -87,13 +87,13 @@ export interface ReactionCommentsApiInterface {
      * @throws {RequiredError}
      * @memberof ReactionCommentsApiInterface
      */
-    deleteReactionCommentsCommentIdRaw(requestParameters: DeleteReactionCommentsCommentIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>>;
+    deleteReactionCommentsCommentIdRaw(requestParameters: DeleteReactionCommentsCommentIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
      * リアクションコメントを削除するAPI。(コメント投稿者向け)
      * Delete Reaction Comment
      */
-    deleteReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response>;
+    deleteReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
      * 特定のコメントのいいねを取り消すAPI
@@ -207,7 +207,7 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
      * リアクションコメントを削除するAPI。(コメント投稿者向け)
      * Delete Reaction Comment
      */
-    async deleteReactionCommentsCommentIdRaw(requestParameters: DeleteReactionCommentsCommentIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgramReactionComment200Response>> {
+    async deleteReactionCommentsCommentIdRaw(requestParameters: DeleteReactionCommentsCommentIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.commentId === null || requestParameters.commentId === undefined) {
             throw new runtime.RequiredError('commentId','Required parameter requestParameters.commentId was null or undefined when calling deleteReactionCommentsCommentId.');
         }
@@ -223,16 +223,15 @@ export class ReactionCommentsApi extends runtime.BaseAPI implements ReactionComm
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgramReactionComment200ResponseFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      * リアクションコメントを削除するAPI。(コメント投稿者向け)
      * Delete Reaction Comment
      */
-    async deleteReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgramReactionComment200Response> {
-        const response = await this.deleteReactionCommentsCommentIdRaw({ commentId: commentId }, initOverrides);
-        return await response.value();
+    async deleteReactionCommentsCommentId(commentId: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteReactionCommentsCommentIdRaw({ commentId: commentId }, initOverrides);
     }
 
     /**
