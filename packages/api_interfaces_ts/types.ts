@@ -138,6 +138,17 @@ export interface paths {
       };
     };
   };
+  "/programs/{id}/attached_pin": {
+    /** ラジオの固定表示を解除するためのAPI */
+    delete: operations["deleteProgramsIdAttachedPin"];
+    /** ラジオを固定表示するためのAPI。固定表示できるラジオは1つのみで、すでにある場合は上書きされる。 */
+    patch: operations["patchProgramsIdAttachedPin"];
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+  };
 }
 
 export interface components {
@@ -666,6 +677,28 @@ export interface operations {
     };
     responses: {
       200: components["responses"]["ReactionComment"];
+    };
+  };
+  /** ラジオの固定表示を解除するためのAPI */
+  deleteProgramsIdAttachedPin: {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      200: components["responses"]["Program"];
+    };
+  };
+  /** ラジオを固定表示するためのAPI。固定表示できるラジオは1つのみで、すでにある場合は上書きされる。 */
+  patchProgramsIdAttachedPin: {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      200: components["responses"]["Program"];
     };
   };
 }
