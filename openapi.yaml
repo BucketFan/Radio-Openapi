@@ -370,6 +370,31 @@ paths:
       description: リアクションコメントを非表示/表示にするトグルAPI。（オーナー向け）
       tags:
         - reaction_comments
+  '/programs/{id}/attached_pin':
+    parameters:
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: ''
+      operationId: patchProgramsIdAttachedPin
+      responses:
+        '200':
+          $ref: '#/components/responses/Program'
+      description: ラジオを固定表示するためのAPI。固定表示できるラジオは1つのみで、すでにある場合は上書きされる。
+      tags:
+        - programs
+    delete:
+      summary: ''
+      operationId: deleteProgramsIdAttachedPin
+      responses:
+        '200':
+          $ref: '#/components/responses/Program'
+      description: ラジオの固定表示を解除するためのAPI
+      tags:
+        - programs
 components:
   schemas:
     Program:
