@@ -32,6 +32,10 @@ export interface CreateProgramOperationRequest {
     createProgramRequest?: CreateProgramRequest;
 }
 
+export interface DeleteProgramsIdAttachedPinRequest {
+    id: number;
+}
+
 export interface GetClubProgramsRequest {
     id: number;
     cursor?: string;
@@ -56,6 +60,10 @@ export interface GetProgramsOfClubIdForAttachedPinRequest {
 
 export interface GetProgramsPlayedRequest {
     cursor?: Date;
+}
+
+export interface PatchProgramsIdAttachedPinRequest {
+    id: number;
 }
 
 export interface PatchProgramsReservedToPublishRequest {
@@ -89,6 +97,22 @@ export interface ProgramsApiInterface {
      * Create Program
      */
     createProgram(createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
+
+    /**
+     * ラジオの固定表示を解除するためのAPI
+     * @summary 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramsApiInterface
+     */
+    deleteProgramsIdAttachedPinRaw(requestParameters: DeleteProgramsIdAttachedPinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>>;
+
+    /**
+     * ラジオの固定表示を解除するためのAPI
+     * 
+     */
+    deleteProgramsIdAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
 
     /**
      * クラブに登録されているプログラム一覧を取得するAPI
@@ -192,6 +216,22 @@ export interface ProgramsApiInterface {
     getProgramsPlayed(cursor?: Date, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response>;
 
     /**
+     * ラジオを固定表示するためのAPI。固定表示できるラジオは1つのみで、すでにある場合は上書きされる。
+     * @summary 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramsApiInterface
+     */
+    patchProgramsIdAttachedPinRaw(requestParameters: PatchProgramsIdAttachedPinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>>;
+
+    /**
+     * ラジオを固定表示するためのAPI。固定表示できるラジオは1つのみで、すでにある場合は上書きされる。
+     * 
+     */
+    patchProgramsIdAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
+
+    /**
      * 放送開始設定が、予約投稿になっていてかつ、予約投稿時間が過去になっているプログラム全てを、公開状態にするAPI。 （AWSのLambdaから定期的にリクエストが飛ぶ）
      * @summary Switch reserved all program to publish
      * @param {string} [authrizedToken] 固定の認証トークン
@@ -259,6 +299,38 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      */
     async createProgram(createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
         const response = await this.createProgramRaw({ createProgramRequest: createProgramRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * ラジオの固定表示を解除するためのAPI
+     * 
+     */
+    async deleteProgramsIdAttachedPinRaw(requestParameters: DeleteProgramsIdAttachedPinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteProgramsIdAttachedPin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/programs/{id}/attached_pin`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgram200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * ラジオの固定表示を解除するためのAPI
+     * 
+     */
+    async deleteProgramsIdAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
+        const response = await this.deleteProgramsIdAttachedPinRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -471,6 +543,38 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      */
     async getProgramsPlayed(cursor?: Date, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPrograms200Response> {
         const response = await this.getProgramsPlayedRaw({ cursor: cursor }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * ラジオを固定表示するためのAPI。固定表示できるラジオは1つのみで、すでにある場合は上書きされる。
+     * 
+     */
+    async patchProgramsIdAttachedPinRaw(requestParameters: PatchProgramsIdAttachedPinRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling patchProgramsIdAttachedPin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/programs/{id}/attached_pin`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgram200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * ラジオを固定表示するためのAPI。固定表示できるラジオは1つのみで、すでにある場合は上書きされる。
+     * 
+     */
+    async patchProgramsIdAttachedPin(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
+        const response = await this.patchProgramsIdAttachedPinRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
