@@ -37,6 +37,18 @@ export interface Profile {
      * @memberof Profile
      */
     icon?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Profile
+     */
+    isProfilePublic?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    publicUrl?: string;
 }
 
 /**
@@ -63,6 +75,8 @@ export function ProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'id': json['id'],
         'name': json['name'],
         'icon': !exists(json, 'icon') ? undefined : json['icon'],
+        'isProfilePublic': !exists(json, 'isProfilePublic') ? undefined : json['isProfilePublic'],
+        'publicUrl': !exists(json, 'publicUrl') ? undefined : json['publicUrl'],
     };
 }
 
@@ -78,6 +92,8 @@ export function ProfileToJSON(value?: Profile | null): any {
         'id': value.id,
         'name': value.name,
         'icon': value.icon,
+        'isProfilePublic': value.isProfilePublic,
+        'publicUrl': value.publicUrl,
     };
 }
 
