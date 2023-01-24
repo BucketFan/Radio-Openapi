@@ -1174,6 +1174,8 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Club'
+            required:
+              - clubs
   requestBodies:
     Program:
       content:
