@@ -311,6 +311,16 @@ paths:
           $ref: '#/components/responses/Club'
       operationId: getClubById
       description: idからクラブを取得するAPI
+  /clubs/susbscribing:
+    get:
+      summary: Get subscribing clubs
+      responses:
+        '200':
+          $ref: '#/components/responses/Clubs'
+      operationId: getSubscribingClubs
+      description: 自分が参加しているクラブ一覧
+      tags:
+        - clubs
   /programs/played:
     get:
       summary: Your GET endpoint
@@ -1153,6 +1163,17 @@ components:
             properties:
               account:
                 $ref: '#/components/schemas/Account'
+    Clubs:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              clubs:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Club'
   requestBodies:
     Program:
       content:

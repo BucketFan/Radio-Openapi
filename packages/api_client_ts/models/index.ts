@@ -15,6 +15,7 @@ export * from './GetClubById200Response';
 export * from './GetCurrentAccount200Response';
 export * from './GetProgramReactionComments200Response';
 export * from './GetPrograms200Response';
+export * from './GetSubscribingClubs200Response';
 export * from './Plan';
 export * from './PlayLog';
 export * from './PostPublishPreSignedUrl200Response';

@@ -22,6 +22,7 @@ models/GetClubById200Response.ts
 models/GetCurrentAccount200Response.ts
 models/GetProgramReactionComments200Response.ts
 models/GetPrograms200Response.ts
+models/GetSubscribingClubs200Response.ts
 models/Plan.ts
 models/PlayLog.ts
 models/PostPublishPreSignedUrl200Response.ts
