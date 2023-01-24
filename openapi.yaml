@@ -642,6 +642,10 @@ components:
           type: string
         icon:
           type: string
+        isProfilePublic:
+          type: boolean
+        publicUrl:
+          type: string
       required:
         - id
         - name

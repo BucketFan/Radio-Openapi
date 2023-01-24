@@ -257,6 +257,8 @@ export interface components {
       id: number;
       name: string;
       icon?: string;
+      isProfilePublic?: boolean;
+      publicUrl?: string;
     };
     /** PlayLog */
     PlayLog: {
