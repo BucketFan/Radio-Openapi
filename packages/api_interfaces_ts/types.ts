@@ -176,8 +176,6 @@ export interface components {
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
-      /** Format: date-time */
-      latestPlayLogUpdatedAt?: string;
     };
     /**
      * Chapter
