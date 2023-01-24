@@ -111,6 +111,10 @@ export interface paths {
       };
     };
   };
+  "/clubs/susbscribing": {
+    /** 自分が参加しているクラブ一覧 */
+    get: operations["getSubscribingClubs"];
+  };
   "/programs/played": {
     /** 特定のユーザーの再生履歴からプログラム一覧を返すAPI */
     get: operations["getProgramsPlayed"];
@@ -366,6 +370,14 @@ export interface components {
       content: {
         "application/json": {
           account?: components["schemas"]["Account"];
+        };
+      };
+    };
+    /** Example response */
+    Clubs: {
+      content: {
+        "application/json": {
+          clubs?: components["schemas"]["Club"][];
         };
       };
     };
@@ -637,6 +649,12 @@ export interface operations {
     };
     responses: {
       200: components["responses"]["Club"];
+    };
+  };
+  /** 自分が参加しているクラブ一覧 */
+  getSubscribingClubs: {
+    responses: {
+      200: components["responses"]["Clubs"];
     };
   };
   /** 特定のユーザーの再生履歴からプログラム一覧を返すAPI */

@@ -16,10 +16,13 @@
 import * as runtime from '../runtime';
 import type {
   GetClubById200Response,
+  GetSubscribingClubs200Response,
 } from '../models';
 import {
     GetClubById200ResponseFromJSON,
     GetClubById200ResponseToJSON,
+    GetSubscribingClubs200ResponseFromJSON,
+    GetSubscribingClubs200ResponseToJSON,
 } from '../models';
 
 export interface GetClubByIdRequest {
@@ -48,6 +51,21 @@ export interface ClubsApiInterface {
      * Your GET endpoint
      */
     getClubById(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetClubById200Response>;
+
+    /**
+     * 自分が参加しているクラブ一覧
+     * @summary Get subscribing clubs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApiInterface
+     */
+    getSubscribingClubsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetSubscribingClubs200Response>>;
+
+    /**
+     * 自分が参加しているクラブ一覧
+     * Get subscribing clubs
+     */
+    getSubscribingClubs(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetSubscribingClubs200Response>;
 
 }
 
@@ -85,6 +103,34 @@ export class ClubsApi extends runtime.BaseAPI implements ClubsApiInterface {
      */
     async getClubById(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetClubById200Response> {
         const response = await this.getClubByIdRaw({ id: id }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * 自分が参加しているクラブ一覧
+     * Get subscribing clubs
+     */
+    async getSubscribingClubsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetSubscribingClubs200Response>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/clubs/susbscribing`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetSubscribingClubs200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * 自分が参加しているクラブ一覧
+     * Get subscribing clubs
+     */
+    async getSubscribingClubs(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetSubscribingClubs200Response> {
+        const response = await this.getSubscribingClubsRaw(initOverrides);
         return await response.value();
     }
 
