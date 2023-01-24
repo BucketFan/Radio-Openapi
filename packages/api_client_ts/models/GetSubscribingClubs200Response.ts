@@ -31,7 +31,7 @@ export interface GetSubscribingClubs200Response {
      * @type {Array<Club>}
      * @memberof GetSubscribingClubs200Response
      */
-    clubs?: Array<Club>;
+    clubs: Array<Club>;
 }
 
 /**
@@ -39,6 +39,7 @@ export interface GetSubscribingClubs200Response {
  */
 export function instanceOfGetSubscribingClubs200Response(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "clubs" in value;
 
     return isInstance;
 }
@@ -53,7 +54,7 @@ export function GetSubscribingClubs200ResponseFromJSONTyped(json: any, ignoreDis
     }
     return {
         
-        'clubs': !exists(json, 'clubs') ? undefined : ((json['clubs'] as Array<any>).map(ClubFromJSON)),
+        'clubs': ((json['clubs'] as Array<any>).map(ClubFromJSON)),
     };
 }
 
@@ -66,7 +67,7 @@ export function GetSubscribingClubs200ResponseToJSON(value?: GetSubscribingClubs
     }
     return {
         
-        'clubs': value.clubs === undefined ? undefined : ((value.clubs as Array<any>).map(ClubToJSON)),
+        'clubs': ((value.clubs as Array<any>).map(ClubToJSON)),
     };
 }
 
