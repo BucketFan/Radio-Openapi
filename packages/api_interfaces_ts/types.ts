@@ -111,9 +111,10 @@ export interface paths {
       };
     };
   };
-  "/clubs/susbscribing": {
+  "/clubs/subscribing": {
     /** 自分が参加しているクラブ一覧 */
     get: operations["getSubscribingClubs"];
+    parameters: {};
   };
   "/programs/played": {
     /** 特定のユーザーの再生履歴からプログラム一覧を返すAPI */
@@ -653,6 +654,7 @@ export interface operations {
   };
   /** 自分が参加しているクラブ一覧 */
   getSubscribingClubs: {
+    parameters: {};
     responses: {
       200: components["responses"]["Clubs"];
     };

@@ -311,7 +311,7 @@ paths:
           $ref: '#/components/responses/Club'
       operationId: getClubById
       description: idからクラブを取得するAPI
-  /clubs/susbscribing:
+  /clubs/subscribing:
     get:
       summary: Get subscribing clubs
       responses:
@@ -321,6 +321,7 @@ paths:
       description: 自分が参加しているクラブ一覧
       tags:
         - clubs
+    parameters: []
   /programs/played:
     get:
       summary: Your GET endpoint
