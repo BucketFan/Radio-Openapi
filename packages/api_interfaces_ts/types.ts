@@ -16,6 +16,8 @@ export interface paths {
     get: operations["getProgramChapters"];
     /** Radioプログラム編集API（オーナー向け） */
     put: operations["putProgram"];
+    /** Programの論理削除 */
+    delete: operations["deleteProgram"];
     parameters: {
       path: {
         id: number;
@@ -474,6 +476,17 @@ export interface operations {
       200: components["responses"]["Program"];
     };
     requestBody: components["requestBodies"]["Program"];
+  };
+  /** Programの論理削除 */
+  deleteProgram: {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      200: components["responses"]["Program"];
+    };
   };
   /** クラブに登録されているプログラム一覧を取得するAPI */
   getClubPrograms: {

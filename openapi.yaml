@@ -69,6 +69,15 @@ paths:
           $ref: '#/components/responses/Program'
       tags:
         - programs
+    delete:
+      summary: ''
+      operationId: deleteProgram
+      responses:
+        '200':
+          $ref: '#/components/responses/Program'
+      description: Programの論理削除
+      tags:
+        - programs
   '/programs/of_club/{id}':
     parameters:
       - schema:

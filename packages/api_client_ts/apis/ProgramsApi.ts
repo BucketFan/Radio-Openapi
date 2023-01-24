@@ -32,6 +32,10 @@ export interface CreateProgramOperationRequest {
     createProgramRequest?: CreateProgramRequest;
 }
 
+export interface DeleteProgramRequest {
+    id: number;
+}
+
 export interface DeleteProgramsIdAttachedPinRequest {
     id: number;
 }
@@ -97,6 +101,22 @@ export interface ProgramsApiInterface {
      * Create Program
      */
     createProgram(createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
+
+    /**
+     * Programの論理削除
+     * @summary 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramsApiInterface
+     */
+    deleteProgramRaw(requestParameters: DeleteProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>>;
+
+    /**
+     * Programの論理削除
+     * 
+     */
+    deleteProgram(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
 
     /**
      * ラジオの固定表示を解除するためのAPI
@@ -299,6 +319,38 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      */
     async createProgram(createProgramRequest?: CreateProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
         const response = await this.createProgramRaw({ createProgramRequest: createProgramRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Programの論理削除
+     * 
+     */
+    async deleteProgramRaw(requestParameters: DeleteProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteProgram.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/programs/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgram200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Programの論理削除
+     * 
+     */
+    async deleteProgram(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
+        const response = await this.deleteProgramRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
