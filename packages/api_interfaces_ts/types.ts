@@ -374,7 +374,7 @@ export interface components {
     Clubs: {
       content: {
         "application/json": {
-          clubs?: components["schemas"]["Club"][];
+          clubs: components["schemas"]["Club"][];
         };
       };
     };
