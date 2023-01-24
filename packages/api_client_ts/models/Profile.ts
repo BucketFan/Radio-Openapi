@@ -36,32 +36,8 @@ export interface Profile {
      * @type {string}
      * @memberof Profile
      */
-    thumbnail?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Profile
-     */
-    isPublicProfile: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof Profile
-     */
-    type: ProfileTypeEnum;
+    icon?: string;
 }
-
-
-/**
- * @export
- */
-export const ProfileTypeEnum = {
-    Owner: 'OWNER',
-    Member: 'MEMBER',
-    Passerby: 'PASSERBY'
-} as const;
-export type ProfileTypeEnum = typeof ProfileTypeEnum[keyof typeof ProfileTypeEnum];
-
 
 /**
  * Check if a given object implements the Profile interface.
@@ -70,8 +46,6 @@ export function instanceOfProfile(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "isPublicProfile" in value;
-    isInstance = isInstance && "type" in value;
 
     return isInstance;
 }
@@ -88,9 +62,7 @@ export function ProfileFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         
         'id': json['id'],
         'name': json['name'],
-        'thumbnail': !exists(json, 'thumbnail') ? undefined : json['thumbnail'],
-        'isPublicProfile': json['isPublicProfile'],
-        'type': json['type'],
+        'icon': !exists(json, 'icon') ? undefined : json['icon'],
     };
 }
 
@@ -105,9 +77,7 @@ export function ProfileToJSON(value?: Profile | null): any {
         
         'id': value.id,
         'name': value.name,
-        'thumbnail': value.thumbnail,
-        'isPublicProfile': value.isPublicProfile,
-        'type': value.type,
+        'icon': value.icon,
     };
 }
 
