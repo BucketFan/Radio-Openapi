@@ -255,10 +255,7 @@ export interface components {
     Profile: {
       id: number;
       name: string;
-      thumbnail?: string;
-      isPublicProfile: boolean;
-      /** @enum {string} */
-      type: "OWNER" | "MEMBER" | "PASSERBY";
+      icon?: string;
     };
     /** PlayLog */
     PlayLog: {

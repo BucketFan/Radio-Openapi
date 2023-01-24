@@ -639,21 +639,11 @@ components:
           type: number
         name:
           type: string
-        thumbnail:
+        icon:
           type: string
-        isPublicProfile:
-          type: boolean
-        type:
-          type: string
-          enum:
-            - OWNER
-            - MEMBER
-            - PASSERBY
       required:
         - id
         - name
-        - isPublicProfile
-        - type
     PlayLog:
       title: PlayLog
       x-stoplight:
