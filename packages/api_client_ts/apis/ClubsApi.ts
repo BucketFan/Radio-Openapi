@@ -116,7 +116,7 @@ export class ClubsApi extends runtime.BaseAPI implements ClubsApiInterface {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/clubs/susbscribing`,
+            path: `/clubs/subscribing`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
