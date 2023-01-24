@@ -122,12 +122,6 @@ export interface Program {
      * @memberof Program
      */
     updatedAt: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof Program
-     */
-    latestPlayLogUpdatedAt?: Date;
 }
 
 
@@ -186,7 +180,6 @@ export function ProgramFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'releasedAt': !exists(json, 'releasedAt') ? undefined : (new Date(json['releasedAt'])),
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
-        'latestPlayLogUpdatedAt': !exists(json, 'latestPlayLogUpdatedAt') ? undefined : (new Date(json['latestPlayLogUpdatedAt'])),
     };
 }
 
@@ -213,7 +206,6 @@ export function ProgramToJSON(value?: Program | null): any {
         'releasedAt': value.releasedAt === undefined ? undefined : (value.releasedAt.toISOString()),
         'createdAt': (value.createdAt.toISOString()),
         'updatedAt': (value.updatedAt.toISOString()),
-        'latestPlayLogUpdatedAt': value.latestPlayLogUpdatedAt === undefined ? undefined : (value.latestPlayLogUpdatedAt.toISOString()),
     };
 }
 
