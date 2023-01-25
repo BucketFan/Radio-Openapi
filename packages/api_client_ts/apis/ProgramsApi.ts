@@ -110,13 +110,13 @@ export interface ProgramsApiInterface {
      * @throws {RequiredError}
      * @memberof ProgramsApiInterface
      */
-    deleteProgramRaw(requestParameters: DeleteProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>>;
+    deleteProgramRaw(requestParameters: DeleteProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
      * Programの論理削除
      * 
      */
-    deleteProgram(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response>;
+    deleteProgram(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
      * ラジオの固定表示を解除するためのAPI
@@ -326,7 +326,7 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
      * Programの論理削除
      * 
      */
-    async deleteProgramRaw(requestParameters: DeleteProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProgram200Response>> {
+    async deleteProgramRaw(requestParameters: DeleteProgramRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteProgram.');
         }
@@ -342,16 +342,15 @@ export class ProgramsApi extends runtime.BaseAPI implements ProgramsApiInterface
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProgram200ResponseFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      * Programの論理削除
      * 
      */
-    async deleteProgram(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProgram200Response> {
-        const response = await this.deleteProgramRaw({ id: id }, initOverrides);
-        return await response.value();
+    async deleteProgram(id: number, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteProgramRaw({ id: id }, initOverrides);
     }
 
     /**

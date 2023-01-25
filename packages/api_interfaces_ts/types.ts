@@ -494,7 +494,8 @@ export interface operations {
       };
     };
     responses: {
-      200: components["responses"]["Program"];
+      /** OK */
+      200: unknown;
     };
   };
   /** クラブに登録されているプログラム一覧を取得するAPI */
