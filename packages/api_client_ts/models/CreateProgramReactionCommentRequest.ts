@@ -21,12 +21,6 @@ import { exists, mapValues } from '../runtime';
 export interface CreateProgramReactionCommentRequest {
     /**
      * 
-     * @type {number}
-     * @memberof CreateProgramReactionCommentRequest
-     */
-    programId?: number;
-    /**
-     * 
      * @type {string}
      * @memberof CreateProgramReactionCommentRequest
      */
@@ -52,7 +46,6 @@ export function CreateProgramReactionCommentRequestFromJSONTyped(json: any, igno
     }
     return {
         
-        'programId': !exists(json, 'programId') ? undefined : json['programId'],
         'contents': !exists(json, 'contents') ? undefined : json['contents'],
     };
 }
@@ -66,7 +59,6 @@ export function CreateProgramReactionCommentRequestToJSON(value?: CreateProgramR
     }
     return {
         
-        'programId': value.programId,
         'contents': value.contents,
     };
 }

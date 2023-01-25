@@ -1,6 +1,6 @@
 {
   "name": "@bucketfan/radio-api-interfaces",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "Interfaces for the Radio API",
   "main": "types.ts",
   "publishConfig": {
