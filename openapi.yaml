@@ -72,12 +72,12 @@ paths:
     delete:
       summary: ''
       operationId: deleteProgram
-      responses:
-        '200':
-          $ref: '#/components/responses/Program'
       description: Programの論理削除
       tags:
         - programs
+      responses:
+        '200':
+          description: OK
   '/programs/of_club/{id}':
     parameters:
       - schema:
