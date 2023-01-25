@@ -1241,8 +1241,6 @@ components:
           schema:
             type: object
             properties:
-              programId:
-                type: integer
               contents:
                 type: string
     PreSignedUrl:

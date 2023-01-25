@@ -414,7 +414,6 @@ export interface components {
     ReactionComment: {
       content: {
         "application/json": {
-          programId?: number;
           contents?: string;
         };
       };
