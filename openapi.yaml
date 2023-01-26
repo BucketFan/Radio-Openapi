@@ -701,10 +701,15 @@ components:
           type: array
           items:
             type: number
+        accountIds:
+          type: array
+          items:
+            type: number
       required:
         - id
         - plans
         - ownerClubIds
+        - accountIds
   responses:
     Programs:
       description: Example response
