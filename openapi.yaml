@@ -695,7 +695,7 @@ components:
           type: array
           items:
             type: number
-        accountIds:
+        profileIds:
           type: array
           items:
             type: number
@@ -703,7 +703,7 @@ components:
         - id
         - plans
         - ownerClubIds
-        - accountIds
+        - profileIds
   responses:
     Programs:
       description: Example response
