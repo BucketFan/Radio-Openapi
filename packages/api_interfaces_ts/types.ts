@@ -277,6 +277,7 @@ export interface components {
       id: number;
       plans: components["schemas"]["Plan"][];
       ownerClubIds: number[];
+      profileIds: number[];
     };
   };
   responses: {
